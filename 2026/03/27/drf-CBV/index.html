@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>drf-CBV | 我的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1.视图源码（django） url中 123456urlpatterns &#x3D; [    # path(&#x27;admin&#x2F;&#x27;, admin.site.urls),    path(&#x27;auth&#x2F;&#x27;,views.auth),  #  ----&gt;获取请求---&gt;执行函数()    path(&#x27;info&#x2F;&#x27;, views.InfoView">
+<meta property="og:type" content="article">
+<meta property="og:title" content="drf-CBV">
+<meta property="og:url" content="http://example.com/2026/03/27/drf-CBV/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="1.视图源码（django） url中 123456urlpatterns &#x3D; [    # path(&#x27;admin&#x2F;&#x27;, admin.site.urls),    path(&#x27;auth&#x2F;&#x27;,views.auth),  #  ----&gt;获取请求---&gt;执行函数()    path(&#x27;info&#x2F;&#x27;, views.InfoView">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-27T11:04:57.000Z">
+<meta property="article:modified_time" content="2026-03-27T11:30:37.770Z">
+<meta property="article:author" content="yibinL">
+<meta property="article:tag" content="drf">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">我的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-drf-CBV" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/27/drf-CBV/" class="article-date">
+  <time class="dt-published" datetime="2026-03-27T11:04:57.000Z" itemprop="datePublished">2026-03-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/drf/">drf</a>►<a class="article-category-link" href="/categories/drf/cbv/">cbv</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      drf-CBV
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-视图源码（django）"><a href="#1-视图源码（django）" class="headerlink" title="1.视图源码（django）"></a>1.视图源码（django）</h2><ul>
+<li><p>url中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># path(&#x27;admin/&#x27;, admin.site.urls),</span></span><br><span class="line">    path(<span class="string">&#x27;auth/&#x27;</span>,views.auth),  <span class="comment">#  ----&gt;获取请求---&gt;执行函数()</span></span><br><span class="line">    path(<span class="string">&#x27;info/&#x27;</span>, views.InfoView.as_view()),     <span class="comment"># 获取请求----&gt;去源码中执行view函数</span></span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.views <span class="keyword">import</span> View</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>源码中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">View</span>:</span><br><span class="line"><span class="meta">	@classonlymethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">as_view</span>(<span class="params">cls, **initkwargs</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Main entry point for a request-response process.&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> initkwargs:</span><br><span class="line">            ....</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">view</span>(<span class="params">request, *args, **kwargs</span>):</span><br><span class="line">            <span class="comment"># 实例化视图类的对象，如：InfoView</span></span><br><span class="line">            <span class="variable language_">self</span> = cls(**initkwargs)</span><br><span class="line">            <span class="variable language_">self</span>.setup(request, *args, **kwargs)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(<span class="variable language_">self</span>, <span class="string">&quot;request&quot;</span>):</span><br><span class="line">                <span class="keyword">raise</span> AttributeError(</span><br><span class="line">                    <span class="string">&quot;%s instance has no &#x27;request&#x27; attribute. Did you override &quot;</span></span><br><span class="line">                    <span class="string">&quot;setup() and forget to call super()?&quot;</span> % cls.__name__</span><br><span class="line">                )</span><br><span class="line">            <span class="comment"># 执行：对象.dispatch</span></span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>.dispatch(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">        ....</span><br><span class="line">        ....</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> view</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dispatch函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">http_method_names = [</span><br><span class="line">        <span class="string">&quot;get&quot;</span>,</span><br><span class="line">        <span class="string">&quot;post&quot;</span>,</span><br><span class="line">        <span class="string">&quot;put&quot;</span>,</span><br><span class="line">        <span class="string">&quot;patch&quot;</span>,</span><br><span class="line">        <span class="string">&quot;delete&quot;</span>,</span><br><span class="line">        <span class="string">&quot;head&quot;</span>,</span><br><span class="line">        <span class="string">&quot;options&quot;</span>,</span><br><span class="line">        <span class="string">&quot;trace&quot;</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">    <span class="comment"># Try to dispatch to the right method; if a method doesn&#x27;t exist,</span></span><br><span class="line">    <span class="comment"># defer to the error handler. Also defer to the error handler if the</span></span><br><span class="line">    <span class="comment"># request method isn&#x27;t on the approved list.</span></span><br><span class="line">    <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> <span class="variable language_">self</span>.http_method_names:</span><br><span class="line">        handler = <span class="built_in">getattr</span>(</span><br><span class="line">            <span class="variable language_">self</span>, request.method.lower(), <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        handler = <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line">    <span class="keyword">return</span> handler(request, *args, **kwargs)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-drf"><a href="#2-drf" class="headerlink" title="2.drf"></a>2.drf</h2><ul>
+<li><p>url’</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># path(&#x27;admin/&#x27;, admin.site.urls),</span></span><br><span class="line">    path(<span class="string">&#x27;auth/&#x27;</span>,views.auth),  <span class="comment">#  ----&gt;获取请求---&gt;执行函数()</span></span><br><span class="line">    </span><br><span class="line">    path(<span class="string">&#x27;info/&lt;int:nid&gt;/&#x27;</span>, views.InfoView.as_view()),     <span class="comment"># 获取请求----&gt;去源码中执行view函数</span></span><br><span class="line">    path(<span class="string">&#x27;info/&lt;str:name&gt;/&#x27;</span>, views.Userinfo.as_view()),     <span class="comment"># 获取请求----&gt;去源码中执行view函数</span></span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.views <span class="keyword">import</span> APIView</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>源码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">APIView</span>(<span class="title class_ inherited__">View</span>):</span><br><span class="line"><span class="meta">	@classmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">as_view</span>(<span class="params">cls, **initkwargs</span>):</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        <span class="comment"># 找父类的as_view，也就是刚才上面的View</span></span><br><span class="line">        view = <span class="built_in">super</span>().as_view(**initkwargs)</span><br><span class="line">        view.cls = cls</span><br><span class="line">        view.initkwargs = initkwargs</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">return</span> csrf_exempt(view)   <span class="comment">#免除csrf_token校验</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># 调用自己的dispatch</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.args = args</span><br><span class="line">        <span class="variable language_">self</span>.kwargs = kwargs</span><br><span class="line">        <span class="comment">#　request＝Request -&gt; drf对request封装了一层</span></span><br><span class="line">        <span class="comment"># request._request  -&gt;原来django中的request对象</span></span><br><span class="line">        <span class="comment">#request._request.GET</span></span><br><span class="line">	    <span class="comment">#request._request.POST</span></span><br><span class="line">	    <span class="comment">#request._request.method</span></span><br><span class="line">        <span class="comment"># request.xxx   -&gt;drf自己封装的数据</span></span><br><span class="line">        request = <span class="variable language_">self</span>.initialize_request(request, *args, **kwargs)</span><br><span class="line">        <span class="variable language_">self</span>.request = request</span><br><span class="line">        <span class="variable language_">self</span>.headers = <span class="variable language_">self</span>.default_response_headers  <span class="comment"># deprecate?</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="variable language_">self</span>.initial(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Get the appropriate handler method</span></span><br><span class="line">            <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> <span class="variable language_">self</span>.http_method_names:</span><br><span class="line">                handler = <span class="built_in">getattr</span>(<span class="variable language_">self</span>, request.method.lower(),</span><br><span class="line">                                  <span class="variable language_">self</span>.http_method_not_allowed)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                handler = <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line"></span><br><span class="line">            response = handler(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">            response = <span class="variable language_">self</span>.handle_exception(exc)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.response = <span class="variable language_">self</span>.finalize_response(request, response, *args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.response</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数据封装</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># drf的封装</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Request</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, request, parsers=<span class="literal">None</span>, authenticators=<span class="literal">None</span>,</span></span><br><span class="line"><span class="params">                 negotiator=<span class="literal">None</span>, parser_context=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="keyword">assert</span> <span class="built_in">isinstance</span>(request, HttpRequest), (</span><br><span class="line">            <span class="string">&#x27;The `request` argument must be an instance of &#x27;</span></span><br><span class="line">            <span class="string">&#x27;`django.http.HttpRequest`, not `&#123;&#125;.&#123;&#125;`.&#x27;</span></span><br><span class="line">            .<span class="built_in">format</span>(request.__class__.__module__, request.__class__.__name__)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>._request = request</span><br><span class="line">        <span class="variable language_">self</span>.parsers = parsers <span class="keyword">or</span> ()</span><br><span class="line">        <span class="variable language_">self</span>.authenticators = authenticators <span class="keyword">or</span> ()</span><br><span class="line">        <span class="variable language_">self</span>.negotiator = negotiator <span class="keyword">or</span> <span class="variable language_">self</span>._default_negotiator()</span><br><span class="line">        <span class="variable language_">self</span>.parser_context = parser_context</span><br><span class="line">        <span class="variable language_">self</span>._data = Empty</span><br><span class="line">        <span class="variable language_">self</span>._files = Empty</span><br><span class="line">        <span class="variable language_">self</span>._full_data = Empty</span><br><span class="line">        <span class="variable language_">self</span>._content_type = Empty</span><br><span class="line">        <span class="variable language_">self</span>._stream = Empty</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>本质上与django是相同的，在继承后，扩展更多功能。</p>
+<p>as_view()  -&gt;免除csrf</p>
+<p>dispatch() -&gt;视图执行前，反射执行视图，视图后处理</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/03/27/drf-CBV/" data-id="cuidG3-A5ATnOk00KK5enloei" data-title="drf-CBV" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/drf/" rel="tag">drf</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/03/27/my-blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">my-blog</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/drf/">drf</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/drf/cbv/">cbv</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99/">网站</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99/blog/">blog</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drf/" rel="tag">drf</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/drf/" style="font-size: 10px;">drf</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/03/27/drf-CBV/">drf-CBV</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/27/my-blog/">my-blog</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/27/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 yibinL<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
