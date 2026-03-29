@@ -8,7 +8,7 @@
 	
 <title>
     
-        分类&nbsp;&nbsp;✦&nbsp;
+        关于&nbsp;&nbsp;✦&nbsp;
     
     我的博客
 </title>
@@ -20,7 +20,8 @@
 
 <meta name="keywords" content="" />
 
-<meta name="description" content="" />
+<meta name="description" content="一个简单的笔记博客页面
+" />
 
 	<!-- favicon -->
 	
@@ -266,57 +267,91 @@
 
 	<div id="content">
 		<h1 id="article-title">
-	<i class="fa fa-folder-open" aria-hidden="true"></i>分类
+	关于
 </h1>
-<h2 id="article-title">
-    目前共计 5 个分类
-</h2>
+
+<div class="article-meta">
+	<span> yibinL </span>
+	<span> 2026-03-29 18:45:29 </span>
+	<div id="article-categories">
+		
+		
+	</div>
+</div>
 
 <div id="article-content">
-	<ul>
-      
-          
-            <li class="menu-item">
-                <span>
-                    <a href="/categories/drf/">drf(6)</a>
-                </span>
-            </li>
-          
-      
-          
-            <li class="menu-item">
-                <span>
-                    <a href="/categories/drf/cbv/">cbv(1)</a>
-                </span>
-            </li>
-          
-      
-          
-            <li class="menu-item">
-                <span>
-                    <a href="/categories/drf/源码流程/">源码流程(5)</a>
-                </span>
-            </li>
-          
-      
-          
-            <li class="menu-item">
-                <span>
-                    <a href="/categories/网站/">网站(1)</a>
-                </span>
-            </li>
-          
-      
-          
-            <li class="menu-item">
-                <span>
-                    <a href="/categories/网站/blog/">blog(1)</a>
-                </span>
-            </li>
-          
-      
-	</ul>
+	<p>一个简单的笔记博客页面</p>
+
+	
 </div>
+
+
+    
+
+    
+
+    
+        
+        <script async reload>
+            fetch("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/tokyo-night-dark.css")
+                .then((response) => response.text())
+                .then((cssContent) => {
+                    const style = document.createElement("style");
+                    
+                        cssContent = cssContent
+                            .replace(".hljs-code,", "")
+                            .replaceAll("_", " ")
+                            .replaceAll("hljs-", "hljs .")
+                            .replaceAll(".hljs", " .highlight")
+                            .replaceAll(".built in", ".built_in")
+                            .replaceAll("title.", "");
+                        const figures = document.querySelectorAll("figure.highlight td.gutter");
+                        figures.forEach(figure=>{
+                            figure.classList.add("highlight");
+                        })
+                    
+                    style.innerHTML = cssContent;
+                    document.head.appendChild(style);
+                })
+                .catch((error) => {
+                    console.error("Error loading CSS:", error);
+                });
+        </script>
+    
+
+
+
+
+
+    <script reload>
+        var targets = document.querySelectorAll("figure.highlight, #article-content > pre:not(.highlight,.hljs)");
+        targets.forEach((block) => {
+            const copyBtn = document.createElement("button");
+            copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+            copyBtn.className = "code-copy";
+
+            
+                copyBtn.style.color = "#fff";
+            
+
+            copyBtn.addEventListener("click", () => {
+                const text = block.querySelector("td.code")?.textContent || block.querySelector("code")?.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    copyBtn.innerHTML = "Copied!";
+                    setTimeout(() => {
+                        copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+                    }, 2000);
+                });
+            });
+            block.appendChild(copyBtn);
+        });
+    </script>
+
+
+
+
+
+
 	</div>
 
 	<div id="footer">
