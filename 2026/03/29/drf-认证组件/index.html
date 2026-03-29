@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>drf-认证组件 | 我的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1.用户授权100个API，1个无需登录就能访问；99需要登录才能访问。 编写类作为认证组件 12345678910111213141516171819from rest_framework.authentication import BaseAuthenticationfrom rest_framework.exceptions import AuthenticationFailedclass">
+<meta property="og:type" content="article">
+<meta property="og:title" content="drf-认证组件">
+<meta property="og:url" content="http://example.com/2026/03/29/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="1.用户授权100个API，1个无需登录就能访问；99需要登录才能访问。 编写类作为认证组件 12345678910111213141516171819from rest_framework.authentication import BaseAuthenticationfrom rest_framework.exceptions import AuthenticationFailedclass">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-29T10:14:21.000Z">
+<meta property="article:modified_time" content="2026-03-29T10:16:09.651Z">
+<meta property="article:author" content="yibinL">
+<meta property="article:tag" content="drf">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">我的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-drf-认证组件" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/29/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/" class="article-date">
+  <time class="dt-published" datetime="2026-03-29T10:14:21.000Z" itemprop="datePublished">2026-03-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/drf/">drf</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      drf-认证组件
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-用户授权"><a href="#1-用户授权" class="headerlink" title="1.用户授权"></a>1.用户授权</h2><p>100个API，1个无需登录就能访问；99需要登录才能访问。</p>
+<p>编写类作为认证组件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.authentication <span class="keyword">import</span> BaseAuthentication</span><br><span class="line"><span class="keyword">from</span> rest_framework.exceptions <span class="keyword">import</span> AuthenticationFailed</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="comment"># 做用户认证：</span></span><br><span class="line">        <span class="comment"># 1.读取请求传递的token</span></span><br><span class="line">        <span class="comment"># 2.校验合法性</span></span><br><span class="line">        <span class="comment"># 3.返回值</span></span><br><span class="line">        <span class="comment">#   3.1 返回元组(11,22)  认证成功 (request.user，request.auth)</span></span><br><span class="line">        <span class="comment">#   3.2 抛出异常         认证失败 -&gt; 返回错误信息</span></span><br><span class="line">        <span class="comment">#   3.3 返回None        拥有多个认证类,则逐一认证，都认证失败  --&gt; 匿名用户</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 获取get请求中的token /xxx/xx/?token=123123</span></span><br><span class="line">        token = request.query_params.get(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> token:</span><br><span class="line">            <span class="keyword">return</span> (<span class="string">&#x27;yibin&#x27;</span>,token)</span><br><span class="line">            <span class="comment"># raise AuthenticationFailed(&#x27;认证失败&#x27;)</span></span><br><span class="line">        <span class="keyword">raise</span> AuthenticationFailed(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">20000</span>,<span class="string">&#x27;error&#x27;</span>:<span class="string">&#x27;认证失败&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>认证组件中返回的两个值，分别赋值给：<code>request.user</code> 和 <code>request.auth</code>。</p>
+<h2 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h2><h3 id="1-局部配置"><a href="#1-局部配置" class="headerlink" title="1.局部配置"></a>1.局部配置</h3><p>我们给不需要认证的接口局部配置</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LoginView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="comment"># 局部认证，如果不设置就会应用全局的配置</span></span><br><span class="line">    authentication_classes = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self,request</span>):</span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;status&#x27;</span>:<span class="number">200</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-全局配置"><a href="#2-全局配置" class="headerlink" title="2.全局配置"></a>2.全局配置</h3><p>在<code>setting</code>中设置，这样会默认配置到所有接口</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">&#x27;UNAUTHENTICATED_USER&#x27;</span>: <span class="literal">None</span>,   <span class="comment"># 去掉匿名用户</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;DEFAULT_AUTHENTICATION_CLASSES&#x27;</span>:[<span class="string">&#x27;ext.auth.MyAuthentication&#x27;</span>,]  <span class="comment"># 全局的认证配置,可能有多个认证组件</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：认证组件不能写在view视图中。</p>
+<h3 id="3-查看drf的默认配置"><a href="#3-查看drf的默认配置" class="headerlink" title="3.查看drf的默认配置"></a>3.查看drf的默认配置</h3><p>点击<code>APIView</code>类的源码：可以查看到它的默认配置的名称，我们就可以在<code>setting</code>中修改</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">APIView</span>(<span class="title class_ inherited__">View</span>):</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">	authentication_classes = api_settings.DEFAULT_AUTHENTICATION_CLASSES</span><br><span class="line">	</span><br><span class="line">    <span class="comment">#其他配置</span></span><br><span class="line">    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES</span><br><span class="line">    parser_classes = api_settings.DEFAULT_PARSER_CLASSES</span><br><span class="line">    throttle_classes = api_settings.DEFAULT_THROTTLE_CLASSES</span><br><span class="line">    permission_classes = api_settings.DEFAULT_PERMISSION_CLASSES</span><br><span class="line">    content_negotiation_class = api_settings.DEFAULT_CONTENT_NEGOTIATION_CLASS</span><br><span class="line">    metadata_class = api_settings.DEFAULT_METADATA_CLASS</span><br><span class="line">    versioning_class = api_settings.DEFAULT_VERSIONING_CLASS</span><br></pre></td></tr></table></figure>
+
+<p>这里使用了面向对象的继承</p>
+<h2 id="3-认证的源码流程"><a href="#3-认证的源码流程" class="headerlink" title="3.认证的源码流程"></a>3.认证的源码流程</h2><p>请求进来url —&gt; as_views  —&gt;  views —&gt;dispatch</p>
+<p>在<code>dispatch</code>在对请求的封装时，会对认证组件进行各种操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">APIView</span>(<span class="title class_ inherited__">View</span>):</span><br><span class="line">    <span class="comment"># 虽然setting中写的是字符串，但是它会自己通过反射找到相应的类</span></span><br><span class="line">    authentication_classes = api_settings.DEFAULT_AUTHENTICATION_CLASSES</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第一步 ：请求的封装  ---&gt;  加载认证组件</span></span><br><span class="line">        request = <span class="variable language_">self</span>.initialize_request(request, *args, **kwargs)</span><br><span class="line">        <span class="variable language_">self</span>.request = request</span><br><span class="line">        <span class="variable language_">self</span>.headers = <span class="variable language_">self</span>.default_response_headers  <span class="comment"># deprecate?</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 第二步: 使用认证组件,进行认证</span></span><br><span class="line">            <span class="variable language_">self</span>.initial(request, *args, **kwargs)</span><br><span class="line">            <span class="comment"># 认证通过后才出执行视图函数</span></span><br><span class="line">            <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> <span class="variable language_">self</span>.http_method_names:</span><br><span class="line">                <span class="comment"># 反射获取get/post等方法</span></span><br><span class="line">                handler = <span class="built_in">getattr</span>(<span class="variable language_">self</span>, request.method.lower(),</span><br><span class="line">                                  <span class="variable language_">self</span>.http_method_not_allowed)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                handler = <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line">            <span class="comment"># 第三步：执行对应视图中的方法</span></span><br><span class="line">            response = handler(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">            <span class="comment"># 会捕获到认证失败的异常:_authenticate</span></span><br><span class="line">            response = <span class="variable language_">self</span>.handle_exception(exc)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一步：加载认证组件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">initialize_request</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line"></span><br><span class="line">    parser_context = <span class="variable language_">self</span>.get_parser_context(request)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 加载认证组件，本质就是实例化每个认证类的对象，并封装到request对象。</span></span><br><span class="line">    <span class="keyword">return</span> Request(</span><br><span class="line">        request,</span><br><span class="line">        parsers=<span class="variable language_">self</span>.get_parsers(),</span><br><span class="line">        authenticators=<span class="variable language_">self</span>.get_authenticators(),   <span class="comment">#[对象，对象，对象.....]</span></span><br><span class="line">        negotiator=<span class="variable language_">self</span>.get_content_negotiator(),</span><br><span class="line">        parser_context=parser_context</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+<p>在<code>get_authenticators</code>中实例化我们设置好的组件类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_authenticators</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># 实例化authentication_classes中的每一个组件对象</span></span><br><span class="line">    <span class="comment"># [认证类的对象，认证类的对象，认证类的对象，认证类的对象]</span></span><br><span class="line">    <span class="keyword">return</span> [auth() <span class="keyword">for</span> auth <span class="keyword">in</span> <span class="variable language_">self</span>.authentication_classes]</span><br></pre></td></tr></table></figure>
+
+<p>封装在<code>Request</code>对象中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Request</span>:</span><br><span class="line">    <span class="comment">#　封装</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, request, parsers=<span class="literal">None</span>, authenticators=<span class="literal">None</span>,</span></span><br><span class="line"><span class="params">                 negotiator=<span class="literal">None</span>, parser_context=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line">        <span class="variable language_">self</span>.authenticators = authenticators <span class="keyword">or</span> ()</span><br><span class="line">        <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>第二部：执行认证组件，进入视图函数之前</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">initial</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">    <span class="comment"># 执行perform_authentication</span></span><br><span class="line">    <span class="variable language_">self</span>.perform_authentication(request)</span><br><span class="line">    <span class="variable language_">self</span>.check_permissions(request)</span><br><span class="line">    <span class="variable language_">self</span>.check_throttles(request)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">perform_authentication</span>(<span class="params">self, request</span>):</span><br><span class="line">    request.user</span><br><span class="line">    <span class="comment"># 可能是什么？</span></span><br><span class="line">    <span class="comment">#一个可调用的方法</span></span><br></pre></td></tr></table></figure>
+
+<p>执行<code>Request</code>中的<code>request.user</code>方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 调用方法时</span></span><br><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">user</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># 一开始并没有request._user,看它的初始化封装就可以知道</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;_user&#x27;</span>):</span><br><span class="line">        <span class="keyword">with</span> wrap_attributeerrors():</span><br><span class="line">            <span class="comment"># 执行这个方法</span></span><br><span class="line">            <span class="variable language_">self</span>._authenticate()</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span>._user</span><br></pre></td></tr></table></figure>
+
+<p>再执行<code>_authenticate</code></p>
+<p>在这里它会获取到第一步时封装好的组件对象进行身份验证</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_authenticate</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># 读取在第一步中封装好的每一个认证组件</span></span><br><span class="line">    <span class="keyword">for</span> authenticator <span class="keyword">in</span> <span class="variable language_">self</span>.authenticators:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 执行认证组件中的authenticate方法，进行认证。self = Request对象</span></span><br><span class="line">            user_auth_tuple = authenticator.authenticate(<span class="variable language_">self</span>)</span><br><span class="line">        <span class="keyword">except</span> exceptions.APIException:</span><br><span class="line">            <span class="comment"># 如果认证返回异常，会捕获并执行下面</span></span><br><span class="line">            <span class="variable language_">self</span>._not_authenticated()</span><br><span class="line">            <span class="keyword">raise</span>   <span class="comment">#这里的 raise 不带任何参数，意思是重新抛出刚刚捕获的那个异常,往上抛</span></span><br><span class="line">  </span><br><span class="line">        <span class="keyword">if</span> user_auth_tuple <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="variable language_">self</span>._authenticator = authenticator</span><br><span class="line">            <span class="comment">#　赋值，获取到认证信息</span></span><br><span class="line">            <span class="variable language_">self</span>.user, <span class="variable language_">self</span>.auth = user_auth_tuple</span><br><span class="line">            <span class="comment">#返回，认证通过就不需要再进行其他认证</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">    <span class="comment"># 都返回None,都没有认证通过</span></span><br><span class="line">    <span class="variable language_">self</span>._not_authenticated()</span><br></pre></td></tr></table></figure>
+
+<p>如果认证通过：则添加身份信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 给user赋值时</span></span><br><span class="line"><span class="meta">@user.setter</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">user</span>(<span class="params">self, value</span>):</span><br><span class="line">    <span class="comment"># 获得request._user</span></span><br><span class="line">    <span class="variable language_">self</span>._user = value</span><br><span class="line">    <span class="variable language_">self</span>._request.user = value</span><br></pre></td></tr></table></figure>
+
+<p>验证不通过：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_not_authenticated</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># 认证失败，启动匿名用户</span></span><br><span class="line">    <span class="variable language_">self</span>._authenticator = <span class="literal">None</span></span><br><span class="line">	<span class="comment"># 如果有设置匿名用户</span></span><br><span class="line">    <span class="keyword">if</span> api_settings.UNAUTHENTICATED_USER:</span><br><span class="line">        <span class="comment"># 实例化一个匿名用户</span></span><br><span class="line">        <span class="variable language_">self</span>.user = api_settings.UNAUTHENTICATED_USER()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="variable language_">self</span>.user = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> api_settings.UNAUTHENTICATED_TOKEN:</span><br><span class="line">        <span class="variable language_">self</span>.auth = api_settings.UNAUTHENTICATED_TOKEN()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="variable language_">self</span>.auth = <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第三步：</p>
+<p>如果认证通过则执行视图函数</p>
+<p>如果认证失败则进行异常处理</p>
+</li>
+</ul>
+<h2 id="4-对于异常处理"><a href="#4-对于异常处理" class="headerlink" title="4.对于异常处理"></a>4.对于异常处理</h2><h3 id="过程："><a href="#过程：" class="headerlink" title="过程："></a>过程：</h3><p>当认证失败后，会抛出异常</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_authenticate</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># 读取在第一步中封装好的每一个认证组件</span></span><br><span class="line">    <span class="keyword">for</span> authenticator <span class="keyword">in</span> <span class="variable language_">self</span>.authenticators:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 执行认证组件中的authenticate方法，进行认证。self = Request对象</span></span><br><span class="line">            user_auth_tuple = authenticator.authenticate(<span class="variable language_">self</span>)</span><br><span class="line">        <span class="keyword">except</span> exceptions.APIException:</span><br><span class="line">            <span class="comment"># 如果认证返回异常，会捕获并执行下面</span></span><br><span class="line">            <span class="variable language_">self</span>._not_authenticated()</span><br><span class="line">            <span class="keyword">raise</span>   <span class="comment">#这里的 raise 不带任何参数，意思是重新抛出刚刚捕获的那个异常,往上抛</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里并不会立刻处理，而是往上抛，直到在<code>dispatch</code>被捕获</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line"></span><br><span class="line">	....</span><br><span class="line">    ....</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 第二步: 使用认证组件,进行认证</span></span><br><span class="line">        <span class="variable language_">self</span>.initial(request, *args, **kwargs)</span><br><span class="line">        <span class="comment"># 认证通过后才出执行视图函数</span></span><br><span class="line">        <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> <span class="variable language_">self</span>.http_method_names:</span><br><span class="line">            <span class="comment"># 反射获取get/post等方法</span></span><br><span class="line">            handler = <span class="built_in">getattr</span>(<span class="variable language_">self</span>, request.method.lower(),</span><br><span class="line">                              <span class="variable language_">self</span>.http_method_not_allowed)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            handler = <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line">        <span class="comment"># 第三步：执行对应视图中的方法</span></span><br><span class="line">        response = handler(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">        <span class="comment"># 会捕获到认证失败的异常:_authenticate</span></span><br><span class="line">        response = <span class="variable language_">self</span>.handle_exception(exc)</span><br></pre></td></tr></table></figure>
+
+<p>这里调用的另一个方法<code>handle_exception</code>:引出组件中另一个方法<code>authenticate_header</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">handle_exception</span>(<span class="params">self, exc</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(exc, (exceptions.NotAuthenticated,</span><br><span class="line">                        exceptions.AuthenticationFailed)):</span><br><span class="line">        <span class="comment"># WWW-Authenticate header for 401 responses, else coerce to 403</span></span><br><span class="line">        auth_header = <span class="variable language_">self</span>.get_authenticate_header(<span class="variable language_">self</span>.request)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> auth_header:</span><br><span class="line">            <span class="comment"># 添加</span></span><br><span class="line">            exc.auth_header = auth_header</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            exc.status_code = status.HTTP_403_FORBIDDEN</span><br></pre></td></tr></table></figure>
+
+<p>如果我们有设置<code>authenticate_header</code>它便会去里面获取信息添加在响应头,并返回状态码401，没有的话返回状态码403</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        token = request.query_params.get(<span class="string">&#x27;token&#x27;</span>)    <span class="comment"># 相当于request._request.GET.get()</span></span><br><span class="line">        <span class="keyword">if</span> token:</span><br><span class="line">            <span class="keyword">return</span> (<span class="string">&#x27;yibin&#x27;</span>,token)</span><br><span class="line">            <span class="comment"># raise AuthenticationFailed(&#x27;认证失败&#x27;)</span></span><br><span class="line">        <span class="keyword">raise</span> AuthenticationFailed(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">20000</span>,<span class="string">&#x27;error&#x27;</span>:<span class="string">&#x27;认证失败&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate_header</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="comment"># 异常后在响应头添加一个信息</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;API&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p><strong>一旦认证过程抛出了异常（<code>raise</code>），视图函数（View）就绝对不会执行了。</strong></p>
+<p>为了让你更透彻地理解这个过程，我们可以看一下 DRF 内部的“执行流程图”：</p>
+<ol>
+<li>DRF 的执行流水线</li>
+</ol>
+<p>当一个请求到达 Django 视图时，DRF 的 <code>APIView</code> 会按顺序执行以下操作：</p>
+<ol>
+<li><p><strong><code>dispatch()</code></strong>: 这是总入口。</p>
+</li>
+<li><p><strong><code>initial()</code></strong>: 初始化阶段，这里包含三大守门员：</p>
+<ul>
+<li><strong>认证 (Perform Authentication)</strong>：确定你是谁（如果你在这里抛出异常，流程直接跳出）。</li>
+<li><strong>权限 (Check Permissions)</strong>：确定你能不能看。</li>
+<li><strong>限流 (Check Throttles)</strong>：确定你访问是不是太快了。</li>
+</ul>
+</li>
+<li><p><strong>视图函数 (Handler)</strong>：如 <code>get()</code>, <code>post()</code> 等业务逻辑。</p>
+</li>
+<li><p>异常抛出后的“紧急跳出”机制</p>
+</li>
+</ol>
+<p>在 Python 中，<code>raise</code> 的作用是<strong>中断当前的执行路径</strong>。</p>
+<p>当 <code>authenticator.authenticate(self)</code> 抛出 <code>APIException</code> 时：</p>
+<ol>
+<li>代码运行到 <code>raise</code> 语句。</li>
+<li>它不再继续向下执行 <code>initial()</code> 里的剩余代码（跳过权限检查和限流检查）。</li>
+<li>它直接跳出 <code>initial()</code> 方法。</li>
+<li>它跳出 <code>dispatch()</code> 方法。</li>
+<li>最后，它被 DRF 的**全局异常处理器（Exception Handler）**捕获。</li>
+<li>异常处理器把这个异常转换成一个 <code>Response</code> 对象（包含 401 或 403 状态码）。</li>
+<li>Django 把这个 Response 返回给客户端。</li>
+</ol>
+<p><strong>结论：视图函数中的业务逻辑代码根本没有机会被触碰。</strong></p>
+<ol start="3">
+<li>特殊情况：为什么有时认证失败还能进视图？</li>
+</ol>
+<p>这里有一个细节，可能会让你产生困惑，所以必须说明：</p>
+<ul>
+<li><p><strong>情况 A：抛出异常（你刚才看到的源码）</strong><br>如果认证组件（如 Token 认证）发现你提供了 Token，但 Token 是<strong>无效的&#x2F;过期的</strong>，它通常会 <code>raise AuthenticationFailed</code>。</p>
+<ul>
+<li><strong>结果</strong>：中断执行，<strong>不进视图</strong>，直接返回 401。</li>
+</ul>
+</li>
+<li><p><strong>情况 B：没有提供凭证（返回 <code>None</code>）</strong><br>如果你根本没有在 Header 里传 Token，认证组件会执行 <code>return None</code>（而不是抛异常）。<br>DRF 发现所有认证组件都返回了 <code>None</code>，它就会执行 <code>_not_authenticated()</code> 把你设为“匿名用户”。</p>
+<ul>
+<li><strong>结果</strong>：认证通过（身份是匿名），流程继续。</li>
+<li><strong>后续</strong>：紧接着的<strong>权限组件（Permission）<strong>会检查。如果你设置了 <code>IsAuthenticated</code> 权限，权限组件会抛出异常并拦截；如果你设置了 <code>AllowAny</code>，那么</strong>这种情况下会进入视图</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="5-多个认证组件"><a href="#5-多个认证组件" class="headerlink" title="5.多个认证组件"></a>5.多个认证组件</h2><p>当存在多个组件处理不同情况，如token放在url，或请求头中，或请求体中，需要不同的认证组件处理</p>
+<p>我们可以设置不报错让它逐个校验：</p>
+<p>如果都返回None，都没有认证成功 -&gt; 视图是否会被执行？</p>
+<ol>
+<li><p>视图函数会执行，只不过 self.user   self.auth &#x3D; None</p>
+</li>
+<li><p>或者在最后加入一个认证组件专门返回异常</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">URLAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        token = request.query_params.get(<span class="string">&quot;token&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> token:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;wupeiqi&quot;</span>, token</span><br><span class="line">        <span class="keyword">return</span> 　　　<span class="comment">#　不报错直接返回，让它进行后续的认证</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">HeaderAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        token = request.meta.get(<span class="string">&quot;xxxxx&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> token:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;wupeiqi&quot;</span>, token</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BodyAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        token = request.data.get(<span class="string">&quot;xxxxx&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> token:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;wupeiqi&quot;</span>, token</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment"># 前面有通过的则不会来到这里</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NoAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="keyword">raise</span> <span class="comment">#直接返回异常认证失败</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">OrderView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    authentication_classes = [URLAuthentication,HeaderAuthentication,BodyAuthentication ,NoAuthentication]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="built_in">print</span>(request.user, request.auth)</span><br><span class="line">        <span class="keyword">return</span> Response(<span class="string">&quot;OrderView&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-python开发常见"><a href="#6-python开发常见" class="headerlink" title="6.python开发常见"></a>6.python开发常见</h2><h3 id="1-子类的约束"><a href="#1-子类的约束" class="headerlink" title="1.子类的约束"></a>1.子类的约束</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BaseAuthentication</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="comment"># 子类中这个方法必须写不然就会报错，因为底层会调用这个方法</span></span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError(<span class="string">&quot;.authenticate() must be overridden.&quot;</span>)   <span class="comment"># 抛出异常</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">    <span class="comment"># 当你继承了这个父类</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        .....</span><br></pre></td></tr></table></figure>
+
+<p>在约束子类必须定义这个方法，是开发中常见的情况</p>
+<h3 id="2-状态码"><a href="#2-状态码" class="headerlink" title="2.状态码"></a>2.状态码</h3><p>对于401与403的区别</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>401 Unauthorized</th>
+<th>403 Forbidden</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>核心含义</strong></td>
+<td>身份未验证 &#x2F; 验证失败</td>
+<td>身份已验证，但权限不够</td>
+</tr>
+<tr>
+<td><strong>针对对象</strong></td>
+<td>身份（Who are you?）</td>
+<td>行为（What can you do?）</td>
+</tr>
+<tr>
+<td><strong>处理流程</strong></td>
+<td>发生在 <strong>Authentication</strong> 阶段</td>
+<td>发生在 <strong>Permissions</strong> 阶段</td>
+</tr>
+<tr>
+<td><strong>客户端反应</strong></td>
+<td>引导用户去登录 &#x2F; 刷新 Token</td>
+<td>告诉用户“你没权访问此资源”</td>
+</tr>
+<tr>
+<td><strong>登录能解决吗？</strong></td>
+<td>能（登录后就变成合法用户了）</td>
+<td>不能（登录了也没权限，除非换个号）</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/03/29/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/" data-id="cuidtdFJqDHOPLSSZ08d8d2_e" data-title="drf-认证组件" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/drf/" rel="tag">drf</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/03/29/drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          drf-权限组件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/03/29/drf-request/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">drf-request</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/drf/">drf</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/drf/cbv/">cbv</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99/">网站</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99/blog/">blog</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drf/" rel="tag">drf</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/drf/" style="font-size: 20px;">drf</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/03/29/drf-%E9%99%90%E6%B5%81/">drf-限流</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/29/drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/">drf-权限组件</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/29/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/">drf-认证组件</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/29/drf-request/">drf-request</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/29/drf%E7%BA%AF%E5%87%80%E7%89%88/">drf纯净版</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 yibinL<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

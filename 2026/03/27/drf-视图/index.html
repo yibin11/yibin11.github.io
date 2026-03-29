@@ -6,15 +6,15 @@
   
   <title>drf-CBV | 我的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="1.视图源码（django） url中 123456urlpatterns &#x3D; [    # path(&#x27;admin&#x2F;&#x27;, admin.site.urls),    path(&#x27;auth&#x2F;&#x27;,views.auth),  #  ----&gt;获取请求---&gt;执行函数()    path(&#x27;info&#x2F;&#x27;, views.InfoView">
+  <meta name="description" content="django的FBV和CBV FBV，函数 CBV，类+反射 &#x3D;&gt; 请求方法不同执行类中的不同方法。  drf-&gt;CBV123456View	- 10APIView(View)	- 20class UserInfo(APIView):	-&gt; 调用30个功能    1.视图源码（django） url中 123456urlpatterns &#x3D; [    # path(&amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="drf-CBV">
-<meta property="og:url" content="http://example.com/2026/03/27/drf-CBV/index.html">
+<meta property="og:url" content="http://example.com/2026/03/27/drf-%E8%A7%86%E5%9B%BE/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="1.视图源码（django） url中 123456urlpatterns &#x3D; [    # path(&#x27;admin&#x2F;&#x27;, admin.site.urls),    path(&#x27;auth&#x2F;&#x27;,views.auth),  #  ----&gt;获取请求---&gt;执行函数()    path(&#x27;info&#x2F;&#x27;, views.InfoView">
+<meta property="og:description" content="django的FBV和CBV FBV，函数 CBV，类+反射 &#x3D;&gt; 请求方法不同执行类中的不同方法。  drf-&gt;CBV123456View	- 10APIView(View)	- 20class UserInfo(APIView):	-&gt; 调用30个功能    1.视图源码（django） url中 123456urlpatterns &#x3D; [    # path(&amp;#">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-27T11:04:57.000Z">
-<meta property="article:modified_time" content="2026-03-27T11:30:37.770Z">
+<meta property="article:modified_time" content="2026-03-27T14:37:49.487Z">
 <meta property="article:author" content="yibinL">
 <meta property="article:tag" content="drf">
 <meta name="twitter:card" content="summary">
@@ -78,9 +78,9 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-drf-CBV" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-drf-视图" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2026/03/27/drf-CBV/" class="article-date">
+    <a href="/2026/03/27/drf-%E8%A7%86%E5%9B%BE/" class="article-date">
   <time class="dt-published" datetime="2026-03-27T11:04:57.000Z" itemprop="datePublished">2026-03-27</time>
 </a>
     
@@ -104,7 +104,15 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="1-视图源码（django）"><a href="#1-视图源码（django）" class="headerlink" title="1.视图源码（django）"></a>1.视图源码（django）</h2><ul>
+        <h2 id="django的FBV和CBV"><a href="#django的FBV和CBV" class="headerlink" title="django的FBV和CBV"></a>django的FBV和CBV</h2><ul>
+<li>FBV，函数</li>
+<li>CBV，类+反射 &#x3D;&gt; 请求方法不同执行类中的不同方法。</li>
+</ul>
+<h2 id="drf-CBV"><a href="#drf-CBV" class="headerlink" title="drf-&gt;CBV"></a>drf-&gt;CBV</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">View</span><br><span class="line">	- 10</span><br><span class="line">APIView(View)</span><br><span class="line">	- 20</span><br><span class="line">class UserInfo(APIView):</span><br><span class="line">	-&gt; 调用30个功能</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-视图源码（django）"><a href="#1-视图源码（django）" class="headerlink" title="1.视图源码（django）"></a>1.视图源码（django）</h2><ul>
 <li><p>url中</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># path(&#x27;admin/&#x27;, admin.site.urls),</span></span><br><span class="line">    path(<span class="string">&#x27;auth/&#x27;</span>,views.auth),  <span class="comment">#  ----&gt;获取请求---&gt;执行函数()</span></span><br><span class="line">    path(<span class="string">&#x27;info/&#x27;</span>, views.InfoView.as_view()),     <span class="comment"># 获取请求----&gt;去源码中执行view函数</span></span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
@@ -112,10 +120,10 @@
 
 
 </li>
-<li><p>源码中</p>
+<li><p>源码中，使用了闭包</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">View</span>:</span><br><span class="line"><span class="meta">	@classonlymethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">as_view</span>(<span class="params">cls, **initkwargs</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Main entry point for a request-response process.&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> initkwargs:</span><br><span class="line">            ....</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">view</span>(<span class="params">request, *args, **kwargs</span>):</span><br><span class="line">            <span class="comment"># 实例化视图类的对象，如：InfoView</span></span><br><span class="line">            <span class="variable language_">self</span> = cls(**initkwargs)</span><br><span class="line">            <span class="variable language_">self</span>.setup(request, *args, **kwargs)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(<span class="variable language_">self</span>, <span class="string">&quot;request&quot;</span>):</span><br><span class="line">                <span class="keyword">raise</span> AttributeError(</span><br><span class="line">                    <span class="string">&quot;%s instance has no &#x27;request&#x27; attribute. Did you override &quot;</span></span><br><span class="line">                    <span class="string">&quot;setup() and forget to call super()?&quot;</span> % cls.__name__</span><br><span class="line">                )</span><br><span class="line">            <span class="comment"># 执行：对象.dispatch</span></span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>.dispatch(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">        ....</span><br><span class="line">        ....</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> view</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>dispatch函数</p>
+<li><p>dispatch方法：获取我们在视图中定义好的get&#x2F;post等方法并调用</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">http_method_names = [</span><br><span class="line">        <span class="string">&quot;get&quot;</span>,</span><br><span class="line">        <span class="string">&quot;post&quot;</span>,</span><br><span class="line">        <span class="string">&quot;put&quot;</span>,</span><br><span class="line">        <span class="string">&quot;patch&quot;</span>,</span><br><span class="line">        <span class="string">&quot;delete&quot;</span>,</span><br><span class="line">        <span class="string">&quot;head&quot;</span>,</span><br><span class="line">        <span class="string">&quot;options&quot;</span>,</span><br><span class="line">        <span class="string">&quot;trace&quot;</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">    <span class="comment"># Try to dispatch to the right method; if a method doesn&#x27;t exist,</span></span><br><span class="line">    <span class="comment"># defer to the error handler. Also defer to the error handler if the</span></span><br><span class="line">    <span class="comment"># request method isn&#x27;t on the approved list.</span></span><br><span class="line">    <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> <span class="variable language_">self</span>.http_method_names:</span><br><span class="line">        handler = <span class="built_in">getattr</span>(</span><br><span class="line">            <span class="variable language_">self</span>, request.method.lower(), <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        handler = <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line">    <span class="keyword">return</span> handler(request, *args, **kwargs)</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="2-drf"><a href="#2-drf" class="headerlink" title="2.drf"></a>2.drf</h2><ul>
@@ -137,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/03/27/drf-CBV/" data-id="cuidG3-A5ATnOk00KK5enloei" data-title="drf-CBV" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2026/03/27/drf-%E8%A7%86%E5%9B%BE/" data-id="cuidOp425EvpaDMfaV9BGhObH" data-title="drf-CBV" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -148,6 +156,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2026/03/29/drf%E7%BA%AF%E5%87%80%E7%89%88/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          drf纯净版
+        
+      </div>
+    </a>
   
   
     <a href="/2026/03/27/my-blog/" id="article-nav-older" class="article-nav-link-wrap">
@@ -189,7 +206,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/drf/" style="font-size: 10px;">drf</a>
+      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/drf/" style="font-size: 20px;">drf</a>
     </div>
   </div>
 
@@ -211,15 +228,23 @@
       <ul>
         
           <li>
-            <a href="/2026/03/27/drf-CBV/">drf-CBV</a>
+            <a href="/2026/03/29/drf-%E9%99%90%E6%B5%81/">drf-限流</a>
           </li>
         
           <li>
-            <a href="/2026/03/27/my-blog/">my-blog</a>
+            <a href="/2026/03/29/drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/">drf-权限组件</a>
           </li>
         
           <li>
-            <a href="/2026/03/27/hello-world/">Hello World</a>
+            <a href="/2026/03/29/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/">drf-认证组件</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/29/drf-request/">drf-request</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/29/drf%E7%BA%AF%E5%87%80%E7%89%88/">drf纯净版</a>
           </li>
         
       </ul>
