@@ -8,6 +8,8 @@
 	
 <title>
     
+        Hello World&nbsp;&nbsp;✦&nbsp;
+    
     我的博客
 </title>
 
@@ -18,7 +20,8 @@
 
 <meta name="keywords" content="" />
 
-<meta name="description" content="" />
+<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick" />
 
 	<!-- favicon -->
 	
@@ -155,7 +158,7 @@
 			
 									
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2026/03/27/other/hello-world/" title="/2026/03/27/other/hello-world">
 									
 										hello-world
@@ -263,220 +266,173 @@
 </div>
 
 	<div id="content">
-		<div id="index">
-	
-	<div class="index-li">
-		<a href="/2026/03/29/drf/drf-%E9%99%90%E6%B5%81/">
-			<h2 class="index-title">
-				drf-限流
-			</h2>
-			<div class="index-brief">
-				原理用于限制访问频率
-获取访问者的ip或账户作为标识，记录下访问记录在redis中
-    标识                           访问记录（redis）
- &quot;9123123&quot;                   [16：45, 16:43, 16:42, ]
+		<h1 id="article-title">
+	Hello World
+</h1>
 
-throttle_XXX_11.11.11.11     [16：45, 16:43, 16:42 ...
-			</div>
-		</a>
-		<div class="article-meta">
-			<span>2026-03-29</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/"
-					>drf</a
-				>
-				 > 
-			</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/源码流程/"
-					>源码流程</a
-				>
-				
-			</span>
-			  
-		</div>
-	</div>
-	
-	<div class="index-li">
-		<a href="/2026/03/29/drf/drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/">
-			<h2 class="index-title">
-				drf-权限组件
-			</h2>
-			<div class="index-brief">
-				1.应用我们可以编辑权限校验的逻辑和返回错误信息
-from rest_framework.permissions import BasePermissionfrom ext.code import *class UserPermission(BasePermission):    # 自定义错误返回信息    message = &#123;&#x27;code&#x27;:PERMISSION_ ...
-			</div>
-		</a>
-		<div class="article-meta">
-			<span>2026-03-29</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/"
-					>drf</a
-				>
-				 > 
-			</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/源码流程/"
-					>源码流程</a
-				>
-				
-			</span>
-			  
-		</div>
-	</div>
-	
-	<div class="index-li">
-		<a href="/2026/03/29/drf/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/">
-			<h2 class="index-title">
-				drf-认证组件
-			</h2>
-			<div class="index-brief">
-				1.用户授权100个API，1个无需登录就能访问；99需要登录才能访问。
-编写类作为认证组件
-from rest_framework.authentication import BaseAuthenticationfrom rest_framework.exceptions import AuthenticationFailedclass MyAuthentication(BaseAuthenti ...
-			</div>
-		</a>
-		<div class="article-meta">
-			<span>2026-03-29</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/"
-					>drf</a
-				>
-				 > 
-			</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/源码流程/"
-					>源码流程</a
-				>
-				
-			</span>
-			  
-		</div>
-	</div>
-	
-	<div class="index-li">
-		<a href="/2026/03/29/drf/drf-request/">
-			<h2 class="index-title">
-				drf-request
-			</h2>
-			<div class="index-brief">
-				1.request封装在URL中调用的view方法最后是调用了self.dispatch
-在源码的dispatch方法中
-def dispatch(self, request, *args, **kwargs):    &quot;&quot;&quot;    `.dispatch()` is pretty much the same as Django&#x27;s regular dispa ...
-			</div>
-		</a>
-		<div class="article-meta">
-			<span>2026-03-29</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/"
-					>drf</a
-				>
-				 > 
-			</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/源码流程/"
-					>源码流程</a
-				>
-				
-			</span>
-			  
-		</div>
-	</div>
-	
-	<div class="index-li">
-		<a href="/2026/03/29/drf/drf%E7%BA%AF%E5%87%80%E7%89%88/">
-			<h2 class="index-title">
-				drf纯净版
-			</h2>
-			<div class="index-brief">
-				1.匿名用户默认情况下：drf页面访问需要用户信息
-class UserView(APIView):    def get(self,request,*args,**kwargs):        print(request.user)   # 当前登录的用户 - 此时没用户 -&gt; 匿名用户        return Response(&#123;&#x27;status&#x27;: & ...
-			</div>
-		</a>
-		<div class="article-meta">
-			<span>2026-03-29</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/"
-					>drf</a
-				>
-				 > 
-			</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/源码流程/"
-					>源码流程</a
-				>
-				
-			</span>
-			  
-		</div>
-	</div>
-	
-	<div class="index-li">
-		<a href="/2026/03/27/drf/drf-%E8%A7%86%E5%9B%BE/">
-			<h2 class="index-title">
-				drf-CBV
-			</h2>
-			<div class="index-brief">
-				django的FBV和CBV
-FBV，函数
-CBV，类+反射 &#x3D;&gt; 请求方法不同执行类中的不同方法。
-
-drf-&gt;CBVView	- 10APIView(View)	- 20class UserInfo(APIView):	-&gt; 调用30个功能
-
-
-
-1.视图源码（django）
-url中
-urlpatterns = [    # path(&#x27;admin/&# ...
-			</div>
-		</a>
-		<div class="article-meta">
-			<span>2026-03-27</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/"
-					>drf</a
-				>
-				 > 
-			</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/cbv/"
-					>cbv</a
-				>
-				
-			</span>
-			  
-		</div>
-	</div>
-	
-
-	<div id="index-paginator">
+<div class="article-meta">
+	<span> yibinL </span>
+	<span> 2026-03-27 18:06:00 </span>
+	<div id="article-categories">
+		
+			<span>Categories：</span>
+			
+		
+		
+			<span>Tags：</span>
+			
 		
 	</div>
 </div>
+
+<div id="article-content">
+	<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+	
+    <div class="copyright-box">
+		<div class="license-box">
+			<div class="license-header">
+				
+				<div class="license-title">
+					Hello World
+				</div>
+				<div class="license-subTitle">http://example.com/2026/03/27/other/hello-world/index.html</div>
+			</div>
+			<div class="license-meta">
+				
+					<div class="license-meta-item">
+						<div>作者</div>
+						<div>
+							<a href="">
+								yibinL
+							</a>
+						</div>
+					</div>
+				
+				
+					<div class="license-meta-item license-meta-date">
+					<div>发布于</div>
+					<div>2026年3月27日</div>
+					</div>
+				
+				
+				
+				
+					<div class="license-meta-item">
+					<div>许可协议</div>
+					<div>
+						
+						
+						
+							<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+								<span class="hint--top hint--rounded" aria-label="BY - 署名">
+									BY - 署名
+								</span>
+							</a>
+						
+						
+					</div>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+    
+
+    
+
+    
+        
+        <script async reload>
+            fetch("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/tokyo-night-dark.css")
+                .then((response) => response.text())
+                .then((cssContent) => {
+                    const style = document.createElement("style");
+                    
+                        cssContent = cssContent
+                            .replace(".hljs-code,", "")
+                            .replaceAll("_", " ")
+                            .replaceAll("hljs-", "hljs .")
+                            .replaceAll(".hljs", " .highlight")
+                            .replaceAll(".built in", ".built_in")
+                            .replaceAll("title.", "");
+                        const figures = document.querySelectorAll("figure.highlight td.gutter");
+                        figures.forEach(figure=>{
+                            figure.classList.add("highlight");
+                        })
+                    
+                    style.innerHTML = cssContent;
+                    document.head.appendChild(style);
+                })
+                .catch((error) => {
+                    console.error("Error loading CSS:", error);
+                });
+        </script>
+    
+
+
+
+
+
+    <script reload>
+        var targets = document.querySelectorAll("figure.highlight, #article-content > pre:not(.highlight,.hljs)");
+        targets.forEach((block) => {
+            const copyBtn = document.createElement("button");
+            copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+            copyBtn.className = "code-copy";
+
+            
+                copyBtn.style.color = "#fff";
+            
+
+            copyBtn.addEventListener("click", () => {
+                const text = block.querySelector("td.code")?.textContent || block.querySelector("code")?.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    copyBtn.innerHTML = "Copied!";
+                    setTimeout(() => {
+                        copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+                    }, 2000);
+                });
+            });
+            block.appendChild(copyBtn);
+        });
+    </script>
+
+
+
+
+<div class="post-guide">
+	<div class="item left">
+	
+	</div>
+	<div class="item right">
+		
+		<a href="/2026/03/27/other/my-blog/">
+			my-blog
+			<i class="fa fa-angle-right" aria-hidden="true"></i>
+		</a>
+		
+	</div>
+</div>
+
+
+
 
 	</div>
 

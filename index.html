@@ -1,1005 +1,599 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>我的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="我的博客">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="我的博客">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="yibinL">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<!-- title -->
+	
+<title>
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+    我的博客
+</title>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+	<!-- keywords,description -->
+	
+
+<meta name="author" content="yibinL" />
+
+<meta name="keywords" content="" />
+
+<meta name="description" content="" />
+
+	<!-- favicon -->
+	
+		<link rel="shortcut icon" href="/favicon.ico">
+	
+
+	<!-- css, script -->
+	
+<link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	<!-- custom css and js -->
+	
+
+
+
+
+
+	<!-- search -->
+	<script async>
+	window.searchEngine = "https://www.google.com/search?q=" ?? "https://www.google.com/search?q=";
+	window.homeHost = "http://example.com" ?? window.location.host;
+</script>
+
+	<!-- statistics -->
+	
+	<script async reload src="https://cn.vercount.one/js"></script>
+
+
+	<!-- analysis -->
+	
+
 
 <meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">我的博客</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-          <a class="main-nav-link" href="/categories">Categories</a>
-        
-          <a class="main-nav-link" href="/tags">Tags</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
+	<header id="header">
+	<a id="title" href="/" class="logo">
+		<img id="logo" src="/favicon-white.ico" alt="logo"/>
+		我的博客
+	</a>
+
+	<ul id="menu">
+		
+			<li class="menu-item">
+				<a href="/about" class="menu-item-link">关于</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="/tags" class="menu-item-link">标签</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="/categories" class="menu-item-link">分类</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="" class="menu-item-link item-icon" target="_blank">
+					<i class="fa fa-github fa-2x"></i>
+				</a>
+			</li>
+		
+		
+			<li class="menu-item dark-mode">
+				<a href="#" class="menu-item-link item-icon">
+					<i class="fa fa-moon-o fa-2x"></i>
+				</a>
+			</li>
+
+			<script async>
+				const localModel = localStorage.getItem("darkModel");
+				const darkModel = !localModel ? 0 : localModel;
+
+				const darkModeIcon = document.querySelector("#menu .dark-mode i");
+
+				if (darkModel == 1) {
+					darkModeIcon.classList.replace("fa-moon-o", "fa-sun-o");
+					DarkReader.enable({
+						brightness: 100,
+						contrast: 90,
+						sepia: 10,
+					});
+				}
+
+				darkModeIcon.addEventListener("click", () => {
+					const isMoon = darkModeIcon.classList.contains("fa-moon-o");
+					darkModeIcon.classList.toggle("fa-moon-o", !isMoon);
+					darkModeIcon.classList.toggle("fa-sun-o", isMoon);
+					localStorage.setItem("darkModel", isMoon ? 1 : 0);
+					isMoon ? DarkReader.enable({ brightness: 100, contrast: 90, sepia: 10 }) : DarkReader.disable();
+				});
+			</script>
+		
+	</ul>
 </header>
 
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-drf-限流" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/03/29/drf-%E9%99%90%E6%B5%81/" class="article-date">
-  <time class="dt-published" datetime="2026-03-29T10:14:37.000Z" itemprop="datePublished">2026-03-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/drf/">drf</a>►<a class="article-category-link" href="/categories/drf/%E6%BA%90%E7%A0%81%E6%B5%81%E7%A8%8B/">源码流程</a>
-  </div>
+<script async>
+	let startHeight = 0;
+	window.addEventListener("scroll", () => {
+		const { scrollY: endHeight } = window;
+		const distance = endHeight - startHeight;
+		startHeight = endHeight;
+		document.querySelector("#header").style.display = distance > 0 && endHeight > 50 ? "none" : "";
+	});
+</script>
+	<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="按回车全站搜索">
+		<div id="tree">
+			
+			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/03/29/other/other/" title="/2026/03/29/other/other">
+											<i class="fa fa-plus-square-o"></i>
+											other
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/other/hello-world/" title="/2026/03/27/other/hello-world">
+									
+										hello-world
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/other/my-blog/" title="/2026/03/27/other/my-blog">
+									
+										my-blog
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/03/29/drf/drf/" title="/2026/03/29/drf/drf">
+											<i class="fa fa-plus-square-o"></i>
+											drf
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/drf/drf-%E8%A7%86%E5%9B%BE/" title="/2026/03/27/drf/drf-视图">
+									
+										drf-视图
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf%E7%BA%AF%E5%87%80%E7%89%88/" title="/2026/03/29/drf/drf纯净版">
+									
+										drf纯净版
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf-request/" title="/2026/03/29/drf/drf-request">
+									
+										drf-request
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/" title="/2026/03/29/drf/drf-认证组件">
+									
+										drf-认证组件
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/" title="/2026/03/29/drf/drf-权限组件">
+									
+										drf-权限组件
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf-%E9%99%90%E6%B5%81/" title="/2026/03/29/drf/drf-限流">
+									
+										drf-限流
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
+		</div>
+	</div>
+</div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/03/29/drf-%E9%99%90%E6%B5%81/">drf-限流</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>用于限制访问频率</p>
-<p>获取访问者的<code>ip</code>或账户作为标识，记录下访问记录在<code>redis</code>中</p>
-<pre><code>    标识                           访问记录（redis）
+	<div id="content">
+		<div id="index">
+	
+	<div class="index-li">
+		<a href="/2026/03/29/other/other/">
+			<h2 class="index-title">
+				other
+			</h2>
+			<div class="index-brief">
+				 ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/29/drf/drf/">
+			<h2 class="index-title">
+				drf
+			</h2>
+			<div class="index-brief">
+				 ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/29/drf/drf-%E9%99%90%E6%B5%81/">
+			<h2 class="index-title">
+				drf-限流
+			</h2>
+			<div class="index-brief">
+				原理用于限制访问频率
+获取访问者的ip或账户作为标识，记录下访问记录在redis中
+    标识                           访问记录（redis）
  &quot;9123123&quot;                   [16：45, 16:43, 16:42, ]
 
-throttle_XXX_11.11.11.11     [16：45, 16:43, 16:42, ]
-
-1.获取当前时间 16：45
-2.当前时间-10分钟=计数开始时间  16:35
-3.删除小于16:35
-4.计算长度
-    - 超过，错误
-    - 未超，访问
-</code></pre>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>编写类</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.core.cache <span class="keyword">import</span> cache <span class="keyword">as</span> default_cache</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Throttle</span>(<span class="title class_ inherited__">SimpleRateThrottle</span>):</span><br><span class="line">    scope = <span class="string">&quot;user&quot;</span>  <span class="comment"># 构造缓存中的key</span></span><br><span class="line">    cache =  default_cache   <span class="comment"># 访问记录存放在django的缓存中（需设置缓存）</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置访问频率，例如：1分钟允许访问5次</span></span><br><span class="line">    <span class="comment"># 其他：&#x27;s&#x27;, &#x27;sec&#x27;, &#x27;m&#x27;, &#x27;min&#x27;, &#x27;h&#x27;, &#x27;hour&#x27;, &#x27;d&#x27;, &#x27;day&#x27;</span></span><br><span class="line">    THROTTLE_RATES = &#123;<span class="string">&#x27;user&#x27;</span>: <span class="string">&#x27;5/m&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_cache_key</span>(<span class="params">self, request, view</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;生成唯一标识&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> request.user:</span><br><span class="line">            ident = request.user.<span class="built_in">id</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 如果没有用户，返回ip地址</span></span><br><span class="line">            ident = <span class="variable language_">self</span>.get_ident(request)    <span class="comment">#获取用户ip代理作为标识</span></span><br><span class="line">        <span class="comment"># cache_format = &#x27;throttle_%(scope)s_%(ident)s&#x27;</span></span><br><span class="line">        <span class="comment"># 返回一个记录key与唯一标识的字符串</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.cache_format % &#123;<span class="string">&#x27;scope&#x27;</span>:<span class="variable language_">self</span>.scope,<span class="string">&#x27;ident&#x27;</span>:ident&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>一般为局部配置某个接口:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LoginView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="comment"># 局部认证，如果不设置就会应用全局的配置</span></span><br><span class="line">    throttle_classes = [Throttle,]</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>安装redis并配置好</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CACHES = &#123;</span><br><span class="line">    <span class="string">&quot;default&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;BACKEND&quot;</span>: <span class="string">&quot;django_redis.cache.RedisCache&quot;</span>,</span><br><span class="line">        <span class="string">&quot;LOCATION&quot;</span>: <span class="string">&quot;redis://127.0.0.1:6379&quot;</span>,</span><br><span class="line">        <span class="string">&quot;OPTIONS&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;CLIENT_CLASS&quot;</span>: <span class="string">&quot;django_redis.client.DefaultClient&quot;</span>,</span><br><span class="line">            <span class="string">&quot;PASSWORD&quot;</span>: <span class="string">&quot;030824&quot;</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们可以在<code>setting</code>设置公共配置</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 写入我们某个scope对应的限流规则</span></span><br><span class="line">    <span class="string">&#x27;DEFAULT_THROTTLE_RATES&#x27;</span>:&#123;</span><br><span class="line">        <span class="string">&#x27;user&#x27;</span>:<span class="string">&#x27;5/m&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><h3 id="1-对象加载"><a href="#1-对象加载" class="headerlink" title="1.对象加载"></a>1.对象加载</h3><p>获取每个限流类的对象，初始化（读取限制的配置，获取到 时间间隔+访问次数） –&gt; num_requests,  duration</p>
-<p>首先：views –&gt;  dispatch -&gt; initail  -&gt;  check_throttles</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">initial</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">    <span class="comment"># Ensure that the incoming request is permitted</span></span><br><span class="line">    <span class="variable language_">self</span>.perform_authentication(request)</span><br><span class="line">    <span class="variable language_">self</span>.check_permissions(request)</span><br><span class="line">    <span class="variable language_">self</span>.check_throttles(request)      <span class="comment"># 执行限流函数</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">check_throttles</span>(<span class="params">self, request</span>):</span><br><span class="line"> </span><br><span class="line">    throttle_durations = []</span><br><span class="line">    <span class="comment">#循环每个对象</span></span><br><span class="line">    <span class="keyword">for</span> throttle <span class="keyword">in</span> <span class="variable language_">self</span>.get_throttles():</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> throttle.allow_request(request, <span class="variable language_">self</span>):</span><br><span class="line">            throttle_durations.append(throttle.wait())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> throttle_durations:</span><br><span class="line">        <span class="comment"># Filter out `None` values which may happen in case of config / rate</span></span><br><span class="line">        <span class="comment"># changes, see #1438</span></span><br><span class="line">        durations = [</span><br><span class="line">            duration <span class="keyword">for</span> duration <span class="keyword">in</span> throttle_durations</span><br><span class="line">            <span class="keyword">if</span> duration <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span></span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        duration = <span class="built_in">max</span>(durations, default=<span class="literal">None</span>)</span><br><span class="line">        <span class="variable language_">self</span>.throttled(request, duration)</span><br></pre></td></tr></table></figure>
-
-<p>执行<code>get_throttles</code>获取我们的限流类</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_throttles</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># 这里会实例化我们的类，也就是会初始化</span></span><br><span class="line">    <span class="keyword">return</span> [throttle() <span class="keyword">for</span> throttle <span class="keyword">in</span> <span class="variable language_">self</span>.throttle_classes]</span><br></pre></td></tr></table></figure>
-
-<p>但是我们的<code>Throttle</code>类并没有定义初始化方法，使用继承父类的<code>init</code></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SimpleRateThrottle</span>(<span class="title class_ inherited__">BaseThrottle</span>):</span><br><span class="line"></span><br><span class="line">    cache = default_cache</span><br><span class="line">    timer = time.time</span><br><span class="line">    cache_format = <span class="string">&#x27;throttle_%(scope)s_%(ident)s&#x27;</span></span><br><span class="line">    scope = <span class="literal">None</span></span><br><span class="line">    THROTTLE_RATES = api_settings.DEFAULT_THROTTLE_RATES  <span class="comment"># 可以全局配置</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">getattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;rate&#x27;</span>, <span class="literal">None</span>):</span><br><span class="line">            <span class="variable language_">self</span>.rate = <span class="variable language_">self</span>.get_rate()</span><br><span class="line">        <span class="variable language_">self</span>.num_requests, <span class="variable language_">self</span>.duration = <span class="variable language_">self</span>.parse_rate(<span class="variable language_">self</span>.rate)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>首先是<code>get_rate</code>，它去读取我们的限流规则（全局or局部）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_rate</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># 判断我们是否有设置scope，它是缓存中的key</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">getattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;scope&#x27;</span>, <span class="literal">None</span>):</span><br><span class="line">        msg = (<span class="string">&quot;You must set either `.scope` or `.rate` for &#x27;%s&#x27; throttle&quot;</span> %</span><br><span class="line">               <span class="variable language_">self</span>.__class__.__name__)</span><br><span class="line">        <span class="keyword">raise</span> ImproperlyConfigured(msg)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 返回限流规则</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.THROTTLE_RATES[<span class="variable language_">self</span>.scope]</span><br><span class="line">    <span class="keyword">except</span> KeyError:</span><br><span class="line">        msg = <span class="string">&quot;No default throttle rate set for &#x27;%s&#x27; scope&quot;</span> % <span class="variable language_">self</span>.scope</span><br><span class="line">        <span class="keyword">raise</span> ImproperlyConfigured(msg)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>然后是<code>parse_rate</code>,它会从规则中获取时间间隔+访问次数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">parse_rate</span>(<span class="params">self, rate</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> rate <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> (<span class="literal">None</span>, <span class="literal">None</span>)</span><br><span class="line">    num, period = rate.split(<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">    num_requests = <span class="built_in">int</span>(num)</span><br><span class="line">    duration = &#123;<span class="string">&#x27;s&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;m&#x27;</span>: <span class="number">60</span>, <span class="string">&#x27;h&#x27;</span>: <span class="number">3600</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">86400</span>&#125;[period[<span class="number">0</span>]]</span><br><span class="line">    <span class="keyword">return</span> (num_requests, duration)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>自从初始化完成，对象加载</p>
-<h3 id="2-限流执行"><a href="#2-限流执行" class="headerlink" title="2.限流执行"></a>2.限流执行</h3><p>回到<code>check_throttles</code></p>
-<p>查看<code>allow_request</code>是否返回<code>ture</code> ，否则需要等待</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">check_throttles</span>(<span class="params">self, request</span>):</span><br><span class="line"> </span><br><span class="line">    throttle_durations = []</span><br><span class="line">    <span class="comment">#循环每个对象  --&gt; allow_request到底如何实现</span></span><br><span class="line">    <span class="keyword">for</span> throttle <span class="keyword">in</span> <span class="variable language_">self</span>.get_throttles():</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> throttle.allow_request(request, <span class="variable language_">self</span>):</span><br><span class="line">            throttle_durations.append(throttle.wait())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> throttle_durations:</span><br><span class="line">        <span class="comment"># Filter out `None` values which may happen in case of config / rate</span></span><br><span class="line">        <span class="comment"># changes, see #1438</span></span><br><span class="line">        durations = [</span><br><span class="line">            duration <span class="keyword">for</span> duration <span class="keyword">in</span> throttle_durations</span><br><span class="line">            <span class="keyword">if</span> duration <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span></span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        duration = <span class="built_in">max</span>(durations, default=<span class="literal">None</span>)</span><br><span class="line">        <span class="variable language_">self</span>.throttled(request, duration)</span><br></pre></td></tr></table></figure>
-
-<p>allow_request如何执行</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">allow_request</span>(<span class="params">self, request, view</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="variable language_">self</span>.rate <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">	<span class="comment"># 获取唯一标识</span></span><br><span class="line">    <span class="variable language_">self</span>.key = <span class="variable language_">self</span>.get_cache_key(request, view)</span><br><span class="line">    <span class="keyword">if</span> <span class="variable language_">self</span>.key <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">	<span class="comment"># 到缓存中获取访问记录，里面记录的是访问时的时间</span></span><br><span class="line">    <span class="variable language_">self</span>.history = <span class="variable language_">self</span>.cache.get(<span class="variable language_">self</span>.key, [])</span><br><span class="line">    <span class="comment"># 获取当前时间</span></span><br><span class="line">    <span class="variable language_">self</span>.now = <span class="variable language_">self</span>.timer()</span><br><span class="line">	<span class="comment"># 计算当前时间从前往后间隔内的记录，剔除掉过时的记录</span></span><br><span class="line">    <span class="keyword">while</span> <span class="variable language_">self</span>.history <span class="keyword">and</span> <span class="variable language_">self</span>.history[-<span class="number">1</span>] &lt;= <span class="variable language_">self</span>.now - <span class="variable language_">self</span>.duration:</span><br><span class="line">        <span class="variable language_">self</span>.history.pop()</span><br><span class="line">    <span class="comment"># 计算记录数量，如果大于限制次数</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.history) &gt;= <span class="variable language_">self</span>.num_requests:</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.throttle_failure()  <span class="comment"># 返回false</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span>.throttle_success()</span><br></pre></td></tr></table></figure>
-
-<p>如果可以访问，执行<code>throttle_success</code></p>
-<p>它会将当前访问记录下来，存放到 redis 中</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">throttle_success</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="variable language_">self</span>.history.insert(<span class="number">0</span>, <span class="variable language_">self</span>.now)  <span class="comment"># 获取当前时间，插入到列表开头</span></span><br><span class="line">    <span class="variable language_">self</span>.cache.<span class="built_in">set</span>(<span class="variable language_">self</span>.key, <span class="variable language_">self</span>.history, <span class="variable language_">self</span>.duration)  <span class="comment"># 放到redis中</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<p>如果限流，回到<code>check_throttles</code>，执行<code>wait</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">check_throttles</span>(<span class="params">self, request</span>):</span><br><span class="line"> 	<span class="comment">#　如果有多个限流，都记录下来 [50,30,20]</span></span><br><span class="line">    throttle_durations = []</span><br><span class="line">    <span class="keyword">for</span> throttle <span class="keyword">in</span> <span class="variable language_">self</span>.get_throttles():</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> throttle.allow_request(request, <span class="variable language_">self</span>):</span><br><span class="line">            <span class="comment"># 会将仍需等待时间获取</span></span><br><span class="line">            throttle_durations.append(throttle.wait())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> throttle_durations:</span><br><span class="line">        <span class="comment"># Filter out `None` values which may happen in case of config / rate</span></span><br><span class="line">        <span class="comment"># changes, see #1438</span></span><br><span class="line">        durations = [</span><br><span class="line">            duration <span class="keyword">for</span> duration <span class="keyword">in</span> throttle_durations</span><br><span class="line">            <span class="keyword">if</span> duration <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span></span><br><span class="line">        ]</span><br><span class="line">		<span class="comment">#　获取等待时间最长的</span></span><br><span class="line">        duration = <span class="built_in">max</span>(durations, default=<span class="literal">None</span>)</span><br><span class="line">        <span class="variable language_">self</span>.throttled(request, duration)</span><br></pre></td></tr></table></figure>
-
-<p><code>wait</code>会计算还要等待多少时间，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">wait</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="variable language_">self</span>.history:</span><br><span class="line">        remaining_duration = <span class="variable language_">self</span>.duration - (<span class="variable language_">self</span>.now - <span class="variable language_">self</span>.history[-<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        remaining_duration = <span class="variable language_">self</span>.duration</span><br><span class="line"></span><br><span class="line">    available_requests = <span class="variable language_">self</span>.num_requests - <span class="built_in">len</span>(<span class="variable language_">self</span>.history) + <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> available_requests &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> remaining_duration / <span class="built_in">float</span>(available_requests)</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-异常"><a href="#3-异常" class="headerlink" title="3.异常"></a>3.异常</h3><p><code>throttled</code>返回错误信息:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> exceptions, status</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">APIView</span>()</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">throttled</span>(<span class="params">self, request, wait</span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">raise</span> exceptions.Throttled(wait)</span><br></pre></td></tr></table></figure>
-
-<p>因为它调用的是父类<code>APIView</code>的<code>throttled</code></p>
-<p>所以其实我们可以自定义错误信息,自己写一个类</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.utils.encoding <span class="keyword">import</span> force_str</span><br><span class="line"><span class="keyword">from</span> rest_framework.exceptions <span class="keyword">import</span> APIException</span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> status</span><br><span class="line"><span class="keyword">from</span> django.utils.translation <span class="keyword">import</span> gettext_lazy <span class="keyword">as</span> _</span><br><span class="line"><span class="keyword">from</span> django.utils.translation <span class="keyword">import</span> ngettext</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyThrottled</span>(<span class="title class_ inherited__">APIException</span>):</span><br><span class="line">    status_code = status.HTTP_429_TOO_MANY_REQUESTS</span><br><span class="line">    default_detail = _(<span class="string">&#x27;请求过于频繁.&#x27;</span>)</span><br><span class="line">    extra_detail_singular = _(<span class="string">&#x27;请等待&#123;wait&#125;秒后再尝试.&#x27;</span>)</span><br><span class="line">    extra_detail_plural = _(<span class="string">&#x27;请等待&#123;wait&#125;秒后再尝试.&#x27;</span>)</span><br><span class="line">    default_code = <span class="string">&#x27;throttled&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, wait=<span class="literal">None</span>, detail=<span class="literal">None</span>, code=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="keyword">if</span> detail <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            detail = force_str(<span class="variable language_">self</span>.default_detail)</span><br><span class="line">        <span class="keyword">if</span> wait <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            wait = math.ceil(wait)</span><br><span class="line">            detail = <span class="string">&#x27; &#x27;</span>.join((</span><br><span class="line">                detail,</span><br><span class="line">                force_str(ngettext(<span class="variable language_">self</span>.extra_detail_singular.<span class="built_in">format</span>(wait=wait),</span><br><span class="line">                                   <span class="variable language_">self</span>.extra_detail_plural.<span class="built_in">format</span>(wait=wait),</span><br><span class="line">                                   wait))))</span><br><span class="line">        <span class="variable language_">self</span>.wait = wait</span><br><span class="line">        <span class="built_in">super</span>().__init__(detail, code)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> exceptions, status</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CommonAPIView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">throttled</span>(<span class="params">self, request, wait</span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">raise</span> MyThrottled(wait)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/03/29/drf-%E9%99%90%E6%B5%81/" data-id="cuidTVah38uWbI6XhE6MMi-p-" data-title="drf-限流" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/drf/" rel="tag">drf</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-drf-权限组件" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/03/29/drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/" class="article-date">
-  <time class="dt-published" datetime="2026-03-29T10:14:27.000Z" itemprop="datePublished">2026-03-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/drf/">drf</a>►<a class="article-category-link" href="/categories/drf/%E6%BA%90%E7%A0%81%E6%B5%81%E7%A8%8B/">源码流程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/03/29/drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/">drf-权限组件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="1-应用"><a href="#1-应用" class="headerlink" title="1.应用"></a>1.应用</h2><p>我们可以编辑权限校验的逻辑和返回错误信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.permissions <span class="keyword">import</span> BasePermission</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> ext.code <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserPermission</span>(<span class="title class_ inherited__">BasePermission</span>):</span><br><span class="line">    <span class="comment"># 自定义错误返回信息</span></span><br><span class="line">    message = &#123;<span class="string">&#x27;code&#x27;</span>:PERMISSION_DENIED_CODE,<span class="string">&#x27;msg&#x27;</span>: <span class="string">&quot;无权访问&quot;</span>&#125;</span><br><span class="line">    <span class="comment"># 判断是否有权限</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">has_permission</span>(<span class="params">self, request, view</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 获取请求中的数据，然后进行校验</span></span><br><span class="line">        <span class="keyword">if</span> request.user.role == <span class="number">3</span> :</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h2><p>与认证组件相同,我们可以全局配置与局部配置</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">OrderView</span>(<span class="title class_ inherited__">CommonAPIView</span>):</span><br><span class="line">	permission_classes = [ManagePermission,BossPermission]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self,request,*args,**kwargs</span>):</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(request.user,request.auth)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:SUCCESS_CODE,&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;DEFAULT_PERMISSION_CLASSES&#x27;</span>:[</span><br><span class="line">    <span class="string">&#x27;ext.permission.UserPermission&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;ext.permission.ManagePermission&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;ext.permission.BossPermission&#x27;</span>,</span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>但默认情况下，保证所有的权限类中的ahas_permission方法都返回True ，才算权限通过，也就是and逻辑</p>
-<p>后面我们要改为or逻辑，更方便我们使用角色进行权限校验</p>
-<h2 id="3-源码"><a href="#3-源码" class="headerlink" title="3.源码"></a>3.源码</h2><p>dispatch() —&gt; initial()  ——&gt; check_permissions()</p>
-<p>在认证校验之后</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">APIView</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">initial</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.format_kwarg = <span class="variable language_">self</span>.get_format_suffix(**kwargs)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Perform content negotiation and store the accepted info on the request</span></span><br><span class="line">        neg = <span class="variable language_">self</span>.perform_content_negotiation(request)</span><br><span class="line">        request.accepted_renderer, request.accepted_media_type = neg</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Determine the API version, if versioning is in use.</span></span><br><span class="line">        version, scheme = <span class="variable language_">self</span>.determine_version(request, *args, **kwargs)</span><br><span class="line">        request.version, request.versioning_scheme = version, scheme</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Ensure that the incoming request is permitted</span></span><br><span class="line">        <span class="variable language_">self</span>.perform_authentication(request)   <span class="comment"># 认证校验</span></span><br><span class="line">        <span class="variable language_">self</span>.check_permissions(request)     <span class="comment"># 权限校验   ---&gt; 存在 request.user/auth</span></span><br><span class="line">        <span class="variable language_">self</span>.check_throttles(request)</span><br></pre></td></tr></table></figure>
-
-<p>#只要有一个权限不通过，就会返回异常，这里设置了and逻辑，我们可以更改掉</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">check_permissions</span>(<span class="params">self, request</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Check if the request should be permitted.</span></span><br><span class="line"><span class="string">    Raises an appropriate exception if the request is not permitted.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> permission <span class="keyword">in</span> <span class="variable language_">self</span>.get_permissions():</span><br><span class="line">        <span class="comment">#执行权限校验</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> permission.has_permission(request, <span class="variable language_">self</span>):</span><br><span class="line">            <span class="variable language_">self</span>.permission_denied(</span><br><span class="line">                request,</span><br><span class="line">                message=<span class="built_in">getattr</span>(permission, <span class="string">&#x27;message&#x27;</span>, <span class="literal">None</span>),</span><br><span class="line">                code=<span class="built_in">getattr</span>(permission, <span class="string">&#x27;code&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line">            )</span><br></pre></td></tr></table></figure>
-
-<p>#获取权限校验</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_permissions</span>(<span class="params">self</span>):</span><br><span class="line">	<span class="comment"># 读取permission_classes的对象列表并实例化</span></span><br><span class="line">    <span class="keyword">return</span> [permission() <span class="keyword">for</span> permission <span class="keyword">in</span> <span class="variable language_">self</span>.permission_classes]</span><br></pre></td></tr></table></figure>
-
-<p>#返回异常</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">permission_denied</span>(<span class="params">self, request, message=<span class="literal">None</span>, code=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    If request is not permitted, determine what kind of exception to raise.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> request.authenticators <span class="keyword">and</span> <span class="keyword">not</span> request.successful_authenticator:</span><br><span class="line">        <span class="keyword">raise</span> exceptions.NotAuthenticated()</span><br><span class="line">    <span class="keyword">raise</span> exceptions.PermissionDenied(detail=message, code=code) <span class="comment"># 异常</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-自定义-改为or关系"><a href="#4-自定义-改为or关系" class="headerlink" title="4.自定义(改为or关系)"></a>4.自定义(改为or关系)</h2><p>因为源码中调用<code>check_permissions</code>的对象是我们的接口类，所以我们可以在接口中自定义<code>check_permissions</code>,不调用它从父类中继承的方法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">check_permissions</span>(<span class="params">self, request</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;修改权限机制，改为满足任一条件即可&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    no_permission_list =[]</span><br><span class="line">    <span class="keyword">for</span> permission <span class="keyword">in</span> <span class="variable language_">self</span>.get_permissions():</span><br><span class="line">        <span class="keyword">if</span> permission.has_permission(request, <span class="variable language_">self</span>):</span><br><span class="line">            <span class="comment">#如果满足条件立刻返回</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            no_permission_list.append(permission)   <span class="comment"># 将不满足的权限条件记录下来</span></span><br><span class="line">	</span><br><span class="line">    <span class="comment"># 不满足所有条件才抛出异常</span></span><br><span class="line">    <span class="variable language_">self</span>.permission_denied(</span><br><span class="line">        request,</span><br><span class="line">        message=<span class="built_in">getattr</span>(no_permission_list[<span class="number">0</span>], <span class="string">&#x27;message&#x27;</span>, <span class="literal">None</span>),    <span class="comment"># 我们只取第一个权限错误的信息</span></span><br><span class="line">        code=<span class="built_in">getattr</span>(no_permission_list[<span class="number">0</span>], <span class="string">&#x27;code&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
-
-
-
-<p>如果想让这个自定义的机制更加灵活的使用，我们可以放在一个公共类上让我们的接口去继承</p>
-<p>这样子就不用换一个新环境就要改源码或者在每个接口重复写代码。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.views <span class="keyword">import</span> APIView</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CommonAPIView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">check_permissions</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;修改权限机制，改为满足任一条件即可&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        no_permission_list = []</span><br><span class="line">        <span class="keyword">for</span> permission <span class="keyword">in</span> <span class="variable language_">self</span>.get_permissions():</span><br><span class="line">            <span class="keyword">if</span> permission.has_permission(request, <span class="variable language_">self</span>):</span><br><span class="line">                <span class="comment"># 如果满足条件立刻返回</span></span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                no_permission_list.append(permission)  <span class="comment"># 将不满足的权限条件记录下来</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.permission_denied(</span><br><span class="line">            request,</span><br><span class="line">            message=<span class="built_in">getattr</span>(no_permission_list[<span class="number">0</span>], <span class="string">&#x27;message&#x27;</span>, <span class="literal">None</span>),  <span class="comment"># 我们只取第一个权限错误的信息</span></span><br><span class="line">            code=<span class="built_in">getattr</span>(no_permission_list[<span class="number">0</span>], <span class="string">&#x27;code&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line">        )</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>接口继承：</p>
-<p>如果我们想让一个接口不让某个角色使用，那就不加上可以通过它的权限组件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">OrderView</span>(<span class="title class_ inherited__">CommonAPIView</span>):</span><br><span class="line">	permission_classes = [ManagePermission,BossPermission]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self,request,*args,**kwargs</span>):</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(request.user,request.auth)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:SUCCESS_CODE,&#125;)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/03/29/drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/" data-id="cuidO7v0_cKlmC6EwjhRwVJsQ" data-title="drf-权限组件" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/drf/" rel="tag">drf</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-drf-认证组件" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/03/29/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/" class="article-date">
-  <time class="dt-published" datetime="2026-03-29T10:14:21.000Z" itemprop="datePublished">2026-03-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/drf/">drf</a>►<a class="article-category-link" href="/categories/drf/%E6%BA%90%E7%A0%81%E6%B5%81%E7%A8%8B/">源码流程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/03/29/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/">drf-认证组件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="1-用户授权"><a href="#1-用户授权" class="headerlink" title="1.用户授权"></a>1.用户授权</h2><p>100个API，1个无需登录就能访问；99需要登录才能访问。</p>
-<p>编写类作为认证组件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.authentication <span class="keyword">import</span> BaseAuthentication</span><br><span class="line"><span class="keyword">from</span> rest_framework.exceptions <span class="keyword">import</span> AuthenticationFailed</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="comment"># 做用户认证：</span></span><br><span class="line">        <span class="comment"># 1.读取请求传递的token</span></span><br><span class="line">        <span class="comment"># 2.校验合法性</span></span><br><span class="line">        <span class="comment"># 3.返回值</span></span><br><span class="line">        <span class="comment">#   3.1 返回元组(11,22)  认证成功 (request.user，request.auth)</span></span><br><span class="line">        <span class="comment">#   3.2 抛出异常         认证失败 -&gt; 返回错误信息</span></span><br><span class="line">        <span class="comment">#   3.3 返回None        拥有多个认证类,则逐一认证，都认证失败  --&gt; 匿名用户</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 获取get请求中的token /xxx/xx/?token=123123</span></span><br><span class="line">        token = request.query_params.get(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> token:</span><br><span class="line">            <span class="keyword">return</span> (<span class="string">&#x27;yibin&#x27;</span>,token)</span><br><span class="line">            <span class="comment"># raise AuthenticationFailed(&#x27;认证失败&#x27;)</span></span><br><span class="line">        <span class="keyword">raise</span> AuthenticationFailed(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">20000</span>,<span class="string">&#x27;error&#x27;</span>:<span class="string">&#x27;认证失败&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>认证组件中返回的两个值，分别赋值给：<code>request.user</code> 和 <code>request.auth</code>。</p>
-<h2 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h2><h3 id="1-局部配置"><a href="#1-局部配置" class="headerlink" title="1.局部配置"></a>1.局部配置</h3><p>我们给不需要认证的接口局部配置</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LoginView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="comment"># 局部认证，如果不设置就会应用全局的配置</span></span><br><span class="line">    authentication_classes = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self,request</span>):</span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;status&#x27;</span>:<span class="number">200</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-全局配置"><a href="#2-全局配置" class="headerlink" title="2.全局配置"></a>2.全局配置</h3><p>在<code>setting</code>中设置，这样会默认配置到所有接口</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">&#x27;UNAUTHENTICATED_USER&#x27;</span>: <span class="literal">None</span>,   <span class="comment"># 去掉匿名用户</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;DEFAULT_AUTHENTICATION_CLASSES&#x27;</span>:[<span class="string">&#x27;ext.auth.MyAuthentication&#x27;</span>,]  <span class="comment"># 全局的认证配置,可能有多个认证组件</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意：认证组件不能写在view视图中。</p>
-<h3 id="3-查看drf的默认配置"><a href="#3-查看drf的默认配置" class="headerlink" title="3.查看drf的默认配置"></a>3.查看drf的默认配置</h3><p>点击<code>APIView</code>类的源码：可以查看到它的默认配置的名称，我们就可以在<code>setting</code>中修改</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">APIView</span>(<span class="title class_ inherited__">View</span>):</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">	authentication_classes = api_settings.DEFAULT_AUTHENTICATION_CLASSES</span><br><span class="line">	</span><br><span class="line">    <span class="comment">#其他配置</span></span><br><span class="line">    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES</span><br><span class="line">    parser_classes = api_settings.DEFAULT_PARSER_CLASSES</span><br><span class="line">    throttle_classes = api_settings.DEFAULT_THROTTLE_CLASSES</span><br><span class="line">    permission_classes = api_settings.DEFAULT_PERMISSION_CLASSES</span><br><span class="line">    content_negotiation_class = api_settings.DEFAULT_CONTENT_NEGOTIATION_CLASS</span><br><span class="line">    metadata_class = api_settings.DEFAULT_METADATA_CLASS</span><br><span class="line">    versioning_class = api_settings.DEFAULT_VERSIONING_CLASS</span><br></pre></td></tr></table></figure>
-
-<p>这里使用了面向对象的继承</p>
-<h2 id="3-认证的源码流程"><a href="#3-认证的源码流程" class="headerlink" title="3.认证的源码流程"></a>3.认证的源码流程</h2><p>请求进来url —&gt; as_views  —&gt;  views —&gt;dispatch</p>
-<p>在<code>dispatch</code>在对请求的封装时，会对认证组件进行各种操作</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">APIView</span>(<span class="title class_ inherited__">View</span>):</span><br><span class="line">    <span class="comment"># 虽然setting中写的是字符串，但是它会自己通过反射找到相应的类</span></span><br><span class="line">    authentication_classes = api_settings.DEFAULT_AUTHENTICATION_CLASSES</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第一步 ：请求的封装  ---&gt;  加载认证组件</span></span><br><span class="line">        request = <span class="variable language_">self</span>.initialize_request(request, *args, **kwargs)</span><br><span class="line">        <span class="variable language_">self</span>.request = request</span><br><span class="line">        <span class="variable language_">self</span>.headers = <span class="variable language_">self</span>.default_response_headers  <span class="comment"># deprecate?</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 第二步: 使用认证组件,进行认证</span></span><br><span class="line">            <span class="variable language_">self</span>.initial(request, *args, **kwargs)</span><br><span class="line">            <span class="comment"># 认证通过后才出执行视图函数</span></span><br><span class="line">            <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> <span class="variable language_">self</span>.http_method_names:</span><br><span class="line">                <span class="comment"># 反射获取get/post等方法</span></span><br><span class="line">                handler = <span class="built_in">getattr</span>(<span class="variable language_">self</span>, request.method.lower(),</span><br><span class="line">                                  <span class="variable language_">self</span>.http_method_not_allowed)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                handler = <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line">            <span class="comment"># 第三步：执行对应视图中的方法</span></span><br><span class="line">            response = handler(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">            <span class="comment"># 会捕获到认证失败的异常:_authenticate</span></span><br><span class="line">            response = <span class="variable language_">self</span>.handle_exception(exc)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>第一步：加载认证组件</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">initialize_request</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line"></span><br><span class="line">    parser_context = <span class="variable language_">self</span>.get_parser_context(request)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 加载认证组件，本质就是实例化每个认证类的对象，并封装到request对象。</span></span><br><span class="line">    <span class="keyword">return</span> Request(</span><br><span class="line">        request,</span><br><span class="line">        parsers=<span class="variable language_">self</span>.get_parsers(),</span><br><span class="line">        authenticators=<span class="variable language_">self</span>.get_authenticators(),   <span class="comment">#[对象，对象，对象.....]</span></span><br><span class="line">        negotiator=<span class="variable language_">self</span>.get_content_negotiator(),</span><br><span class="line">        parser_context=parser_context</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
-
-<p>在<code>get_authenticators</code>中实例化我们设置好的组件类</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_authenticators</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># 实例化authentication_classes中的每一个组件对象</span></span><br><span class="line">    <span class="comment"># [认证类的对象，认证类的对象，认证类的对象，认证类的对象]</span></span><br><span class="line">    <span class="keyword">return</span> [auth() <span class="keyword">for</span> auth <span class="keyword">in</span> <span class="variable language_">self</span>.authentication_classes]</span><br></pre></td></tr></table></figure>
-
-<p>封装在<code>Request</code>对象中</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Request</span>:</span><br><span class="line">    <span class="comment">#　封装</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, request, parsers=<span class="literal">None</span>, authenticators=<span class="literal">None</span>,</span></span><br><span class="line"><span class="params">                 negotiator=<span class="literal">None</span>, parser_context=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line">        <span class="variable language_">self</span>.authenticators = authenticators <span class="keyword">or</span> ()</span><br><span class="line">        <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>第二部：执行认证组件，进入视图函数之前</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">initial</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">    <span class="comment"># 执行perform_authentication</span></span><br><span class="line">    <span class="variable language_">self</span>.perform_authentication(request)</span><br><span class="line">    <span class="variable language_">self</span>.check_permissions(request)</span><br><span class="line">    <span class="variable language_">self</span>.check_throttles(request)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">perform_authentication</span>(<span class="params">self, request</span>):</span><br><span class="line">    request.user</span><br><span class="line">    <span class="comment"># 可能是什么？</span></span><br><span class="line">    <span class="comment">#一个可调用的方法</span></span><br></pre></td></tr></table></figure>
-
-<p>执行<code>Request</code>中的<code>request.user</code>方法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 调用方法时</span></span><br><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">user</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># 一开始并没有request._user,看它的初始化封装就可以知道</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;_user&#x27;</span>):</span><br><span class="line">        <span class="keyword">with</span> wrap_attributeerrors():</span><br><span class="line">            <span class="comment"># 执行这个方法</span></span><br><span class="line">            <span class="variable language_">self</span>._authenticate()</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span>._user</span><br></pre></td></tr></table></figure>
-
-<p>再执行<code>_authenticate</code></p>
-<p>在这里它会获取到第一步时封装好的组件对象进行身份验证</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_authenticate</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># 读取在第一步中封装好的每一个认证组件</span></span><br><span class="line">    <span class="keyword">for</span> authenticator <span class="keyword">in</span> <span class="variable language_">self</span>.authenticators:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 执行认证组件中的authenticate方法，进行认证。self = Request对象</span></span><br><span class="line">            user_auth_tuple = authenticator.authenticate(<span class="variable language_">self</span>)</span><br><span class="line">        <span class="keyword">except</span> exceptions.APIException:</span><br><span class="line">            <span class="comment"># 如果认证返回异常，会捕获并执行下面</span></span><br><span class="line">            <span class="variable language_">self</span>._not_authenticated()</span><br><span class="line">            <span class="keyword">raise</span>   <span class="comment">#这里的 raise 不带任何参数，意思是重新抛出刚刚捕获的那个异常,往上抛</span></span><br><span class="line">  </span><br><span class="line">        <span class="keyword">if</span> user_auth_tuple <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="variable language_">self</span>._authenticator = authenticator</span><br><span class="line">            <span class="comment">#　赋值，获取到认证信息</span></span><br><span class="line">            <span class="variable language_">self</span>.user, <span class="variable language_">self</span>.auth = user_auth_tuple</span><br><span class="line">            <span class="comment">#返回，认证通过就不需要再进行其他认证</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">    <span class="comment"># 都返回None,都没有认证通过</span></span><br><span class="line">    <span class="variable language_">self</span>._not_authenticated()</span><br></pre></td></tr></table></figure>
-
-<p>如果认证通过：则添加身份信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 给user赋值时</span></span><br><span class="line"><span class="meta">@user.setter</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">user</span>(<span class="params">self, value</span>):</span><br><span class="line">    <span class="comment"># 获得request._user</span></span><br><span class="line">    <span class="variable language_">self</span>._user = value</span><br><span class="line">    <span class="variable language_">self</span>._request.user = value</span><br></pre></td></tr></table></figure>
-
-<p>验证不通过：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_not_authenticated</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># 认证失败，启动匿名用户</span></span><br><span class="line">    <span class="variable language_">self</span>._authenticator = <span class="literal">None</span></span><br><span class="line">	<span class="comment"># 如果有设置匿名用户</span></span><br><span class="line">    <span class="keyword">if</span> api_settings.UNAUTHENTICATED_USER:</span><br><span class="line">        <span class="comment"># 实例化一个匿名用户</span></span><br><span class="line">        <span class="variable language_">self</span>.user = api_settings.UNAUTHENTICATED_USER()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="variable language_">self</span>.user = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> api_settings.UNAUTHENTICATED_TOKEN:</span><br><span class="line">        <span class="variable language_">self</span>.auth = api_settings.UNAUTHENTICATED_TOKEN()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="variable language_">self</span>.auth = <span class="literal">None</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第三步：</p>
-<p>如果认证通过则执行视图函数</p>
-<p>如果认证失败则进行异常处理</p>
-</li>
-</ul>
-<h2 id="4-对于异常处理"><a href="#4-对于异常处理" class="headerlink" title="4.对于异常处理"></a>4.对于异常处理</h2><h3 id="过程："><a href="#过程：" class="headerlink" title="过程："></a>过程：</h3><p>当认证失败后，会抛出异常</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_authenticate</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># 读取在第一步中封装好的每一个认证组件</span></span><br><span class="line">    <span class="keyword">for</span> authenticator <span class="keyword">in</span> <span class="variable language_">self</span>.authenticators:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 执行认证组件中的authenticate方法，进行认证。self = Request对象</span></span><br><span class="line">            user_auth_tuple = authenticator.authenticate(<span class="variable language_">self</span>)</span><br><span class="line">        <span class="keyword">except</span> exceptions.APIException:</span><br><span class="line">            <span class="comment"># 如果认证返回异常，会捕获并执行下面</span></span><br><span class="line">            <span class="variable language_">self</span>._not_authenticated()</span><br><span class="line">            <span class="keyword">raise</span>   <span class="comment">#这里的 raise 不带任何参数，意思是重新抛出刚刚捕获的那个异常,往上抛</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这里并不会立刻处理，而是往上抛，直到在<code>dispatch</code>被捕获</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line"></span><br><span class="line">	....</span><br><span class="line">    ....</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 第二步: 使用认证组件,进行认证</span></span><br><span class="line">        <span class="variable language_">self</span>.initial(request, *args, **kwargs)</span><br><span class="line">        <span class="comment"># 认证通过后才出执行视图函数</span></span><br><span class="line">        <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> <span class="variable language_">self</span>.http_method_names:</span><br><span class="line">            <span class="comment"># 反射获取get/post等方法</span></span><br><span class="line">            handler = <span class="built_in">getattr</span>(<span class="variable language_">self</span>, request.method.lower(),</span><br><span class="line">                              <span class="variable language_">self</span>.http_method_not_allowed)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            handler = <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line">        <span class="comment"># 第三步：执行对应视图中的方法</span></span><br><span class="line">        response = handler(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">        <span class="comment"># 会捕获到认证失败的异常:_authenticate</span></span><br><span class="line">        response = <span class="variable language_">self</span>.handle_exception(exc)</span><br></pre></td></tr></table></figure>
-
-<p>这里调用的另一个方法<code>handle_exception</code>:引出组件中另一个方法<code>authenticate_header</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">handle_exception</span>(<span class="params">self, exc</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(exc, (exceptions.NotAuthenticated,</span><br><span class="line">                        exceptions.AuthenticationFailed)):</span><br><span class="line">        <span class="comment"># WWW-Authenticate header for 401 responses, else coerce to 403</span></span><br><span class="line">        auth_header = <span class="variable language_">self</span>.get_authenticate_header(<span class="variable language_">self</span>.request)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> auth_header:</span><br><span class="line">            <span class="comment"># 添加</span></span><br><span class="line">            exc.auth_header = auth_header</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            exc.status_code = status.HTTP_403_FORBIDDEN</span><br></pre></td></tr></table></figure>
-
-<p>如果我们有设置<code>authenticate_header</code>它便会去里面获取信息添加在响应头,并返回状态码401，没有的话返回状态码403</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        token = request.query_params.get(<span class="string">&#x27;token&#x27;</span>)    <span class="comment"># 相当于request._request.GET.get()</span></span><br><span class="line">        <span class="keyword">if</span> token:</span><br><span class="line">            <span class="keyword">return</span> (<span class="string">&#x27;yibin&#x27;</span>,token)</span><br><span class="line">            <span class="comment"># raise AuthenticationFailed(&#x27;认证失败&#x27;)</span></span><br><span class="line">        <span class="keyword">raise</span> AuthenticationFailed(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">20000</span>,<span class="string">&#x27;error&#x27;</span>:<span class="string">&#x27;认证失败&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate_header</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="comment"># 异常后在响应头添加一个信息</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;API&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p><strong>一旦认证过程抛出了异常（<code>raise</code>），视图函数（View）就绝对不会执行了。</strong></p>
-<p>为了让你更透彻地理解这个过程，我们可以看一下 DRF 内部的“执行流程图”：</p>
-<ol>
-<li>DRF 的执行流水线</li>
-</ol>
-<p>当一个请求到达 Django 视图时，DRF 的 <code>APIView</code> 会按顺序执行以下操作：</p>
-<ol>
-<li><p><strong><code>dispatch()</code></strong>: 这是总入口。</p>
-</li>
-<li><p><strong><code>initial()</code></strong>: 初始化阶段，这里包含三大守门员：</p>
-<ul>
-<li><strong>认证 (Perform Authentication)</strong>：确定你是谁（如果你在这里抛出异常，流程直接跳出）。</li>
-<li><strong>权限 (Check Permissions)</strong>：确定你能不能看。</li>
-<li><strong>限流 (Check Throttles)</strong>：确定你访问是不是太快了。</li>
-</ul>
-</li>
-<li><p><strong>视图函数 (Handler)</strong>：如 <code>get()</code>, <code>post()</code> 等业务逻辑。</p>
-</li>
-<li><p>异常抛出后的“紧急跳出”机制</p>
-</li>
-</ol>
-<p>在 Python 中，<code>raise</code> 的作用是<strong>中断当前的执行路径</strong>。</p>
-<p>当 <code>authenticator.authenticate(self)</code> 抛出 <code>APIException</code> 时：</p>
-<ol>
-<li>代码运行到 <code>raise</code> 语句。</li>
-<li>它不再继续向下执行 <code>initial()</code> 里的剩余代码（跳过权限检查和限流检查）。</li>
-<li>它直接跳出 <code>initial()</code> 方法。</li>
-<li>它跳出 <code>dispatch()</code> 方法。</li>
-<li>最后，它被 DRF 的**全局异常处理器（Exception Handler）**捕获。</li>
-<li>异常处理器把这个异常转换成一个 <code>Response</code> 对象（包含 401 或 403 状态码）。</li>
-<li>Django 把这个 Response 返回给客户端。</li>
-</ol>
-<p><strong>结论：视图函数中的业务逻辑代码根本没有机会被触碰。</strong></p>
-<ol start="3">
-<li>特殊情况：为什么有时认证失败还能进视图？</li>
-</ol>
-<p>这里有一个细节，可能会让你产生困惑，所以必须说明：</p>
-<ul>
-<li><p><strong>情况 A：抛出异常（你刚才看到的源码）</strong><br>如果认证组件（如 Token 认证）发现你提供了 Token，但 Token 是<strong>无效的&#x2F;过期的</strong>，它通常会 <code>raise AuthenticationFailed</code>。</p>
-<ul>
-<li><strong>结果</strong>：中断执行，<strong>不进视图</strong>，直接返回 401。</li>
-</ul>
-</li>
-<li><p><strong>情况 B：没有提供凭证（返回 <code>None</code>）</strong><br>如果你根本没有在 Header 里传 Token，认证组件会执行 <code>return None</code>（而不是抛异常）。<br>DRF 发现所有认证组件都返回了 <code>None</code>，它就会执行 <code>_not_authenticated()</code> 把你设为“匿名用户”。</p>
-<ul>
-<li><strong>结果</strong>：认证通过（身份是匿名），流程继续。</li>
-<li><strong>后续</strong>：紧接着的<strong>权限组件（Permission）<strong>会检查。如果你设置了 <code>IsAuthenticated</code> 权限，权限组件会抛出异常并拦截；如果你设置了 <code>AllowAny</code>，那么</strong>这种情况下会进入视图</strong>。</li>
-</ul>
-</li>
-</ul>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="5-多个认证组件"><a href="#5-多个认证组件" class="headerlink" title="5.多个认证组件"></a>5.多个认证组件</h2><p>当存在多个组件处理不同情况，如token放在url，或请求头中，或请求体中，需要不同的认证组件处理</p>
-<p>我们可以设置不报错让它逐个校验：</p>
-<p>如果都返回None，都没有认证成功 -&gt; 视图是否会被执行？</p>
-<ol>
-<li><p>视图函数会执行，只不过 self.user   self.auth &#x3D; None</p>
-</li>
-<li><p>或者在最后加入一个认证组件专门返回异常</p>
-</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">URLAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        token = request.query_params.get(<span class="string">&quot;token&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> token:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;wupeiqi&quot;</span>, token</span><br><span class="line">        <span class="keyword">return</span> 　　　<span class="comment">#　不报错直接返回，让它进行后续的认证</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">HeaderAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        token = request.meta.get(<span class="string">&quot;xxxxx&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> token:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;wupeiqi&quot;</span>, token</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BodyAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        token = request.data.get(<span class="string">&quot;xxxxx&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> token:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;wupeiqi&quot;</span>, token</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment"># 前面有通过的则不会来到这里</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NoAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="keyword">raise</span> <span class="comment">#直接返回异常认证失败</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">OrderView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    authentication_classes = [URLAuthentication,HeaderAuthentication,BodyAuthentication ,NoAuthentication]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="built_in">print</span>(request.user, request.auth)</span><br><span class="line">        <span class="keyword">return</span> Response(<span class="string">&quot;OrderView&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="6-python开发常见"><a href="#6-python开发常见" class="headerlink" title="6.python开发常见"></a>6.python开发常见</h2><h3 id="1-子类的约束"><a href="#1-子类的约束" class="headerlink" title="1.子类的约束"></a>1.子类的约束</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BaseAuthentication</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="comment"># 子类中这个方法必须写不然就会报错，因为底层会调用这个方法</span></span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError(<span class="string">&quot;.authenticate() must be overridden.&quot;</span>)   <span class="comment"># 抛出异常</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyAuthentication</span>(<span class="title class_ inherited__">BaseAuthentication</span>):</span><br><span class="line">    <span class="comment"># 当你继承了这个父类</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">authenticate</span>(<span class="params">self, request</span>):</span><br><span class="line">        .....</span><br></pre></td></tr></table></figure>
-
-<p>在约束子类必须定义这个方法，是开发中常见的情况</p>
-<h3 id="2-状态码"><a href="#2-状态码" class="headerlink" title="2.状态码"></a>2.状态码</h3><p>对于401与403的区别</p>
-<table>
-<thead>
-<tr>
-<th>特性</th>
-<th>401 Unauthorized</th>
-<th>403 Forbidden</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>核心含义</strong></td>
-<td>身份未验证 &#x2F; 验证失败</td>
-<td>身份已验证，但权限不够</td>
-</tr>
-<tr>
-<td><strong>针对对象</strong></td>
-<td>身份（Who are you?）</td>
-<td>行为（What can you do?）</td>
-</tr>
-<tr>
-<td><strong>处理流程</strong></td>
-<td>发生在 <strong>Authentication</strong> 阶段</td>
-<td>发生在 <strong>Permissions</strong> 阶段</td>
-</tr>
-<tr>
-<td><strong>客户端反应</strong></td>
-<td>引导用户去登录 &#x2F; 刷新 Token</td>
-<td>告诉用户“你没权访问此资源”</td>
-</tr>
-<tr>
-<td><strong>登录能解决吗？</strong></td>
-<td>能（登录后就变成合法用户了）</td>
-<td>不能（登录了也没权限，除非换个号）</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/03/29/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/" data-id="cuidQ26PDXRx9kJ8JUWySOGhw" data-title="drf-认证组件" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/drf/" rel="tag">drf</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-drf-request" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/03/29/drf-request/" class="article-date">
-  <time class="dt-published" datetime="2026-03-29T10:13:22.000Z" itemprop="datePublished">2026-03-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/drf/">drf</a>►<a class="article-category-link" href="/categories/drf/%E6%BA%90%E7%A0%81%E6%B5%81%E7%A8%8B/">源码流程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/03/29/drf-request/">drf-request</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="1-request封装"><a href="#1-request封装" class="headerlink" title="1.request封装"></a>1.request封装</h2><p>在<code>URL</code>中调用的<code>view</code>方法最后是调用了<code>self.dispatch</code></p>
-<p>在源码的<code>dispatch</code>方法中</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    `.dispatch()` is pretty much the same as Django&#x27;s regular dispatch,</span></span><br><span class="line"><span class="string">    but with extra hooks for startup, finalize, and exception handling.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="variable language_">self</span>.args = args</span><br><span class="line">    <span class="variable language_">self</span>.kwargs = kwargs</span><br><span class="line">	<span class="comment"># 对数据进行了封装</span></span><br><span class="line">    request = <span class="variable language_">self</span>.initialize_request(request, *args, **kwargs)</span><br><span class="line">    <span class="variable language_">self</span>.request = request</span><br><span class="line">    <span class="variable language_">self</span>.headers = <span class="variable language_">self</span>.default_response_headers  </span><br></pre></td></tr></table></figure>
-
-<p>在<code>initialize_request</code>方法中,使用<code>Request</code>进行封装</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">initialize_request</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Returns the initial request object.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    parser_context = <span class="variable language_">self</span>.get_parser_context(request)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Request(</span><br><span class="line">        request,</span><br><span class="line">        parsers=<span class="variable language_">self</span>.get_parsers(),</span><br><span class="line">        authenticators=<span class="variable language_">self</span>.get_authenticators(),</span><br><span class="line">        negotiator=<span class="variable language_">self</span>.get_content_negotiator(),</span><br><span class="line">        parser_context=parser_context</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
-
-<p>用到了<code>__getattr__</code>:让我们可以仍然可以通过：<code>request.xx</code>获取原<code>request</code>中的内容</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__getattr__</span>(<span class="params">self, attr</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    If an attribute does not exist on this instance, then we also attempt</span></span><br><span class="line"><span class="string">    to proxy it to the underlying HttpRequest object.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        _request = <span class="variable language_">self</span>.__getattribute__(<span class="string">&quot;_request&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getattr</span>(_request, attr)</span><br><span class="line">    <span class="keyword">except</span> AttributeError:</span><br><span class="line">        <span class="keyword">raise</span> AttributeError(<span class="string">f&quot;&#x27;<span class="subst">&#123;self.__class__.__name__&#125;</span>&#x27; object has no attribute &#x27;<span class="subst">&#123;attr&#125;</span>&#x27;&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>在<code>dispatch</code>方法中</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="variable language_">self</span>.initial(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Get the appropriate handler method</span></span><br><span class="line">    <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> <span class="variable language_">self</span>.http_method_names:</span><br><span class="line">        <span class="comment"># 反射获取视图中定义好的get/post等类方法</span></span><br><span class="line">        handler = <span class="built_in">getattr</span>(<span class="variable language_">self</span>, request.method.lower(),</span><br><span class="line">                          <span class="variable language_">self</span>.http_method_not_allowed)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        handler = <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line">    <span class="comment"># 执行对应方法</span></span><br><span class="line">    response = handler(request, *args, **kwargs)</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-参数"><a href="#2-参数" class="headerlink" title="2.参数"></a>2.参数</h2><ul>
-<li><p>url中：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path(<span class="string">&#x27;user/&lt;int:v1&gt;/&#x27;</span>,views.UserView.as_view()),</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>获取参数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UserView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="comment"># kwargs = &#123;&#x27;v1&#x27;:123&#125;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self,request,*args,**kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(request.user)   <span class="comment"># 当前登录的用户 - 此时没用户 -&gt; 匿名用户 -&gt;把匿名用户改为无</span></span><br><span class="line">        <span class="built_in">print</span>(kwargs[<span class="string">&#x27;v1&#x27;</span>])</span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;status&#x27;</span>: <span class="string">&#x27;ok&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UserView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="comment"># kwargs = &#123;&#x27;v1&#x27;:123&#125;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self,request,v1</span>):</span><br><span class="line">        <span class="built_in">print</span>(v1)           <span class="comment"># 1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="variable language_">self</span>.kwargs)  <span class="comment"># 返回：&#123;&#x27;v1&#x27;: 1&#125;</span></span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;status&#x27;</span>: <span class="string">&#x27;ok&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这是因为在<code>dispatch</code>中：它直接为我们这个类添加了这两个类变量让我们可以获取</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    `.dispatch()` is pretty much the same as Django&#x27;s regular dispatch,</span></span><br><span class="line"><span class="string">    but with extra hooks for startup, finalize, and exception handling.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="variable language_">self</span>.args = args</span><br><span class="line">    <span class="variable language_">self</span>.kwargs = kwargs</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/03/29/drf-request/" data-id="cuidOd683r40z65rtA9sbb0j2" data-title="drf-request" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/drf/" rel="tag">drf</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-drf纯净版" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/03/29/drf%E7%BA%AF%E5%87%80%E7%89%88/" class="article-date">
-  <time class="dt-published" datetime="2026-03-29T10:12:00.000Z" itemprop="datePublished">2026-03-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/drf/">drf</a>►<a class="article-category-link" href="/categories/drf/%E6%BA%90%E7%A0%81%E6%B5%81%E7%A8%8B/">源码流程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/03/29/drf%E7%BA%AF%E5%87%80%E7%89%88/">drf纯净版</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="1-匿名用户"><a href="#1-匿名用户" class="headerlink" title="1.匿名用户"></a>1.匿名用户</h2><p>默认情况下：<code>drf</code>页面访问需要用户信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UserView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self,request,*args,**kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(request.user)   <span class="comment"># 当前登录的用户 - 此时没用户 -&gt; 匿名用户</span></span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;status&#x27;</span>: <span class="string">&#x27;ok&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>源码中</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_not_authenticated</span>(<span class="params">self</span>):</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">self</span>._authenticator = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> api_settings.UNAUTHENTICATED_USER:</span><br><span class="line">        <span class="variable language_">self</span>.user = api_settings.UNAUTHENTICATED_USER()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="variable language_">self</span>.user = <span class="literal">None</span></span><br><span class="line">	....</span><br><span class="line">    ....</span><br></pre></td></tr></table></figure>
-
-
-
-<p>它里面用到了一些django的应用:可以在setting中解开，但是就不是想要的纯净版</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27;django.contrib.auth&#x27;,</span><br><span class="line">&#x27;django.contrib.contenttypes&#x27;,</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-解决"><a href="#2-解决" class="headerlink" title="2.解决"></a>2.解决</h2><p>在<code>settings</code>中配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># drf配置</span><br><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    &#x27;UNAUTHENTICATED_USER&#x27;: None,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-drf-纯净版"><a href="#3-drf-纯净版" class="headerlink" title="3.drf-纯净版"></a>3.drf-纯净版</h3><pre><code>- 纯净版项目
-	- app	
-		INSTALLED_APPS = [
-		    # &#39;django.contrib.admin&#39;,
-		    # &#39;django.contrib.auth&#39;,
-		    # &#39;django.contrib.contenttypes&#39;,
-		    # &#39;django.contrib.sessions&#39;,
-		    # &#39;django.contrib.messages&#39;,
-		    &#39;django.contrib.staticfiles&#39;,
-		    &#39;rest_framework&#39;,  # template/static
-		]
-	- drf
-		REST_FRAMEWORK = {
-		    &quot;UNAUTHENTICATED_USER&quot;: None
-		}
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/03/29/drf%E7%BA%AF%E5%87%80%E7%89%88/" data-id="cuidwihzdZxPCd2sKtj3az1K4" data-title="drf纯净版" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/drf/" rel="tag">drf</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-drf-视图" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/03/27/drf-%E8%A7%86%E5%9B%BE/" class="article-date">
-  <time class="dt-published" datetime="2026-03-27T11:04:57.000Z" itemprop="datePublished">2026-03-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/drf/">drf</a>►<a class="article-category-link" href="/categories/drf/cbv/">cbv</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/03/27/drf-%E8%A7%86%E5%9B%BE/">drf-CBV</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="django的FBV和CBV"><a href="#django的FBV和CBV" class="headerlink" title="django的FBV和CBV"></a>django的FBV和CBV</h2><ul>
-<li>FBV，函数</li>
-<li>CBV，类+反射 &#x3D;&gt; 请求方法不同执行类中的不同方法。</li>
-</ul>
-<h2 id="drf-CBV"><a href="#drf-CBV" class="headerlink" title="drf-&gt;CBV"></a>drf-&gt;CBV</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">View</span><br><span class="line">	- 10</span><br><span class="line">APIView(View)</span><br><span class="line">	- 20</span><br><span class="line">class UserInfo(APIView):</span><br><span class="line">	-&gt; 调用30个功能</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="1-视图源码（django）"><a href="#1-视图源码（django）" class="headerlink" title="1.视图源码（django）"></a>1.视图源码（django）</h2><ul>
-<li><p>url中</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># path(&#x27;admin/&#x27;, admin.site.urls),</span></span><br><span class="line">    path(<span class="string">&#x27;auth/&#x27;</span>,views.auth),  <span class="comment">#  ----&gt;获取请求---&gt;执行函数()</span></span><br><span class="line">    path(<span class="string">&#x27;info/&#x27;</span>, views.InfoView.as_view()),     <span class="comment"># 获取请求----&gt;去源码中执行view函数</span></span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.views <span class="keyword">import</span> View</span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>源码中，使用了闭包</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">View</span>:</span><br><span class="line"><span class="meta">	@classonlymethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">as_view</span>(<span class="params">cls, **initkwargs</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Main entry point for a request-response process.&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> initkwargs:</span><br><span class="line">            ....</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">view</span>(<span class="params">request, *args, **kwargs</span>):</span><br><span class="line">            <span class="comment"># 实例化视图类的对象，如：InfoView</span></span><br><span class="line">            <span class="variable language_">self</span> = cls(**initkwargs)</span><br><span class="line">            <span class="variable language_">self</span>.setup(request, *args, **kwargs)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(<span class="variable language_">self</span>, <span class="string">&quot;request&quot;</span>):</span><br><span class="line">                <span class="keyword">raise</span> AttributeError(</span><br><span class="line">                    <span class="string">&quot;%s instance has no &#x27;request&#x27; attribute. Did you override &quot;</span></span><br><span class="line">                    <span class="string">&quot;setup() and forget to call super()?&quot;</span> % cls.__name__</span><br><span class="line">                )</span><br><span class="line">            <span class="comment"># 执行：对象.dispatch</span></span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>.dispatch(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">        ....</span><br><span class="line">        ....</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> view</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>dispatch方法：获取我们在视图中定义好的get&#x2F;post等方法并调用</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">http_method_names = [</span><br><span class="line">        <span class="string">&quot;get&quot;</span>,</span><br><span class="line">        <span class="string">&quot;post&quot;</span>,</span><br><span class="line">        <span class="string">&quot;put&quot;</span>,</span><br><span class="line">        <span class="string">&quot;patch&quot;</span>,</span><br><span class="line">        <span class="string">&quot;delete&quot;</span>,</span><br><span class="line">        <span class="string">&quot;head&quot;</span>,</span><br><span class="line">        <span class="string">&quot;options&quot;</span>,</span><br><span class="line">        <span class="string">&quot;trace&quot;</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">    <span class="comment"># Try to dispatch to the right method; if a method doesn&#x27;t exist,</span></span><br><span class="line">    <span class="comment"># defer to the error handler. Also defer to the error handler if the</span></span><br><span class="line">    <span class="comment"># request method isn&#x27;t on the approved list.</span></span><br><span class="line">    <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> <span class="variable language_">self</span>.http_method_names:</span><br><span class="line">        handler = <span class="built_in">getattr</span>(</span><br><span class="line">            <span class="variable language_">self</span>, request.method.lower(), <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        handler = <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line">    <span class="keyword">return</span> handler(request, *args, **kwargs)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="2-drf"><a href="#2-drf" class="headerlink" title="2.drf"></a>2.drf</h2><ul>
-<li><p>url’</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># path(&#x27;admin/&#x27;, admin.site.urls),</span></span><br><span class="line">    path(<span class="string">&#x27;auth/&#x27;</span>,views.auth),  <span class="comment">#  ----&gt;获取请求---&gt;执行函数()</span></span><br><span class="line">    </span><br><span class="line">    path(<span class="string">&#x27;info/&lt;int:nid&gt;/&#x27;</span>, views.InfoView.as_view()),     <span class="comment"># 获取请求----&gt;去源码中执行view函数</span></span><br><span class="line">    path(<span class="string">&#x27;info/&lt;str:name&gt;/&#x27;</span>, views.Userinfo.as_view()),     <span class="comment"># 获取请求----&gt;去源码中执行view函数</span></span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.views <span class="keyword">import</span> APIView</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>源码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">APIView</span>(<span class="title class_ inherited__">View</span>):</span><br><span class="line"><span class="meta">	@classmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">as_view</span>(<span class="params">cls, **initkwargs</span>):</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        <span class="comment"># 找父类的as_view，也就是刚才上面的View</span></span><br><span class="line">        view = <span class="built_in">super</span>().as_view(**initkwargs)</span><br><span class="line">        view.cls = cls</span><br><span class="line">        view.initkwargs = initkwargs</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">return</span> csrf_exempt(view)   <span class="comment">#免除csrf_token校验</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># 调用自己的dispatch</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.args = args</span><br><span class="line">        <span class="variable language_">self</span>.kwargs = kwargs</span><br><span class="line">        <span class="comment">#　request＝Request -&gt; drf对request封装了一层</span></span><br><span class="line">        <span class="comment"># request._request  -&gt;原来django中的request对象</span></span><br><span class="line">        <span class="comment">#request._request.GET</span></span><br><span class="line">	    <span class="comment">#request._request.POST</span></span><br><span class="line">	    <span class="comment">#request._request.method</span></span><br><span class="line">        <span class="comment"># request.xxx   -&gt;drf自己封装的数据</span></span><br><span class="line">        request = <span class="variable language_">self</span>.initialize_request(request, *args, **kwargs)</span><br><span class="line">        <span class="variable language_">self</span>.request = request</span><br><span class="line">        <span class="variable language_">self</span>.headers = <span class="variable language_">self</span>.default_response_headers  <span class="comment"># deprecate?</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="variable language_">self</span>.initial(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Get the appropriate handler method</span></span><br><span class="line">            <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> <span class="variable language_">self</span>.http_method_names:</span><br><span class="line">                handler = <span class="built_in">getattr</span>(<span class="variable language_">self</span>, request.method.lower(),</span><br><span class="line">                                  <span class="variable language_">self</span>.http_method_not_allowed)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                handler = <span class="variable language_">self</span>.http_method_not_allowed</span><br><span class="line"></span><br><span class="line">            response = handler(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">            response = <span class="variable language_">self</span>.handle_exception(exc)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.response = <span class="variable language_">self</span>.finalize_response(request, response, *args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.response</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数据封装</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># drf的封装</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Request</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, request, parsers=<span class="literal">None</span>, authenticators=<span class="literal">None</span>,</span></span><br><span class="line"><span class="params">                 negotiator=<span class="literal">None</span>, parser_context=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="keyword">assert</span> <span class="built_in">isinstance</span>(request, HttpRequest), (</span><br><span class="line">            <span class="string">&#x27;The `request` argument must be an instance of &#x27;</span></span><br><span class="line">            <span class="string">&#x27;`django.http.HttpRequest`, not `&#123;&#125;.&#123;&#125;`.&#x27;</span></span><br><span class="line">            .<span class="built_in">format</span>(request.__class__.__module__, request.__class__.__name__)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>._request = request</span><br><span class="line">        <span class="variable language_">self</span>.parsers = parsers <span class="keyword">or</span> ()</span><br><span class="line">        <span class="variable language_">self</span>.authenticators = authenticators <span class="keyword">or</span> ()</span><br><span class="line">        <span class="variable language_">self</span>.negotiator = negotiator <span class="keyword">or</span> <span class="variable language_">self</span>._default_negotiator()</span><br><span class="line">        <span class="variable language_">self</span>.parser_context = parser_context</span><br><span class="line">        <span class="variable language_">self</span>._data = Empty</span><br><span class="line">        <span class="variable language_">self</span>._files = Empty</span><br><span class="line">        <span class="variable language_">self</span>._full_data = Empty</span><br><span class="line">        <span class="variable language_">self</span>._content_type = Empty</span><br><span class="line">        <span class="variable language_">self</span>._stream = Empty</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>本质上与django是相同的，在继承后，扩展更多功能。</p>
-<p>as_view()  -&gt;免除csrf</p>
-<p>dispatch() -&gt;视图执行前，反射执行视图，视图后处理</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/03/27/drf-%E8%A7%86%E5%9B%BE/" data-id="cuid0CNdqJys7nqC_vLWbnK_2" data-title="drf-CBV" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/drf/" rel="tag">drf</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-my-blog" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/03/27/my-blog/" class="article-date">
-  <time class="dt-published" datetime="2026-03-27T10:10:22.000Z" itemprop="datePublished">2026-03-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BD%91%E7%AB%99/">网站</a>►<a class="article-category-link" href="/categories/%E7%BD%91%E7%AB%99/blog/">blog</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/03/27/my-blog/">my-blog</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="一-GitHub-Pages-Hexo"><a href="#一-GitHub-Pages-Hexo" class="headerlink" title="一.GitHub Pages + Hexo"></a>一.GitHub Pages + Hexo</h2><p>这种方案的本质是：你在自己电脑上写文章（Markdown格式），用 Hexo 把文章转成漂亮的网页，最后推送到 GitHub 上托管。<strong>全程免费，不需要买服务器，不需要买域名（除非你想自定义）。</strong></p>
-<p>以下是手把手教学：</p>
-<hr>
-<h3 id="第一步：安装必备工具"><a href="#第一步：安装必备工具" class="headerlink" title="第一步：安装必备工具"></a>第一步：安装必备工具</h3><p>在开始之前，你的电脑需要安装两个基础环境：</p>
-<ol>
-<li><strong>Node.js</strong>: 运行 Hexo 的引擎。 <a target="_blank" rel="noopener" href="https://nodejs.org/">官网下载</a> (选 LTS 版本)。</li>
-<li><strong>Git</strong>: 用来把你的代码上传到 GitHub。 <a target="_blank" rel="noopener" href="https://git-scm.com/">官网下载</a>。</li>
-</ol>
-<p>安装完成后，打开命令行（Windows 用 CMD 或 PowerShell，Mac 用终端），输入以下命令检查是否成功：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="第二步：安装-Hexo-并初始化"><a href="#第二步：安装-Hexo-并初始化" class="headerlink" title="第二步：安装 Hexo 并初始化"></a>第二步：安装 Hexo 并初始化</h3><p>在命令行里执行以下操作：</p>
-<ol>
-<li><p><strong>安装 Hexo 框架：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>创建一个文件夹作为你的博客基地：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> my-blog</span><br><span class="line"><span class="built_in">cd</span> my-blog</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>初始化博客：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>本地预览：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s  <span class="comment"># s 是 server 的缩写</span></span><br></pre></td></tr></table></figure>
-
-<p>现在，打开浏览器访问 <code>http://localhost:4000</code>，你应该能看到一个默认的蓝色主题博客了！</p>
-</li>
-</ol>
-<hr>
-<h3 id="第三步：写下第一篇博文"><a href="#第三步：写下第一篇博文" class="headerlink" title="第三步：写下第一篇博文"></a>第三步：写下第一篇博文</h3><p>这就是展现你学习成果的时候了。</p>
-<ol>
-<li><p><strong>新建文章：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">&quot;python-reflection&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>编辑内容：</strong><br>去你的博客文件夹下找到 <code>source/_posts/python-reflection.md</code>。用记事本（推荐用 VS Code 或 Typora）打开它。<br>你可以把刚才学到的 <strong>Python 反射</strong> 知识写进去。它是支持 <strong>Markdown</strong> 语法的，写代码块非常漂亮。</p>
-</li>
-<li><p><strong>重新生成预览：</strong><br>按 <code>Ctrl+C</code> 停止刚才的预览，然后运行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g  <span class="comment"># g 是 generate，生成静态网页</span></span><br><span class="line">hexo s  <span class="comment"># 再次启动预览查看新文章</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<hr>
-<h3 id="第四步：部署到-GitHub"><a href="#第四步：部署到-GitHub" class="headerlink" title="第四步：部署到 GitHub"></a>第四步：部署到 GitHub</h3><p>现在博客还在你电脑里，我们要把它发到网上。</p>
-<ol>
-<li><p><strong>注册 GitHub 账号</strong>（如果有就跳过）。</p>
-</li>
-<li><p><strong>新建仓库</strong>：仓库名必须是 <code>你的用户名.github.io</code>。比如我的用户名是 <code>jack</code>，仓库名就是 <code>jack.github.io</code>。</p>
-</li>
-<li><p><strong>配置博客设置</strong>：<br>打开博客根目录下的 <code>_config.yml</code> 文件，拉到最底部，修改为：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的用户名/你的用户名.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>安装部署插件并一键发布</strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">hexo d  <span class="comment"># d 是 deploy，部署</span></span><br></pre></td></tr></table></figure>
-
-<p><em>（注：第一次部署可能会弹出窗口让你登录 GitHub）</em></p>
-</li>
-</ol>
-<p>稍等几分钟，访问 <code>https://你的用户名.github.io</code>，你的个人网站就上线了！</p>
-<hr>
-<h3 id="第五步：进阶"><a href="#第五步：进阶" class="headerlink" title="第五步：进阶"></a>第五步：进阶</h3><p>——换个酷炫的主题</p>
-<p>Hexo 默认的主题比较普通。你可以去 <a target="_blank" rel="noopener" href="https://hexo.io/themes/">Hexo Themes</a> 找喜欢的主题。</p>
-<p>目前最流行的几个：</p>
-<ul>
-<li><strong>Butterfly</strong>: 功能极其强大，非常华丽。</li>
-<li><strong>Fluid</strong>: 响应式设计，非常有质感。</li>
-<li><strong>Next</strong>: 极简主义，很多技术大牛在用。</li>
-</ul>
-<p><strong>换主题的方法：</strong><br>通常是 <code>git clone</code> 主题的代码到你的 <code>themes</code> 文件夹，然后在 <code>_config.yml</code> 里把 <code>theme: landscape</code> 改成新主题的名字。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/03/27/my-blog/" data-id="cuid73Ckgc8a6cOimromy9F0_" data-title="my-blog" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/" rel="tag">blog</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/03/27/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2026-03-27T10:06:00.803Z" itemprop="datePublished">2026-03-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/03/27/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/03/27/hello-world/" data-id="cuidBa9K1NYsxhT6tGRsKlqVs" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/drf/">drf</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/drf/cbv/">cbv</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/drf/%E6%BA%90%E7%A0%81%E6%B5%81%E7%A8%8B/">源码流程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99/">网站</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99/blog/">blog</a></li></ul></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drf/" rel="tag">drf</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/drf/" style="font-size: 20px;">drf</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2026/03/29/drf-%E9%99%90%E6%B5%81/">drf-限流</a>
-          </li>
-        
-          <li>
-            <a href="/2026/03/29/drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/">drf-权限组件</a>
-          </li>
-        
-          <li>
-            <a href="/2026/03/29/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/">drf-认证组件</a>
-          </li>
-        
-          <li>
-            <a href="/2026/03/29/drf-request/">drf-request</a>
-          </li>
-        
-          <li>
-            <a href="/2026/03/29/drf%E7%BA%AF%E5%87%80%E7%89%88/">drf纯净版</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2026 yibinL<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/categories" class="mobile-nav-link">Categories</a>
-  
-    <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
+throttle_XXX_11.11.11.11     [16：45, 16:43, 16:42 ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/29/drf/drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/">
+			<h2 class="index-title">
+				drf-权限组件
+			</h2>
+			<div class="index-brief">
+				1.应用我们可以编辑权限校验的逻辑和返回错误信息
+from rest_framework.permissions import BasePermissionfrom ext.code import *class UserPermission(BasePermission):    # 自定义错误返回信息    message = &#123;&#x27;code&#x27;:PERMISSION_ ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/29/drf/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/">
+			<h2 class="index-title">
+				drf-认证组件
+			</h2>
+			<div class="index-brief">
+				1.用户授权100个API，1个无需登录就能访问；99需要登录才能访问。
+编写类作为认证组件
+from rest_framework.authentication import BaseAuthenticationfrom rest_framework.exceptions import AuthenticationFailedclass MyAuthentication(BaseAuthenti ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/29/drf/drf-request/">
+			<h2 class="index-title">
+				drf-request
+			</h2>
+			<div class="index-brief">
+				1.request封装在URL中调用的view方法最后是调用了self.dispatch
+在源码的dispatch方法中
+def dispatch(self, request, *args, **kwargs):    &quot;&quot;&quot;    `.dispatch()` is pretty much the same as Django&#x27;s regular dispa ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/29/drf/drf%E7%BA%AF%E5%87%80%E7%89%88/">
+			<h2 class="index-title">
+				drf纯净版
+			</h2>
+			<div class="index-brief">
+				1.匿名用户默认情况下：drf页面访问需要用户信息
+class UserView(APIView):    def get(self,request,*args,**kwargs):        print(request.user)   # 当前登录的用户 - 此时没用户 -&gt; 匿名用户        return Response(&#123;&#x27;status&#x27;: & ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/27/drf/drf-%E8%A7%86%E5%9B%BE/">
+			<h2 class="index-title">
+				drf-CBV
+			</h2>
+			<div class="index-brief">
+				django的FBV和CBV
+FBV，函数
+CBV，类+反射 &#x3D;&gt; 请求方法不同执行类中的不同方法。
+
+drf-&gt;CBVView	- 10APIView(View)	- 20class UserInfo(APIView):	-&gt; 调用30个功能
+
+
+
+1.视图源码（django）
+url中
+urlpatterns = [    # path(&#x27;admin/&# ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-27</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/cbv/"
+					>cbv</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/27/other/my-blog/">
+			<h2 class="index-title">
+				my-blog
+			</h2>
+			<div class="index-brief">
+				一.GitHub Pages + Hexo这种方案的本质是：你在自己电脑上写文章（Markdown格式），用 Hexo 把文章转成漂亮的网页，最后推送到 GitHub 上托管。全程免费，不需要买服务器，不需要买域名（除非你想自定义）。
+以下是手把手教学：
+
+第一步：安装必备工具在开始之前，你的电脑需要安装两个基础环境：
+
+Node.js: 运行 Hexo 的引擎。 官网下载 (选 LTS 版本)。 ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-27</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/网站/"
+					>网站</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/网站/blog/"
+					>blog</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/27/other/hello-world/">
+			<h2 class="index-title">
+				Hello World
+			</h2>
+			<div class="index-brief">
+				Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-27</span>
+			  
+		</div>
+	</div>
+	
+
+	<div id="index-paginator">
+		
+	</div>
+</div>
+
+	</div>
+
+	<div id="footer">
+	<div>
+		
+			
+				©2024<span>-</span><span>2026
+			
+			
+			</span>
+			<a href="">
+				yibinL
+			</a>
+		
+		
+			<span id="busuanzi_container_site_pv">
+				总访问量
+				<span id="vercount_value_page_pv"></span>
+			</span>
+			<span id="busuanzi_container_site_uv">
+				总访客数
+				<span id="vercount_value_site_pv"></span>
+			</span>
+		
+	</div>
+	 <div> Theme <a href="https://github.com/Exisi/hexo-theme-node-tree"	target="_blank">Node-Tree</a> Powered by <a href="https://hexo.io" target="_blank">Hexo</a> </div> 
+</div>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+
+<script async>
+    const topTopBtn = document.querySelector("#totop-toggle");
+	topTopBtn.addEventListener("click", () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	});
+</script>
 </body>
 </html>
