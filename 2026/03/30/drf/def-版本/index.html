@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<!-- title -->
+	
+<title>
+    
+        &#39;def-版本&#39;&nbsp;&nbsp;✦&nbsp;
+    
+    It&#39;s my blogs
+</title>
+
+	<!-- keywords,description -->
+	
+
+<meta name="author" content="yibinL" />
+
+<meta name="keywords" content="drf,源码流程" />
+
+<meta name="description" content="1.GET参数传递1.使用在restful规范中要去，后端的API中需要体现版本
+class HomeView(APIView):    # 版本    # 配置文件 VERSION_PARAM 定义版本称呼(version)    # http://127.0.0.1:8000/home/?xxx=123&amp;amp;version=v1      -&amp;gt;   request.version  " />
+
+	<!-- favicon -->
+	
+		<link rel="shortcut icon" href="/favicon.ico">
+	
+
+	<!-- css, script -->
+	
+<link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	<!-- custom css and js -->
+	
+
+
+
+
+
+	<!-- search -->
+	<script async>
+	window.searchEngine = "https://www.google.com/search?q=" ?? "https://www.google.com/search?q=";
+	window.homeHost = "http://example.com" ?? window.location.host;
+</script>
+
+	<!-- statistics -->
+	
+	<script async reload src="https://cn.vercount.one/js"></script>
+
+
+	<!-- analysis -->
+	
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+	<header id="header">
+	<a id="title" href="/" class="logo">
+		<img id="logo" src="/favicon-white.ico" alt="logo"/>
+		It's my blogs
+	</a>
+
+	<ul id="menu">
+		
+			<li class="menu-item">
+				<a href="/about" class="menu-item-link">关于</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="/tags" class="menu-item-link">标签</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="/categories" class="menu-item-link">分类</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="" class="menu-item-link item-icon" target="_blank">
+					<i class="fa fa-github fa-2x"></i>
+				</a>
+			</li>
+		
+		
+			<li class="menu-item dark-mode">
+				<a href="#" class="menu-item-link item-icon">
+					<i class="fa fa-moon-o fa-2x"></i>
+				</a>
+			</li>
+
+			<script async>
+				const localModel = localStorage.getItem("darkModel");
+				const darkModel = !localModel ? 0 : localModel;
+
+				const darkModeIcon = document.querySelector("#menu .dark-mode i");
+
+				if (darkModel == 1) {
+					darkModeIcon.classList.replace("fa-moon-o", "fa-sun-o");
+					DarkReader.enable({
+						brightness: 100,
+						contrast: 90,
+						sepia: 10,
+					});
+				}
+
+				darkModeIcon.addEventListener("click", () => {
+					const isMoon = darkModeIcon.classList.contains("fa-moon-o");
+					darkModeIcon.classList.toggle("fa-moon-o", !isMoon);
+					darkModeIcon.classList.toggle("fa-sun-o", isMoon);
+					localStorage.setItem("darkModel", isMoon ? 1 : 0);
+					isMoon ? DarkReader.enable({ brightness: 100, contrast: 90, sepia: 10 }) : DarkReader.disable();
+				});
+			</script>
+		
+	</ul>
+</header>
+
+<script async>
+	let startHeight = 0;
+	window.addEventListener("scroll", () => {
+		const { scrollY: endHeight } = window;
+		const distance = endHeight - startHeight;
+		startHeight = endHeight;
+		document.querySelector("#header").style.display = distance > 0 && endHeight > 50 ? "none" : "";
+	});
+</script>
+	<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="按回车全站搜索">
+		<div id="tree">
+			
+			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/03/29/other/other/" title="/2026/03/29/other/other">
+											<i class="fa fa-plus-square-o"></i>
+											other
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/other/hello-world/" title="/2026/03/27/other/hello-world">
+									
+										hello-world
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/other/my-blog/" title="/2026/03/27/other/my-blog">
+									
+										my-blog
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/03/29/drf/drf/" title="/2026/03/29/drf/drf">
+											<i class="fa fa-plus-square-o"></i>
+											drf
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/drf/drf-%E8%A7%86%E5%9B%BE/" title="/2026/03/27/drf/drf-视图">
+									
+										drf-视图
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf%E7%BA%AF%E5%87%80%E7%89%88/" title="/2026/03/29/drf/drf纯净版">
+									
+										drf纯净版
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf-request/" title="/2026/03/29/drf/drf-request">
+									
+										drf-request
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/" title="/2026/03/29/drf/drf-认证组件">
+									
+										drf-认证组件
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/" title="/2026/03/29/drf/drf-权限组件">
+									
+										drf-权限组件
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf-%E9%99%90%E6%B5%81/" title="/2026/03/29/drf/drf-限流">
+									
+										drf-限流
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2026/03/30/drf/def-%E7%89%88%E6%9C%AC/" title="/2026/03/30/drf/def-版本">
+									
+										def-版本
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<div id="content">
+		<h1 id="article-title">
+	'def-版本'
+</h1>
+
+<div class="article-meta">
+	<span> yibinL </span>
+	<span> 2026-03-30 00:01:41 </span>
+	<div id="article-categories">
+		
+			<span>Categories：</span>
+			
+				
+				<span>
+					<i class="fa fa-folder" aria-hidden="true">
+						<a href="/categories/drf/">
+							drf
+						</a>
+					</i>
+				 > 
+				</span>
+				
+			
+				
+				<span>
+					<i class="fa fa-folder" aria-hidden="true">
+						<a href="/categories/drf/源码流程/">
+							源码流程
+						</a>
+					</i>
+				
+				</span>
+				
+			
+		
+		
+			<span>Tags：</span>
+			
+				
+					<span>
+						<i class="fa fa-tag" aria-hidden="true">
+							<a href="/tags/drf/">
+								drf
+							</a>
+						</i>
+					</span>
+				
+			
+		
+	</div>
+</div>
+
+<div id="article-content">
+	<h2 id="1-GET参数传递"><a href="#1-GET参数传递" class="headerlink" title="1.GET参数传递"></a>1.GET参数传递</h2><h3 id="1-使用"><a href="#1-使用" class="headerlink" title="1.使用"></a>1.使用</h3><p>在restful规范中要去，后端的API中需要体现版本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">HomeView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="comment"># 版本</span></span><br><span class="line">    <span class="comment"># 配置文件 VERSION_PARAM 定义版本称呼(version)</span></span><br><span class="line">    <span class="comment"># http://127.0.0.1:8000/home/?xxx=123&amp;version=v1      -&gt;   request.version</span></span><br><span class="line">    </span><br><span class="line">    versioning_class = QueryParameterVersioning   <span class="comment"># 用于get请求</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="comment"># 获取版本</span></span><br><span class="line">        <span class="built_in">print</span>(request.version)</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;hello&#x27;</span>: <span class="string">&#x27;world&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>配置: 设置在url上<code>get</code>参数以version代表版本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">&#x27;UNAUTHENTICATED_USER&#x27;</span>: <span class="literal">None</span>,</span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;VERSION_PARAM&#x27;</span>: <span class="string">&#x27;version&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;DEFAULT_VERSION&#x27;</span>: <span class="string">&#x27;v1&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;ALLOWED_VERSIONS&#x27;</span>:[<span class="string">&#x27;v1&#x27;</span>,<span class="string">&#x27;version&#x27;</span>]</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-源码流程"><a href="#2-源码流程" class="headerlink" title="2.源码流程"></a>2.源码流程</h3><p>dispatch() —–&gt;  initial()   ——&gt;  determine_version()</p>
+<p>在<code>initial</code>中，<code>determine_version</code>获取版本值与实例化对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">APIView</span>(<span class="title class_ inherited__">View</span>):</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">initial</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">		....</span><br><span class="line">        ....</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Determine the API version, if versioning is in use.</span></span><br><span class="line">        version, scheme = <span class="variable language_">self</span>.determine_version(request, *args, **kwargs)</span><br><span class="line">        request.version, request.versioning_scheme = version, scheme</span><br><span class="line">			</span><br><span class="line">        ....</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">APIView</span>(<span class="title class_ inherited__">View</span>):</span><br><span class="line">    </span><br><span class="line">    versioning_class = api_settings.DEFAULT_VERSIONING_CLASS</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">determine_version</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">		<span class="comment"># self.versioning_class 就是我们定义的类或者默认配置</span></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.versioning_class <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> (<span class="literal">None</span>, <span class="literal">None</span>)</span><br><span class="line">        scheme = <span class="variable language_">self</span>.versioning_class()  <span class="comment"># 实例化对象</span></span><br><span class="line">		<span class="comment"># 调用对象的determine_version方法获取版本</span></span><br><span class="line">        <span class="keyword">return</span> (scheme.determine_version(request, *args, **kwargs), scheme)</span><br><span class="line">		<span class="comment"># 返回 (版本值,对象)</span></span><br></pre></td></tr></table></figure>
+
+<p>发现对象中没有初始化函数，只有方法</p>
+<p>在方法中，<code>request.query_params</code>相当于django的<code>request.GET</code>获取get参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">QueryParameterVersioning</span>(<span class="title class_ inherited__">BaseVersioning</span>):</span><br><span class="line">    </span><br><span class="line">    invalid_version_message = _(<span class="string">&#x27;Invalid version in query parameter.&#x27;</span>)</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">determine_version</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">        <span class="comment">#　self.version_param 是参数键,让我们获取版本值</span></span><br><span class="line">        <span class="comment">#　self.default_version　是取不到后的默认值</span></span><br><span class="line">        <span class="comment"># 会去父类获取</span></span><br><span class="line">        version = request.query_params.get(<span class="variable language_">self</span>.version_param, <span class="variable language_">self</span>.default_version)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable language_">self</span>.is_allowed_version(version):</span><br><span class="line">            <span class="keyword">raise</span> exceptions.NotFound(<span class="variable language_">self</span>.invalid_version_message)</span><br><span class="line">        <span class="keyword">return</span> version</span><br><span class="line">    </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BaseVersioning</span>:    </span><br><span class="line">    <span class="comment"># 我们可以在settings中配置它</span></span><br><span class="line">    default_version = api_settings.DEFAULT_VERSION</span><br><span class="line">    allowed_versions = api_settings.ALLOWED_VERSIONS</span><br><span class="line">    version_param = api_settings.VERSION_PARAM</span><br><span class="line"><span class="comment">#settings</span></span><br><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">&#x27;UNAUTHENTICATED_USER&#x27;</span>: <span class="literal">None</span>,</span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;VERSION_PARAM&#x27;</span>: <span class="string">&#x27;version&#x27;</span>,         <span class="comment">#键</span></span><br><span class="line">    <span class="string">&#x27;DEFAULT_VERSION&#x27;</span>: <span class="string">&#x27;v1&#x27;</span>,            <span class="comment">#默认值</span></span><br><span class="line">    <span class="string">&#x27;ALLOWED_VERSIONS&#x27;</span>:[<span class="string">&#x27;v1&#x27;</span>,<span class="string">&#x27;version&#x27;</span>]</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>is_allowed_version</code>是为了约束访问时的版本号访问，如果版本号正确才允许访问</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BaseVersioning</span>:</span><br><span class="line">    </span><br><span class="line">    default_version = api_settings.DEFAULT_VERSION</span><br><span class="line">    allowed_versions = api_settings.ALLOWED_VERSIONS</span><br><span class="line">    version_param = api_settings.VERSION_PARAM</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">is_allowed_version</span>(<span class="params">self, version</span>):</span><br><span class="line">        <span class="comment">#　我们可以在settings中设置范围</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable language_">self</span>.allowed_versions:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="comment">#　返回true/false</span></span><br><span class="line">        <span class="keyword">return</span> ((version <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> version == <span class="variable language_">self</span>.default_version) <span class="keyword">or</span></span><br><span class="line">                (version <span class="keyword">in</span> <span class="variable language_">self</span>.allowed_versions))</span><br><span class="line"><span class="comment"># settings        </span></span><br><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">&#x27;UNAUTHENTICATED_USER&#x27;</span>: <span class="literal">None</span>,</span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;VERSION_PARAM&#x27;</span>: <span class="string">&#x27;version&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;DEFAULT_VERSION&#x27;</span>: <span class="string">&#x27;v1&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;ALLOWED_VERSIONS&#x27;</span>:[<span class="string">&#x27;v1&#x27;</span>,<span class="string">&#x27;version&#x27;</span>]   <span class="comment">#范围</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-反向url"><a href="#3-反向url" class="headerlink" title="3.反向url"></a>3.反向url</h3><p>由于要添加版本号的要求，django自带的reverse函数并不能满足反向生成url时在get参数中添加版本号的要求</p>
+<p>这里我们要使用另一种方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">HomeView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="comment"># 版本</span></span><br><span class="line">    <span class="comment"># 配置文件 VERSION_PARAM 定义版本称呼(version),不是值</span></span><br><span class="line">    <span class="comment"># http://127.0.0.1:8000/home/?xxx=123&amp;version=v1      -&gt;   request.version</span></span><br><span class="line">    versioning_class = QueryParameterVersioning   <span class="comment"># 用于get请求</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="built_in">print</span>(request.version)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="comment"># django的反向生成url: /home/</span></span><br><span class="line">        <span class="built_in">print</span>(reverse(<span class="string">&#x27;home&#x27;</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 反向生成url:http://127.0.0.1:8000/home/?version=v1   帮你携带version</span></span><br><span class="line">        url = request.versioning_scheme.reverse(<span class="string">&#x27;home&#x27;</span>,request=request)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;反向生成url&#x27;</span>,url)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;hello&#x27;</span>: <span class="string">&#x27;world&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在刚才的初始化过程中不止返回了版本值，还返回了它的实例化对象<code>request.versioning_scheme</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">initial</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">	....</span><br><span class="line">    ....</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Determine the API version, if versioning is in use.</span></span><br><span class="line">    version, scheme = <span class="variable language_">self</span>.determine_version(request, *args, **kwargs)</span><br><span class="line">   	<span class="comment"># 得到(版本值,对象)</span></span><br><span class="line">    request.version, request.versioning_scheme = version, scheme</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">determine_version</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">    <span class="comment"># self.versioning_class 就是我们定义的类或者默认配置</span></span><br><span class="line">    <span class="keyword">if</span> <span class="variable language_">self</span>.versioning_class <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> (<span class="literal">None</span>, <span class="literal">None</span>)</span><br><span class="line">    scheme = <span class="variable language_">self</span>.versioning_class()  <span class="comment"># 实例化对象</span></span><br><span class="line">    <span class="comment"># 调用对象的determine_version方法获取版本</span></span><br><span class="line">    <span class="keyword">return</span> (scheme.determine_version(request, *args, **kwargs), scheme)</span><br><span class="line">    <span class="comment"># 返回 (版本值,对象)</span></span><br></pre></td></tr></table></figure>
+
+<p>在对象中有一个方法帮我们反向生成url</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">QueryParameterVersioning</span>(<span class="title class_ inherited__">BaseVersioning</span>):</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># reverse方法</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverse</span>(<span class="params">self, viewname, args=<span class="literal">None</span>, kwargs=<span class="literal">None</span>, request=<span class="literal">None</span>, <span class="built_in">format</span>=<span class="literal">None</span>, **extra</span>):</span><br><span class="line">        <span class="comment"># 本质还是执行了django的reverse</span></span><br><span class="line">        url = <span class="built_in">super</span>().reverse(</span><br><span class="line">            viewname, args, kwargs, request, <span class="built_in">format</span>, **extra</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">if</span> request.version <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="comment"># 最终返回 url + 版本号</span></span><br><span class="line">            <span class="keyword">return</span> replace_query_param(url, <span class="variable language_">self</span>.version_param, request.version)</span><br><span class="line">        <span class="keyword">return</span> url</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="2-URL路径传递"><a href="#2-URL路径传递" class="headerlink" title="2.URL路径传递"></a>2.URL路径传递</h2><p>使用<code>url</code>在路径中携带版本号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">HomeView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="comment"># 版本</span></span><br><span class="line">    <span class="comment"># 配置文件 VERSION_PARAM 定义版本称呼(version),不是值</span></span><br><span class="line">    <span class="comment"># http://127.0.0.1:8000/home/?xxx=123&amp;version=v1      -&gt;   request.version</span></span><br><span class="line"></span><br><span class="line">    versioning_class = URLPathVersioning   <span class="comment"># 用于URL路径</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request,*args,**kwargs</span>):</span><br><span class="line">        <span class="comment"># 两种方式</span></span><br><span class="line">		<span class="built_in">print</span>(kwargs.get(<span class="string">&#x27;version&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(request.version)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 反向生成url http://127.0.0.1:8000/api/v1/home/</span></span><br><span class="line">        url = request.versioning_scheme.reverse(<span class="string">&#x27;home&#x27;</span>, request=request)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;反向生成url&#x27;</span>,url)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;hello&#x27;</span>: <span class="string">&#x27;world&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>配置与GET参数传递相同</p>
+<p>源码几乎一致，不过是一个在<code>request.query_params</code>中获取参数，一个在url的<code>kwargs</code>以键值对获取</p>
+<p>反向生成url同样使用，与django的reverse方法不同的是，动态参数不需要写入了</p>
+
+	
+    <div class="copyright-box">
+		<div class="license-box">
+			<div class="license-header">
+				
+				<div class="license-title">
+					'def-版本'
+				</div>
+				<div class="license-subTitle">http://example.com/2026/03/30/drf/def-版本/index.html</div>
+			</div>
+			<div class="license-meta">
+				
+					<div class="license-meta-item">
+						<div>作者</div>
+						<div>
+							<a href="">
+								yibinL
+							</a>
+						</div>
+					</div>
+				
+				
+					<div class="license-meta-item license-meta-date">
+					<div>发布于</div>
+					<div>2026年3月30日</div>
+					</div>
+				
+				
+				
+				
+					<div class="license-meta-item">
+					<div>许可协议</div>
+					<div>
+						
+						
+						
+							<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+								<span class="hint--top hint--rounded" aria-label="BY - 署名">
+									BY - 署名
+								</span>
+							</a>
+						
+						
+					</div>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+    
+
+    
+
+    
+        
+        <script async reload>
+            fetch("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/tokyo-night-dark.css")
+                .then((response) => response.text())
+                .then((cssContent) => {
+                    const style = document.createElement("style");
+                    
+                        cssContent = cssContent
+                            .replace(".hljs-code,", "")
+                            .replaceAll("_", " ")
+                            .replaceAll("hljs-", "hljs .")
+                            .replaceAll(".hljs", " .highlight")
+                            .replaceAll(".built in", ".built_in")
+                            .replaceAll("title.", "");
+                        const figures = document.querySelectorAll("figure.highlight td.gutter");
+                        figures.forEach(figure=>{
+                            figure.classList.add("highlight");
+                        })
+                    
+                    style.innerHTML = cssContent;
+                    document.head.appendChild(style);
+                })
+                .catch((error) => {
+                    console.error("Error loading CSS:", error);
+                });
+        </script>
+    
+
+
+
+
+
+    <script reload>
+        var targets = document.querySelectorAll("figure.highlight, #article-content > pre:not(.highlight,.hljs)");
+        targets.forEach((block) => {
+            const copyBtn = document.createElement("button");
+            copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+            copyBtn.className = "code-copy";
+
+            
+                copyBtn.style.color = "#fff";
+            
+
+            copyBtn.addEventListener("click", () => {
+                const text = block.querySelector("td.code")?.textContent || block.querySelector("code")?.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    copyBtn.innerHTML = "Copied!";
+                    setTimeout(() => {
+                        copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+                    }, 2000);
+                });
+            });
+            block.appendChild(copyBtn);
+        });
+    </script>
+
+
+
+
+<div class="post-guide">
+	<div class="item left">
+	
+		<a href="/2026/03/29/other/other/">
+			<i class="fa fa-angle-left" aria-hidden="true"></i>
+			other
+		</a>
+	
+	</div>
+	<div class="item right">
+		
+	</div>
+</div>
+
+
+
+
+	</div>
+
+	<div id="footer">
+	<div>
+		
+			
+				©2024<span>-</span><span>2026
+			
+			
+			</span>
+			<a href="">
+				yibinL
+			</a>
+		
+		
+			<span id="busuanzi_container_site_pv">
+				总访问量
+				<span id="vercount_value_page_pv"></span>
+			</span>
+			<span id="busuanzi_container_site_uv">
+				总访客数
+				<span id="vercount_value_site_pv"></span>
+			</span>
+		
+	</div>
+	 <div> Theme <a href="https://github.com/Exisi/hexo-theme-node-tree"	target="_blank">Node-Tree</a> Powered by <a href="https://hexo.io" target="_blank">Hexo</a> </div> 
+</div>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+
+<script async>
+    const topTopBtn = document.querySelector("#totop-toggle");
+	topTopBtn.addEventListener("click", () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	});
+</script>
+</body>
+</html>
