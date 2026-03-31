@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<!-- title -->
+	
+<title>
+    
+        8.解析器&nbsp;&nbsp;✦&nbsp;
+    
+    It&#39;s my blogs
+</title>
+
+	<!-- keywords,description -->
+	
+
+<meta name="author" content="yibinL" />
+
+<meta name="keywords" content="" />
+
+<meta name="description" content="title: drf-限流date: 2026-03-31 18:14:37categories:  - drf   - 源码流程tags:	  - drf
+
+
+
+解析器原理解析请求者发送过来的数据，如：json
+class JSON解析器：	content-type:&amp;#x27;application/JSON&amp;#x27;		def parse(): # 解析函数		....		GET	请求没有" />
+
+	<!-- favicon -->
+	
+		<link rel="shortcut icon" href="/favicon.ico">
+	
+
+	<!-- css, script -->
+	
+<link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	<!-- custom css and js -->
+	
+
+
+
+
+
+	<!-- search -->
+	<script async>
+	window.searchEngine = "https://www.google.com/search?q=" ?? "https://www.google.com/search?q=";
+	window.homeHost = "http://example.com" ?? window.location.host;
+</script>
+
+	<!-- statistics -->
+	
+	<script async reload src="https://cn.vercount.one/js"></script>
+
+
+	<!-- analysis -->
+	
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+	<header id="header">
+	<a id="title" href="/" class="logo">
+		<img id="logo" src="/favicon-white.ico" alt="logo"/>
+		It's my blogs
+	</a>
+
+	<ul id="menu">
+		
+			<li class="menu-item">
+				<a href="/about" class="menu-item-link">关于</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="/tags" class="menu-item-link">标签</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="/categories" class="menu-item-link">分类</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="" class="menu-item-link item-icon" target="_blank">
+					<i class="fa fa-github fa-2x"></i>
+				</a>
+			</li>
+		
+		
+			<li class="menu-item dark-mode">
+				<a href="#" class="menu-item-link item-icon">
+					<i class="fa fa-moon-o fa-2x"></i>
+				</a>
+			</li>
+
+			<script async>
+				const localModel = localStorage.getItem("darkModel");
+				const darkModel = !localModel ? 0 : localModel;
+
+				const darkModeIcon = document.querySelector("#menu .dark-mode i");
+
+				if (darkModel == 1) {
+					darkModeIcon.classList.replace("fa-moon-o", "fa-sun-o");
+					DarkReader.enable({
+						brightness: 100,
+						contrast: 90,
+						sepia: 10,
+					});
+				}
+
+				darkModeIcon.addEventListener("click", () => {
+					const isMoon = darkModeIcon.classList.contains("fa-moon-o");
+					darkModeIcon.classList.toggle("fa-moon-o", !isMoon);
+					darkModeIcon.classList.toggle("fa-sun-o", isMoon);
+					localStorage.setItem("darkModel", isMoon ? 1 : 0);
+					isMoon ? DarkReader.enable({ brightness: 100, contrast: 90, sepia: 10 }) : DarkReader.disable();
+				});
+			</script>
+		
+	</ul>
+</header>
+
+<script async>
+	let startHeight = 0;
+	window.addEventListener("scroll", () => {
+		const { scrollY: endHeight } = window;
+		const distance = endHeight - startHeight;
+		startHeight = endHeight;
+		document.querySelector("#header").style.display = distance > 0 && endHeight > 50 ? "none" : "";
+	});
+</script>
+	<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="按回车全站搜索">
+		<div id="tree">
+			
+			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/03/29/other/other/" title="/2026/03/29/other/other">
+											<i class="fa fa-plus-square-o"></i>
+											other
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/other/hello-world/" title="/2026/03/27/other/hello-world">
+									
+										hello-world
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/other/my-blog/" title="/2026/03/27/other/my-blog">
+									
+										my-blog
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/03/29/drf/drf/" title="/2026/03/29/drf/drf">
+											<i class="fa fa-plus-square-o"></i>
+											drf
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/drf/1.drf-%E8%A7%86%E5%9B%BE/" title="/2026/03/27/drf/1.drf-视图">
+									
+										1.drf-视图
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf%E7%BA%AF%E5%87%80%E7%89%88/" title="/2026/03/29/drf/drf纯净版">
+									
+										drf纯净版
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/2.drf-request/" title="/2026/03/29/drf/2.drf-request">
+									
+										2.drf-request
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/3.drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/" title="/2026/03/29/drf/3.drf-认证组件">
+									
+										3.drf-认证组件
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/4.drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/" title="/2026/03/29/drf/4.drf-权限组件">
+									
+										4.drf-权限组件
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/6.drf-%E9%99%90%E6%B5%81/" title="/2026/03/29/drf/6.drf-限流">
+									
+										6.drf-限流
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/30/drf/7.def-%E7%89%88%E6%9C%AC/" title="/2026/03/30/drf/7.def-版本">
+									
+										7.def-版本
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2026/03/31/drf/8.%E8%A7%A3%E6%9E%90%E5%99%A8/" title="/2026/03/31/drf/8.解析器">
+									
+										8.解析器
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/31/drf/9.%E5%BA%8F%E5%88%97%E5%8C%96/" title="/2026/03/31/drf/9.序列化">
+									
+										9.序列化
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<div id="content">
+		<h1 id="article-title">
+	8.解析器
+</h1>
+
+<div class="article-meta">
+	<span> yibinL </span>
+	<span> 2026-03-31 21:35:51 </span>
+	<div id="article-categories">
+		
+			<span>Categories：</span>
+			
+		
+		
+			<span>Tags：</span>
+			
+		
+	</div>
+</div>
+
+<div id="article-content">
+	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: drf-限流</span><br><span class="line">date: 2026-03-31 18:14:37</span><br><span class="line">categories:</span><br><span class="line">  - drf </span><br><span class="line">  - 源码流程</span><br><span class="line">tags:	</span><br><span class="line">  - drf</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="解析器原理"><a href="#解析器原理" class="headerlink" title="解析器原理"></a>解析器原理</h2><p>解析请求者发送过来的数据，如：<code>json</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class JSON解析器：</span><br><span class="line">	content-type:&#x27;application/JSON&#x27;</span><br><span class="line">	</span><br><span class="line">	def parse(): # 解析函数</span><br><span class="line">		....</span><br><span class="line">		</span><br><span class="line">GET</span><br><span class="line">	请求没有请求体</span><br><span class="line"></span><br><span class="line">POST</span><br><span class="line">	http://127.0.0.1:8000/api/home/?xxx=123    ----&gt; request.query_params</span><br><span class="line">	请求头：</span><br><span class="line">		content-type:&#x27;urlencode....&#x27;     # 携带请求体数据类型</span><br><span class="line">		content-type:&#x27;application/JSON&#x27;</span><br><span class="line">	请求体：</span><br><span class="line">		name=yibin&amp;age=12</span><br><span class="line">		&#123;&#x27;name&#x27;:&#x27;yibin&#x27;,&#x27;age&#x27;:18&#125;</span><br><span class="line"></span><br><span class="line">1.读取请求头</span><br><span class="line">2.根据请求头解析数据</span><br><span class="line">	- 根据请求头获取解析器  -&gt; JSON解析器</span><br><span class="line">	- request.data  = JSON解析器.parse</span><br><span class="line">3.request.data</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>为什么常用<code>json</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">表单形式(Querydict)</span><br><span class="line">	name=yibin&amp;age=123</span><br><span class="line">但是它做不到复杂请求，如：嵌套</span><br><span class="line">&#123;</span><br><span class="line">	&#x27;xxx&#x27;:&#123;</span><br><span class="line">		&#x27;xxx&#x27;:123		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;	</span><br><span class="line"></span><br><span class="line">所以使用json</span><br><span class="line">&#123; ... &#125;</span><br><span class="line"></span><br><span class="line">无论是表单提交，还是 JSON 提交，它们的数据都在 HTTP 的请求体（Request Body）里面。</span><br></pre></td></tr></table></figure>
+
+<p>注意：关于<code>QueryDict</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">在 Django 中，request.GET 和 request.POST 返回的数据都是 django.http.QueryDict 类型的对象，而不是普通的 Python 字典（dict）。</span><br><span class="line">主要原因是 HTTP 协议允许同一个参数名（Key）对应多个值（Value）。</span><br><span class="line">1.默认QueryDict不允许被修改 _mutable=False</span><br><span class="line">	要允许修改：</span><br><span class="line">	request.GET._mutable = True</span><br><span class="line"></span><br><span class="line">2.设置值</span><br><span class="line">	request.GET.setlist(&quot;name&quot;,[123])    # filter=wupeiqi&amp;age=19&amp;name=123</span><br><span class="line">	request.GET.setlist(&quot;name&quot;,[123,32]) # filter=wupeiqi&amp;age=19&amp;name=123&amp;name=32</span><br><span class="line"></span><br><span class="line">3.调用urlencode方法，可以拼接</span><br><span class="line">	paramString = request.GET.urlencode()</span><br><span class="line">	print(paramString) &quot;filter=wupeiqi&amp;age=19&amp;name=123&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="对于原生django的疑惑"><a href="#对于原生django的疑惑" class="headerlink" title="对于原生django的疑惑"></a>对于原生django的疑惑</h2><p><strong>既然 POST 请求可以发送 JSON 数据，而 JSON 解析出来明明是普通的字典（dict），那你怎么能说 <code>request.POST</code> 返回的都是 <code>QueryDict</code> 呢？</strong></p>
+<p>核心在于：<strong>在原生 Django 中，如果前端发送的是 JSON 数据，这些数据根本就不会进入 <code>request.POST</code>！</strong></p>
+<p>彻底梳理一下这里面的机制：</p>
+<ol>
+<li><strong><code>request.POST</code> 只认“表单数据”</strong></li>
+</ol>
+<p>在 Django 的底层设计中，<code>request.POST</code> 被严格限定为只处理<strong>HTML 表单提交的数据</strong>。</p>
+<ul>
+<li>必须是 <code>Content-Type: application/x-www-form-urlencoded</code> </li>
+<li>或者是 <code>Content-Type: multipart/form-data</code>（上传文件）</li>
+</ul>
+<p>因为 HTML 表单允许同名的多选框（比如勾选多个爱好 <code>hobbies=reading&amp;hobbies=sports</code>），为了能装下同一个 Key 的多个 Value，Django 强制规定 <code>request.POST</code> 的类型必须是 <code>QueryDict</code>。</p>
+<ol start="2">
+<li><strong>那 POST 过来的 JSON 数据去哪了？</strong></li>
+</ol>
+<p>如果前端通过 POST 请求发送了一段 JSON（<code>Content-Type: application/json</code>），Django 的反应是这样的：</p>
+<ol>
+<li>Django 发现这不是表单类型。</li>
+<li><strong>Django 决定不管它，此时 <code>request.POST</code> 里面是空的</strong>，也就是一个空的 <code>&lt;QueryDict: {}&gt;</code>。</li>
+<li>前端发来的真实 JSON 字符串，被原封不动地塞进了一个叫 <strong><code>request.body</code></strong> 的属性里（这是一个 bytes 字节流）。</li>
+</ol>
+<p>如果你用的是<strong>原生 Django</strong>（没有用 DRF），你要拿 JSON 数据得这么写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">my_view</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="comment"># request.POST 是空的！不要用！</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 必须从 request.body 中读取字节，然后手动解析</span></span><br><span class="line">    json_bytes = request.body </span><br><span class="line">    data = json.loads(json_bytes)  </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 注意：这里的 data 解析出来就是一个标准的 Python 普通字典 (dict)！</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(data)) <span class="comment"># &lt;class &#x27;dict&#x27;&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li><strong>DRF 的 <code>request.data</code> 是怎么回事？</strong></li>
+</ol>
+<p>因为每次都要去 <code>request.body</code> 里手动 <code>json.loads</code> 太反人类了，所以 <strong>Django REST Framework (DRF)</strong> 站出来解决这个问题。</p>
+<p>DRF 对原生的 request 进行了升级，提供了一个全新的属性：<strong><code>request.data</code></strong>（注意不是 <code>request.POST</code>）。</p>
+<p>当你在 DRF 中使用 <code>request.data</code> 时：</p>
+<ul>
+<li>如果前端发来的是<strong>表单</strong>，DRF 给你返回一个 <strong><code>QueryDict</code></strong>。</li>
+<li>如果前端发来的是 <strong>JSON</strong>，DRF 底层的 <code>JSONParser</code> 自动帮你解析，给你返回一个 <strong>普通的 Python <code>dict</code></strong>！</li>
+</ul>
+<p>总结:</p>
+<ol>
+<li><strong><code>request.GET</code></strong>：永远是 <code>QueryDict</code>（因为 URL 参数和表单结构一样，可能有多值）。</li>
+<li><strong><code>request.POST</code>（原生）</strong>：永远是 <code>QueryDict</code>，<strong>但它里面只有表单数据，没有 JSON</strong>。</li>
+<li><strong>JSON 数据</strong>：在原生 Django 里存在 <code>request.body</code> 中（解析后是普通 <code>dict</code>）；在 DRF 中存在 <code>request.data</code> 中（解析后也是普通 <code>dict</code>）。</li>
+</ol>
+<p>所以，当你处理 JSON 数据时，接触到的确实是普通的 <code>dict</code>，而不是 <code>QueryDict</code>！</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">HomeView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="comment"># 所有的解析器</span></span><br><span class="line">    parser_classes = [JSONParser]</span><br><span class="line">    <span class="comment"># 根据请求，匹配对应的解析器; 寻找渲染器</span></span><br><span class="line">    content_negotiation_class = DefaultContentNegotiation</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">post</span>(<span class="params">self, request,*args,**kwargs</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 当调用request.data时就会触发解析的动作，</span></span><br><span class="line">        <span class="built_in">print</span>(request.data,<span class="built_in">type</span>(request.data))</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.dispatch()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>: <span class="number">1000</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="源码流程"><a href="#源码流程" class="headerlink" title="源码流程"></a>源码流程</h2><p>dispatch  - &gt; (第一步)initialize_request  -&gt; (解析)request.data</p>
+<h3 id="第一步：加载解析器"><a href="#第一步：加载解析器" class="headerlink" title="第一步：加载解析器"></a>第一步：加载解析器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">initialize_request</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># &#123;视图对象，url路由参数&#125;</span></span><br><span class="line">    parser_context = <span class="variable language_">self</span>.get_parser_context(request)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Request(</span><br><span class="line">        request,</span><br><span class="line">        parsers=<span class="variable language_">self</span>.get_parsers(),       <span class="comment"># 返回解析器对象 [JSONParser()]</span></span><br><span class="line">        authenticators=<span class="variable language_">self</span>.get_authenticators(),</span><br><span class="line">        negotiator=<span class="variable language_">self</span>.get_content_negotiator(), <span class="comment"># DefaultContentNegotiation匹配对象</span></span><br><span class="line">        parser_context=parser_context     <span class="comment"># &#123;视图对象，url路由参数&#125;</span></span><br><span class="line">    )</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>获取<code>url</code>参数与视图对象并返回</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_parser_context</span>(<span class="params">self, http_request</span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Note: Additionally `request` and `encoding` will also be added</span></span><br><span class="line">    <span class="comment">#       to the context by the Request object.</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="string">&#x27;view&#x27;</span>: <span class="variable language_">self</span>,</span><br><span class="line">        <span class="string">&#x27;args&#x27;</span>: <span class="built_in">getattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;args&#x27;</span>, ()),</span><br><span class="line">        <span class="string">&#x27;kwargs&#x27;</span>: <span class="built_in">getattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;kwargs&#x27;</span>, &#123;&#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>看到对象实例化时</p>
+<p>查看实例化对象时的初始化<code>init</code>有没有什么操作，没有就是单纯创建对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_parsers</span>(<span class="params">self</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [parser() <span class="keyword">for</span> parser <span class="keyword">in</span> <span class="variable language_">self</span>.parser_classes]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">JSONParser</span>(<span class="title class_ inherited__">BaseParser</span>):</span><br><span class="line">	</span><br><span class="line">    media_type = <span class="string">&#x27;application/json&#x27;</span>   <span class="comment"># 请求头类型</span></span><br><span class="line">    renderer_class = renderers.JSONRenderer</span><br><span class="line">    strict = api_settings.STRICT_JSON</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># 解析</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse</span>(<span class="params">self, stream, media_type=<span class="literal">None</span>, parser_context=<span class="literal">None</span></span>):</span><br><span class="line">        ....</span><br><span class="line">        ....</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_content_negotiator</span>(<span class="params">self</span>):</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">getattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;_negotiator&#x27;</span>, <span class="literal">None</span>):</span><br><span class="line">        <span class="variable language_">self</span>._negotiator = <span class="variable language_">self</span>.content_negotiation_class()  <span class="comment"># 实例化对象</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span>._negotiator</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DefaultContentNegotiation</span>(<span class="title class_ inherited__">BaseContentNegotiation</span>):</span><br><span class="line">    settings = api_settings</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># 执行解析器匹配任务,寻找正确的解析器</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">select_parser</span>(<span class="params">self, request, parsers</span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> parser <span class="keyword">in</span> parsers:</span><br><span class="line">            <span class="keyword">if</span> media_type_matches(parser.media_type, request.content_type):</span><br><span class="line">                <span class="keyword">return</span> parser</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>Request的实例化,有个动作</p>
+<p>它为<code>self.parser_context</code>多添加了两个键值对</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Request</span>:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, request, parsers=<span class="literal">None</span>, authenticators=<span class="literal">None</span>,</span></span><br><span class="line"><span class="params">                 negotiator=<span class="literal">None</span>, parser_context=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>._request = request</span><br><span class="line">        <span class="variable language_">self</span>.parsers = parsers <span class="keyword">or</span> ()</span><br><span class="line">        <span class="variable language_">self</span>.negotiator = negotiator <span class="keyword">or</span> <span class="variable language_">self</span>._default_negotiator()</span><br><span class="line">        <span class="variable language_">self</span>.parser_context = parser_context</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.parser_context <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="variable language_">self</span>.parser_context = &#123;&#125;</span><br><span class="line">        <span class="variable language_">self</span>.parser_context[<span class="string">&#x27;request&#x27;</span>] = <span class="variable language_">self</span>   <span class="comment"># 添加request对象自己</span></span><br><span class="line">        <span class="variable language_">self</span>.parser_context[<span class="string">&#x27;encoding&#x27;</span>] = request.encoding <span class="keyword">or</span> settings.DEFAULT_CHARSET</span><br><span class="line">        <span class="comment">#　编码类型</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">initialize_request</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># &#123;视图对象，url路由参数&#125;</span></span><br><span class="line">    parser_context = <span class="variable language_">self</span>.get_parser_context(request)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Request(</span><br><span class="line">        request,</span><br><span class="line">        parsers=<span class="variable language_">self</span>.get_parsers(),       <span class="comment"># 返回解析器对象 [JSONParser()]</span></span><br><span class="line">        authenticators=<span class="variable language_">self</span>.get_authenticators(),</span><br><span class="line">        negotiator=<span class="variable language_">self</span>.get_content_negotiator(), <span class="comment"># DefaultContentNegotiation匹配对象</span></span><br><span class="line">        parser_context=parser_context     <span class="comment"># &#123;视图对象，url路由参数,drf的request,encoding&#125;</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+<h3 id="第二步，看initial"><a href="#第二步，看initial" class="headerlink" title="第二步，看initial"></a>第二步，看<code>initial</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">initial</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">	</span><br><span class="line">    neg = <span class="variable language_">self</span>.perform_content_negotiation(request)</span><br><span class="line">    request.accepted_renderer, request.accepted_media_type = neg</span><br></pre></td></tr></table></figure>
+
+<p>不用看细节，跟解析器无关</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">perform_content_negotiation</span>(<span class="params">self, request, force=<span class="literal">False</span></span>):</span><br><span class="line">	<span class="comment"># 这是渲染器，让你的数据以什么方式展示</span></span><br><span class="line">    renderers = <span class="variable language_">self</span>.get_renderers()</span><br><span class="line">    conneg = <span class="variable language_">self</span>.get_content_negotiator()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> conneg.select_renderer(request, renderers, <span class="variable language_">self</span>.format_kwarg)</span><br><span class="line">    <span class="keyword">except</span> Exception:</span><br><span class="line">        <span class="keyword">if</span> force:</span><br><span class="line">            <span class="keyword">return</span> (renderers[<span class="number">0</span>], renderers[<span class="number">0</span>].media_type)</span><br><span class="line">        <span class="keyword">raise</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="第三步：数据解析"><a href="#第三步：数据解析" class="headerlink" title="第三步：数据解析"></a>第三步：数据解析</h3><p>你会发现以上没有对数据解析的动作</p>
+<p>因为只有当你调用request.data时才会触发解析的动作，所以</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当调用request.data时就会触发解析的动作，</span></span><br><span class="line"><span class="built_in">print</span>(request.data,<span class="built_in">type</span>(request.data))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Request</span>:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, request, parsers=<span class="literal">None</span>, authenticators=<span class="literal">None</span>,</span></span><br><span class="line"><span class="params">                 negotiator=<span class="literal">None</span>, parser_context=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>._request = request</span><br><span class="line">        <span class="variable language_">self</span>.parsers = parsers <span class="keyword">or</span> ()</span><br><span class="line">        <span class="variable language_">self</span>.negotiator = negotiator <span class="keyword">or</span> <span class="variable language_">self</span>._default_negotiator()</span><br><span class="line">        <span class="variable language_">self</span>.parser_context = parser_context</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">data</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> _<span class="built_in">hasattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;_full_data&#x27;</span>):</span><br><span class="line">            <span class="keyword">with</span> wrap_attributeerrors():</span><br><span class="line">                <span class="variable language_">self</span>._load_data_and_files()</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>._full_data</span><br></pre></td></tr></table></figure>
+
+<p>一开始<code>self._full_data</code>为空，执行<code>_load_data_and_files</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_load_data_and_files</span>(<span class="params">self</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> _<span class="built_in">hasattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;_data&#x27;</span>):</span><br><span class="line">        <span class="comment"># 执行self._parse解析,获取数据</span></span><br><span class="line">        <span class="variable language_">self</span>._data, <span class="variable language_">self</span>._files = <span class="variable language_">self</span>._parse()  </span><br><span class="line">        <span class="comment"># 如果是上传了文件</span></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>._files:</span><br><span class="line">            <span class="variable language_">self</span>._full_data = <span class="variable language_">self</span>._data.copy()</span><br><span class="line">            <span class="variable language_">self</span>._full_data.update(<span class="variable language_">self</span>._files)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 没有文件</span></span><br><span class="line">            <span class="variable language_">self</span>._full_data = <span class="variable language_">self</span>._data</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> is_form_media_type(<span class="variable language_">self</span>.content_type):</span><br><span class="line">            <span class="variable language_">self</span>._request._post = <span class="variable language_">self</span>.POST</span><br><span class="line">            <span class="variable language_">self</span>._request._files = <span class="variable language_">self</span>.FILES</span><br></pre></td></tr></table></figure>
+
+<p>进行解析</p>
+<p>先不用理解try里面的异常代码，我们要先弄懂怎么成功的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_parse</span>(<span class="params">self</span>):</span><br><span class="line">	<span class="comment"># 1.读取请求者发来的content-type请求头</span></span><br><span class="line">    media_type = <span class="variable language_">self</span>.content_type</span><br><span class="line">    <span class="comment"># 2.请求发过来的原始数据,拿到的是数据流</span></span><br><span class="line">    stream = <span class="variable language_">self</span>.stream</span><br><span class="line">  	<span class="comment"># 3.获取解析器</span></span><br><span class="line">    parser = <span class="variable language_">self</span>.negotiator.select_parser(<span class="variable language_">self</span>, <span class="variable language_">self</span>.parsers) <span class="comment"># 闯入request，[]</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> parser:</span><br><span class="line">        <span class="keyword">raise</span> exceptions.UnsupportedMediaType(media_type)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 解析 </span></span><br><span class="line">    <span class="comment"># JSONParser -&gt; json.load</span></span><br><span class="line">    parsed = parser.parse(stream, media_type, <span class="variable language_">self</span>.parser_context)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 当前端上传了文件+表单时（使用 MultiPartParser）,这个对象真的有这两个属性</span></span><br><span class="line">        <span class="keyword">return</span> (parsed.data, parsed.files)</span><br><span class="line">    <span class="keyword">except</span> AttributeError:</span><br><span class="line">        <span class="comment"># 当前端发送 JSON 数据时（使用 JSONParser）,DRF 默默地创建了一个空的文件字典 empty_files</span></span><br><span class="line">        <span class="comment"># 最终返回：(&#123;&#x27;name&#x27;: &#x27;张三&#x27;&#125;, &#123;&#125;)</span></span><br><span class="line">        empty_files = MultiValueDict()</span><br><span class="line">        <span class="keyword">return</span> (parsed, empty_files)</span><br><span class="line"></span><br><span class="line"><span class="comment">#json_dict = json.loads(&#x27;&#123;&#x27;xx&#x27;:123&#125;&#x27;)   # 里面是字符串</span></span><br><span class="line"><span class="comment">#json_dict = json.load(文件对象/内存对象)  #从里面读取数据出来并转化</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>获取请求头里面记录的本次数据类型：<code>CONTENT_TYPE </code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">content_type</span>(<span class="params">self</span>):</span><br><span class="line">    meta = <span class="variable language_">self</span>._request.META</span><br><span class="line">    <span class="keyword">return</span> meta.get(<span class="string">&#x27;CONTENT_TYPE&#x27;</span>, meta.get(<span class="string">&#x27;HTTP_CONTENT_TYPE&#x27;</span>, <span class="string">&#x27;&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>获取请求发过来的原始数据：<strong>底层怎么拿数据</strong></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">stream</span>(<span class="params">self</span>):</span><br><span class="line">	<span class="comment"># </span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> _<span class="built_in">hasattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;_stream&#x27;</span>):</span><br><span class="line">        <span class="variable language_">self</span>._load_stream()</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span>._stream</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#核心作用用一句话总结就是：把 HTTP 请求体（也就是前端发过来的真实数据，比如 JSON 字符串），准备成一个“类似文件”的数据流（Stream），以便后续的解析器（如 JSONParser）去读取和翻译。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">_load_stream</span>(<span class="params">self</span>):</span><br><span class="line"></span><br><span class="line">    meta = <span class="variable language_">self</span>._request.META</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 判断前端到底有没有发数据过来，以及发了多少。</span></span><br><span class="line">        content_length = <span class="built_in">int</span>(</span><br><span class="line">            meta.get(<span class="string">&#x27;CONTENT_LENGTH&#x27;</span>, meta.get(<span class="string">&#x27;HTTP_CONTENT_LENGTH&#x27;</span>, <span class="number">0</span>))</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">except</span> (ValueError, TypeError):</span><br><span class="line">        content_length = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> content_length == <span class="number">0</span>:</span><br><span class="line">		<span class="comment"># 如果长度是 0,直接把内部变量 self._stream 设为空       </span></span><br><span class="line">        <span class="variable language_">self</span>._stream = <span class="literal">None</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    <span class="comment"># _read_started</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="keyword">not</span> <span class="variable language_">self</span>._request._read_started:</span><br><span class="line">        <span class="variable language_">self</span>._stream = <span class="variable language_">self</span>._request</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="variable language_">self</span>._stream = io.BytesIO(<span class="variable language_">self</span>.body)</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">elif</span> <span class="keyword">not</span> <span class="variable language_">self</span>._request._read_started:</span><br><span class="line">    <span class="variable language_">self</span>._stream = <span class="variable language_">self</span>._request</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键属性</strong>：<code>_read_started </code>是原生 Django Request 的一个内部标记。如果它是 False，说明底层的字节流<strong>还没有被任何人读取过</strong>。</p>
+<p>原生 Django 的 _request 本身就是一个实现了 read() 方法的<strong>流对象</strong>（你可以把它当成一个只读文件）。DRF 直接把 self._stream 指向它。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span>:</span><br><span class="line">        <span class="variable language_">self</span>._stream = io.BytesIO(<span class="variable language_">self</span>.body)</span><br></pre></td></tr></table></figure>
+
+<p>调用 self.body：这会触发 Django 把之前读过并<strong>缓存</strong>在内存里的完整字节码拿出来。</p>
+<p>调用 io.BytesIO(…)：这是一个 Python 标准库工具。它的作用是<strong>把内存里的一坨死数据（字节流），伪装成一个“文件（流对象）”</strong>。</p>
+<p>这样一来，self._stream 又变成了一个拥有 read() 方法的流，游标回到了起点，DRF 的解析器又可以读取了</p>
+<ol start="3">
+<li>获取解析器</li>
+</ol>
+<p>这里<code>self.negotiator</code>就是前面加载好的匹配器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser = <span class="variable language_">self</span>.negotiator.select_parser(<span class="variable language_">self</span>, <span class="variable language_">self</span>.parsers) <span class="comment"># 传入request，[JSONparser对象]</span></span><br></pre></td></tr></table></figure>
+
+<p>通过<code>parser.media_type</code>获取解析器类型与请求头里面的<code>request.content_type</code>数据类型对比</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DefaultContentNegotiation</span>(<span class="title class_ inherited__">BaseContentNegotiation</span>):</span><br><span class="line">    settings = api_settings</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">select_parser</span>(<span class="params">self, request, parsers</span>):</span><br><span class="line">		<span class="comment">#　循环对比,找的正确的解析器</span></span><br><span class="line">        <span class="keyword">for</span> parser <span class="keyword">in</span> parsers:</span><br><span class="line">            <span class="keyword">if</span> media_type_matches(parser.media_type, request.content_type):</span><br><span class="line">                <span class="keyword">return</span> parser</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>调用解析器解析</li>
+</ol>
+<p>传入 原始数据，解析类型，{视图对象，url路由参数,drf的request , encoding}</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parsed = parser.parse(stream, media_type, <span class="variable language_">self</span>.parser_context)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">JSONParser</span>(<span class="title class_ inherited__">BaseParser</span>):</span><br><span class="line"></span><br><span class="line">    media_type = <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">    renderer_class = renderers.JSONRenderer</span><br><span class="line">    strict = api_settings.STRICT_JSON</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># 解析</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse</span>(<span class="params">self, stream, media_type=<span class="literal">None</span>, parser_context=<span class="literal">None</span></span>):</span><br><span class="line"></span><br><span class="line">        parser_context = parser_context <span class="keyword">or</span> &#123;&#125;</span><br><span class="line">        encoding = parser_context.get(<span class="string">&#x27;encoding&#x27;</span>, settings.DEFAULT_CHARSET)</span><br><span class="line"></span><br><span class="line">        decoded_stream = codecs.getreader(encoding)(stream)</span><br><span class="line">        parse_constant = json.strict_constant <span class="keyword">if</span> <span class="variable language_">self</span>.strict <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> json.load(decoded_stream, parse_constant=parse_constant)</span><br><span class="line"><span class="comment"># 解析完成后返回数据</span></span><br></pre></td></tr></table></figure>
+
+<p>然后我们就可以在<code>data</code>中获取数据了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">data</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> _<span class="built_in">hasattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;_full_data&#x27;</span>):</span><br><span class="line">        <span class="keyword">with</span> wrap_attributeerrors():</span><br><span class="line">            <span class="variable language_">self</span>._load_data_and_files()</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span>._full_data</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><ol>
+<li><strong>为什么用 json.load，不用 json.loads</strong></li>
+</ol>
+<p>在 Python 的 json 模块中，这两个函数有明确的分工：</p>
+<ul>
+<li><strong>json.loads(s)</strong> (load <strong>s</strong>tring)：<ul>
+<li>它接收的是一个<strong>完整的字符串（或字节串）</strong>。</li>
+<li>这意味着，你必须先把所有数据从网络中读取出来，全部塞进内存，变成一个巨大的字符串，然后才能传给它。</li>
+<li><em>如果前端发来一个 50MB 的 JSON，你的服务器内存里瞬间就会多出一个 50MB 的字符串，极其消耗内存。</em></li>
+</ul>
+</li>
+<li><strong>json.load(fp)</strong> (load <strong>f</strong>ile <strong>p</strong>ointer)：<ul>
+<li>它接收的是一个<strong>文件对象（或类似文件的流对象 stream）</strong>，只要这个对象有 .read() 方法就行。</li>
+<li>它是<strong>流式读取</strong>的。它不会一次性把 50MB 全部读进内存，而是一边从流里往外抽数据，一边在内存里构建 Python 字典。</li>
+<li><em>这种方式极其节省内存，性能也更高。</em></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DRF 费尽心思通过 _load_stream 把请求体包装成了一个流（<span class="variable language_">self</span>._stream）。</span><br><span class="line">如果在这里使用 json.loads(stream.read())，就等于把上一题为了优化内存而做的努力**全部白费了**（因为 .read() 会瞬间把流里的所有数据全抽干并塞进内存）。</span><br><span class="line">因此，必须顺水推舟，继续使用支持流式处理的 **json.load()**。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>实时流媒体翻译</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decoded_stream = codecs.getreader(encoding)(stream)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">数据流stream，无论它是原生 Django 的请求体，还是 io.BytesIO，它们里面流淌出来的都是原始的字节（Bytes），比如：<span class="string">b&#x27;&#123;&quot;name&quot;: &quot;\xe5\xbc\xa0\xe4\xb8\x89&quot;&#125;&#x27;</span></span><br><span class="line">所以我们需要把 Bytes 解码（Decode）成 String。通常我们用 <span class="built_in">bytes</span>.decode(<span class="string">&#x27;utf-8&#x27;</span>)，但这必须等所有字节都拿到了才能做（又破坏了流式处理的初衷）。</span><br></pre></td></tr></table></figure>
+
+<p>Python 的 codecs 模块提供了一个极其强大的工具：<strong>流式解码器</strong>。它可以在“不破坏流式特性”的前提下，一边读取字节，一边把它翻译成字符串。</p>
+<p>我们把这行代码拆成两步看：</p>
+<p><strong>第一步：获取翻译官（类）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">translator_class = codecs.getreader(&#x27;utf-8&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>codecs.getreader(encoding) 这个函数调用后，<strong>返回的是一个类</strong>（一个专门处理该编码的 StreamReader 类）。</p>
+<p><strong>第二步：把水管接在翻译官身上（实例化）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decoded_stream = translator_class(stream)</span><br></pre></td></tr></table></figure>
+
+<p>把我们上一题拿到的原始字节流 stream 传进去，实例化这个类。</p>
+<ul>
+<li>当 json.load() 对 decoded_stream 喊：“给我一点数据！”</li>
+<li>decoded_stream 就会转身去原生的 stream 里抽走一小段<strong>字节</strong>。</li>
+<li>然后它瞬间在内部用 utf-8 把字节<strong>解码成字符串</strong>。</li>
+<li>最后把字符串交给 json.load()。</li>
+</ul>
+<h3 id="数据流："><a href="#数据流：" class="headerlink" title="数据流："></a>数据流：</h3><p><strong>数据流（Stream）只能读一次</strong>。<br>就像一杯水，你倒出来（读取）之后，杯子里就没了。如果你想让多个人（多个中间件或解析器）都能读到这份数据，就需要做一些特殊处理。</p>
+<h2 id="解析文件："><a href="#解析文件：" class="headerlink" title="解析文件："></a>解析文件：</h2><p><strong>FileUploadParser</strong></p>
+<p><img src="/assets/image-20210827084403453.png"></p>
+<h2 id="同时上传数据与文件："><a href="#同时上传数据与文件：" class="headerlink" title="同时上传数据与文件："></a>同时上传数据与文件：</h2><p><strong>MultiPartParser</strong></p>
+<p><img src="/assets/image-20210827083047327.png"></p>
+<h2 id="默认解析器"><a href="#默认解析器" class="headerlink" title="默认解析器"></a>默认解析器</h2><p>我们也可以使用默认解析器，但是还是只加入需要解析的解析器。</p>
+
+	
+    <div class="copyright-box">
+		<div class="license-box">
+			<div class="license-header">
+				
+				<div class="license-title">
+					8.解析器
+				</div>
+				<div class="license-subTitle">http://example.com/2026/03/31/drf/8.解析器/index.html</div>
+			</div>
+			<div class="license-meta">
+				
+					<div class="license-meta-item">
+						<div>作者</div>
+						<div>
+							<a href="">
+								yibinL
+							</a>
+						</div>
+					</div>
+				
+				
+					<div class="license-meta-item license-meta-date">
+					<div>发布于</div>
+					<div>2026年3月31日</div>
+					</div>
+				
+				
+				
+				
+					<div class="license-meta-item">
+					<div>许可协议</div>
+					<div>
+						
+						
+						
+							<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+								<span class="hint--top hint--rounded" aria-label="BY - 署名">
+									BY - 署名
+								</span>
+							</a>
+						
+						
+					</div>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+    
+
+    
+
+    
+        
+        <script async reload>
+            fetch("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/tokyo-night-dark.css")
+                .then((response) => response.text())
+                .then((cssContent) => {
+                    const style = document.createElement("style");
+                    
+                        cssContent = cssContent
+                            .replace(".hljs-code,", "")
+                            .replaceAll("_", " ")
+                            .replaceAll("hljs-", "hljs .")
+                            .replaceAll(".hljs", " .highlight")
+                            .replaceAll(".built in", ".built_in")
+                            .replaceAll("title.", "");
+                        const figures = document.querySelectorAll("figure.highlight td.gutter");
+                        figures.forEach(figure=>{
+                            figure.classList.add("highlight");
+                        })
+                    
+                    style.innerHTML = cssContent;
+                    document.head.appendChild(style);
+                })
+                .catch((error) => {
+                    console.error("Error loading CSS:", error);
+                });
+        </script>
+    
+
+
+
+
+
+    <script reload>
+        var targets = document.querySelectorAll("figure.highlight, #article-content > pre:not(.highlight,.hljs)");
+        targets.forEach((block) => {
+            const copyBtn = document.createElement("button");
+            copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+            copyBtn.className = "code-copy";
+
+            
+                copyBtn.style.color = "#fff";
+            
+
+            copyBtn.addEventListener("click", () => {
+                const text = block.querySelector("td.code")?.textContent || block.querySelector("code")?.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    copyBtn.innerHTML = "Copied!";
+                    setTimeout(() => {
+                        copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+                    }, 2000);
+                });
+            });
+            block.appendChild(copyBtn);
+        });
+    </script>
+
+
+
+
+<div class="post-guide">
+	<div class="item left">
+	
+		<a href="/2026/03/30/drf/7.def-%E7%89%88%E6%9C%AC/">
+			<i class="fa fa-angle-left" aria-hidden="true"></i>
+			def-版本
+		</a>
+	
+	</div>
+	<div class="item right">
+		
+		<a href="/2026/03/31/drf/9.%E5%BA%8F%E5%88%97%E5%8C%96/">
+			9.序列化
+			<i class="fa fa-angle-right" aria-hidden="true"></i>
+		</a>
+		
+	</div>
+</div>
+
+
+
+
+	</div>
+
+	<div id="footer">
+	<div>
+		
+			
+				©2024<span>-</span><span>2026
+			
+			
+			</span>
+			<a href="">
+				yibinL
+			</a>
+		
+		
+			<span id="busuanzi_container_site_pv">
+				总访问量
+				<span id="vercount_value_page_pv"></span>
+			</span>
+			<span id="busuanzi_container_site_uv">
+				总访客数
+				<span id="vercount_value_site_pv"></span>
+			</span>
+		
+	</div>
+	 <div> Theme <a href="https://github.com/Exisi/hexo-theme-node-tree"	target="_blank">Node-Tree</a> Powered by <a href="https://hexo.io" target="_blank">Hexo</a> </div> 
+</div>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+
+<script async>
+    const topTopBtn = document.querySelector("#totop-toggle");
+	topTopBtn.addEventListener("click", () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	});
+</script>
+</body>
+</html>
