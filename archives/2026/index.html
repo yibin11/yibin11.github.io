@@ -257,9 +257,9 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2026/03/30/drf/7.def-%E7%89%88%E6%9C%AC/" title="/2026/03/30/drf/7.def-版本">
+									<a href="/2026/03/30/drf/7.drf-%E7%89%88%E6%9C%AC/" title="/2026/03/30/drf/7.drf-版本">
 									
-										7.def-版本
+										7.drf-版本
 									
 									</a>
 								</li>
@@ -288,6 +288,39 @@
 								<div class="article-toc" style="display: none;"></div>
 							</ul>
 			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/01/drf/10.%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" title="/2026/04/01/drf/10.数据校验">
+									
+										10.数据校验
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/02/drf/%E6%A1%88%E4%BE%8B/" title="/2026/04/02/drf/案例">
+									
+										案例
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/06/drf/11.drf-page-view-router-filter/" title="/2026/04/06/drf/11.drf-page-view-router-filter">
+									
+										11.drf-page-view-router-filter
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
 								</li>
 							</ul>
 			
@@ -297,6 +330,116 @@
 
 	<div id="content">
 		<div id="index">
+	
+	<div class="index-li">
+		<a href="/2026/04/06/drf/11.drf-page-view-router-filter/">
+			<h2 class="index-title">
+				drf-page,view,router,filter
+			</h2>
+			<div class="index-brief">
+				分页后端：返回数据与总数据条数，每页显示多少条
+前端：生成页码
+PageNumberPagination,适用于显示页面、上一下、下一页	/accounts/?page=7&amp;page_size=2   #页码与动态分页大小LimitOffsetPagination，滚动翻页,获取当前数据后几条数据	/accounts/?offset=2&amp;limit=10    # 从第几条数据(o ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-04-06</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/04/02/drf/%E6%A1%88%E4%BE%8B/">
+			<h2 class="index-title">
+				案例-博客
+			</h2>
+			<div class="index-brief">
+				注意事项1.post要注意认证，权限，数据校验，数据存不存在,序列化返回如果url上有参数代表数据，就要校验一下是否存在
+
+2.get认证，权限，数据获取，序列化返回
+
+3.不同方法认证在同一个类中get可以不通过认证，post要认证让认证不抛异常，在post中判断
+
+
+
+功能
+博客列表
+路由 + 视图（时间倒序排序） + 序列化
+
+输出所有博客文章（除了博文）
+class BlogSeriali ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-04-02</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/04/01/drf/10.%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/">
+			<h2 class="index-title">
+				10.数据校验
+			</h2>
+			<div class="index-brief">
+				1.序列化器
+序列化
+序列化器的类
+路由 -&gt; 视图  -&gt; 去数据库获取对象或QuerySet  -&gt; 序列化器的类转换成列表、字典、有序字典  -&gt; JSON处理
+
+
+数据校验
+序列化器的类
+路由 -&gt; 视图  -&gt; 解析后 -&gt; request.data  -&gt; 校验（序列化器的类） -&gt; 操作（db，序列化器的类）
+
+2.数据校验校验方 ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-04-01</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
 	
 	<div class="index-li">
 		<a href="/2026/03/31/drf/9.%E5%BA%8F%E5%88%97%E5%8C%96/">
@@ -338,9 +481,9 @@ class JSON解析器：	content-type:&#x27;application/JSON&#x27;		def parse(): #
 	</div>
 	
 	<div class="index-li">
-		<a href="/2026/03/30/drf/7.def-%E7%89%88%E6%9C%AC/">
+		<a href="/2026/03/30/drf/7.drf-%E7%89%88%E6%9C%AC/">
 			<h2 class="index-title">
-				def-版本
+				drf-版本
 			</h2>
 			<div class="index-brief">
 				1.GET参数传递1.使用在restful规范中要去，后端的API中需要体现版本
@@ -443,104 +586,6 @@ throttle_XXX_11.11.11.11     [16：45, 16:43, 16:42 ...
 			<div class="index-brief">
 				1.应用我们可以编辑权限校验的逻辑和返回错误信息
 from rest_framework.permissions import BasePermissionfrom ext.code import *class UserPermission(BasePermission):    # 自定义错误返回信息    message = &#123;&#x27;code&#x27;:PERMISSION_ ...
-			</div>
-		</a>
-		<div class="article-meta">
-			<span>2026-03-29</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/"
-					>drf</a
-				>
-				 > 
-			</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/源码流程/"
-					>源码流程</a
-				>
-				
-			</span>
-			  
-		</div>
-	</div>
-	
-	<div class="index-li">
-		<a href="/2026/03/29/drf/3.drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/">
-			<h2 class="index-title">
-				drf-认证组件
-			</h2>
-			<div class="index-brief">
-				1.用户授权100个API，1个无需登录就能访问；99需要登录才能访问。
-编写类作为认证组件
-from rest_framework.authentication import BaseAuthenticationfrom rest_framework.exceptions import AuthenticationFailedclass MyAuthentication(BaseAuthenti ...
-			</div>
-		</a>
-		<div class="article-meta">
-			<span>2026-03-29</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/"
-					>drf</a
-				>
-				 > 
-			</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/源码流程/"
-					>源码流程</a
-				>
-				
-			</span>
-			  
-		</div>
-	</div>
-	
-	<div class="index-li">
-		<a href="/2026/03/29/drf/2.drf-request/">
-			<h2 class="index-title">
-				drf-request
-			</h2>
-			<div class="index-brief">
-				1.request封装在URL中调用的view方法最后是调用了self.dispatch
-在源码的dispatch方法中
-def dispatch(self, request, *args, **kwargs):    &quot;&quot;&quot;    `.dispatch()` is pretty much the same as Django&#x27;s regular dispa ...
-			</div>
-		</a>
-		<div class="article-meta">
-			<span>2026-03-29</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/"
-					>drf</a
-				>
-				 > 
-			</span>
-			  
-			<span>
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/源码流程/"
-					>源码流程</a
-				>
-				
-			</span>
-			  
-		</div>
-	</div>
-	
-	<div class="index-li">
-		<a href="/2026/03/29/drf/drf%E7%BA%AF%E5%87%80%E7%89%88/">
-			<h2 class="index-title">
-				drf纯净版
-			</h2>
-			<div class="index-brief">
-				1.匿名用户默认情况下：drf页面访问需要用户信息
-class UserView(APIView):    def get(self,request,*args,**kwargs):        print(request.user)   # 当前登录的用户 - 此时没用户 -&gt; 匿名用户        return Response(&#123;&#x27;status&#x27;: & ...
 			</div>
 		</a>
 		<div class="article-meta">

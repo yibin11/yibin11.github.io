@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<!-- title -->
+	
+<title>
+    
+        drf-page,view,router,filter&nbsp;&nbsp;✦&nbsp;
+    
+    It&#39;s my blogs
+</title>
+
+	<!-- keywords,description -->
+	
+
+<meta name="author" content="yibinL" />
+
+<meta name="keywords" content="drf,源码流程" />
+
+<meta name="description" content="分页后端：返回数据与总数据条数，每页显示多少条
+前端：生成页码
+PageNumberPagination,适用于显示页面、上一下、下一页	/accounts/?page=7&amp;amp;page_size=2   #页码与动态分页大小LimitOffsetPagination，滚动翻页,获取当前数据后几条数据	/accounts/?offset=2&amp;amp;limit=10    # 从第几条数据(o" />
+
+	<!-- favicon -->
+	
+		<link rel="shortcut icon" href="/favicon.ico">
+	
+
+	<!-- css, script -->
+	
+<link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	<!-- custom css and js -->
+	
+
+
+
+
+
+	<!-- search -->
+	<script async>
+	window.searchEngine = "https://www.google.com/search?q=" ?? "https://www.google.com/search?q=";
+	window.homeHost = "http://example.com" ?? window.location.host;
+</script>
+
+	<!-- statistics -->
+	
+	<script async reload src="https://cn.vercount.one/js"></script>
+
+
+	<!-- analysis -->
+	
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+	<header id="header">
+	<a id="title" href="/" class="logo">
+		<img id="logo" src="/favicon-white.ico" alt="logo"/>
+		It's my blogs
+	</a>
+
+	<ul id="menu">
+		
+			<li class="menu-item">
+				<a href="/about" class="menu-item-link">关于</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="/tags" class="menu-item-link">标签</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="/categories" class="menu-item-link">分类</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="" class="menu-item-link item-icon" target="_blank">
+					<i class="fa fa-github fa-2x"></i>
+				</a>
+			</li>
+		
+		
+			<li class="menu-item dark-mode">
+				<a href="#" class="menu-item-link item-icon">
+					<i class="fa fa-moon-o fa-2x"></i>
+				</a>
+			</li>
+
+			<script async>
+				const localModel = localStorage.getItem("darkModel");
+				const darkModel = !localModel ? 0 : localModel;
+
+				const darkModeIcon = document.querySelector("#menu .dark-mode i");
+
+				if (darkModel == 1) {
+					darkModeIcon.classList.replace("fa-moon-o", "fa-sun-o");
+					DarkReader.enable({
+						brightness: 100,
+						contrast: 90,
+						sepia: 10,
+					});
+				}
+
+				darkModeIcon.addEventListener("click", () => {
+					const isMoon = darkModeIcon.classList.contains("fa-moon-o");
+					darkModeIcon.classList.toggle("fa-moon-o", !isMoon);
+					darkModeIcon.classList.toggle("fa-sun-o", isMoon);
+					localStorage.setItem("darkModel", isMoon ? 1 : 0);
+					isMoon ? DarkReader.enable({ brightness: 100, contrast: 90, sepia: 10 }) : DarkReader.disable();
+				});
+			</script>
+		
+	</ul>
+</header>
+
+<script async>
+	let startHeight = 0;
+	window.addEventListener("scroll", () => {
+		const { scrollY: endHeight } = window;
+		const distance = endHeight - startHeight;
+		startHeight = endHeight;
+		document.querySelector("#header").style.display = distance > 0 && endHeight > 50 ? "none" : "";
+	});
+</script>
+	<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="按回车全站搜索">
+		<div id="tree">
+			
+			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/03/29/other/other/" title="/2026/03/29/other/other">
+											<i class="fa fa-plus-square-o"></i>
+											other
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/other/hello-world/" title="/2026/03/27/other/hello-world">
+									
+										hello-world
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/other/my-blog/" title="/2026/03/27/other/my-blog">
+									
+										my-blog
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/03/29/drf/drf/" title="/2026/03/29/drf/drf">
+											<i class="fa fa-plus-square-o"></i>
+											drf
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/drf/1.drf-%E8%A7%86%E5%9B%BE/" title="/2026/03/27/drf/1.drf-视图">
+									
+										1.drf-视图
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf%E7%BA%AF%E5%87%80%E7%89%88/" title="/2026/03/29/drf/drf纯净版">
+									
+										drf纯净版
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/2.drf-request/" title="/2026/03/29/drf/2.drf-request">
+									
+										2.drf-request
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/3.drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/" title="/2026/03/29/drf/3.drf-认证组件">
+									
+										3.drf-认证组件
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/4.drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/" title="/2026/03/29/drf/4.drf-权限组件">
+									
+										4.drf-权限组件
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/6.drf-%E9%99%90%E6%B5%81/" title="/2026/03/29/drf/6.drf-限流">
+									
+										6.drf-限流
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/30/drf/7.drf-%E7%89%88%E6%9C%AC/" title="/2026/03/30/drf/7.drf-版本">
+									
+										7.drf-版本
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/31/drf/8.%E8%A7%A3%E6%9E%90%E5%99%A8/" title="/2026/03/31/drf/8.解析器">
+									
+										8.解析器
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/31/drf/9.%E5%BA%8F%E5%88%97%E5%8C%96/" title="/2026/03/31/drf/9.序列化">
+									
+										9.序列化
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/01/drf/10.%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" title="/2026/04/01/drf/10.数据校验">
+									
+										10.数据校验
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/02/drf/%E6%A1%88%E4%BE%8B/" title="/2026/04/02/drf/案例">
+									
+										案例
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2026/04/06/drf/11.drf-page-view-router-filter/" title="/2026/04/06/drf/11.drf-page-view-router-filter">
+									
+										11.drf-page-view-router-filter
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<div id="content">
+		<h1 id="article-title">
+	drf-page,view,router,filter
+</h1>
+
+<div class="article-meta">
+	<span> yibinL </span>
+	<span> 2026-04-06 18:18:48 </span>
+	<div id="article-categories">
+		
+			<span>Categories：</span>
+			
+				
+				<span>
+					<i class="fa fa-folder" aria-hidden="true">
+						<a href="/categories/drf/">
+							drf
+						</a>
+					</i>
+				 > 
+				</span>
+				
+			
+				
+				<span>
+					<i class="fa fa-folder" aria-hidden="true">
+						<a href="/categories/drf/源码流程/">
+							源码流程
+						</a>
+					</i>
+				
+				</span>
+				
+			
+		
+		
+			<span>Tags：</span>
+			
+				
+					<span>
+						<i class="fa fa-tag" aria-hidden="true">
+							<a href="/tags/drf/">
+								drf
+							</a>
+						</i>
+					</span>
+				
+			
+		
+	</div>
+</div>
+
+<div id="article-content">
+	<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><p>后端：返回数据与总数据条数，每页显示多少条</p>
+<p>前端：生成页码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PageNumberPagination,适用于显示页面、上一下、下一页</span><br><span class="line">	/accounts/?page=<span class="number">7</span>&amp;page_size=<span class="number">2</span>   <span class="comment">#页码与动态分页大小</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">LimitOffsetPagination，滚动翻页,获取当前数据后几条数据</span><br><span class="line">	/accounts/?offset=<span class="number">2</span>&amp;limit=<span class="number">10</span>    <span class="comment"># 从第几条数据(offset)往后取几条数据(limit)</span></span><br><span class="line">	/accounts/?lastid=<span class="number">10</span>&amp;offset=<span class="number">0</span>&amp;limit=<span class="number">10</span>  </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-PageNumberPagination"><a href="#1-PageNumberPagination" class="headerlink" title="1.PageNumberPagination"></a>1.PageNumberPagination</h3><p>使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">对象 = PageNumberPagination()</span><br><span class="line">result = 对象方法(data,request,<span class="variable language_">self</span>)   <span class="comment"># 返回一个列表，是分页结果</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request,version</span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取数据</span></span><br><span class="line">    queryset=models.Blog.objects.<span class="built_in">all</span>().order_by(<span class="string">&#x27;-id&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    page= BlogPaginator()</span><br><span class="line">    result = page.paginate_queryset(queryset,request,<span class="variable language_">self</span>)</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 序列化</span></span><br><span class="line">    ser = BlogSerializer(instance = result ,many=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># 返回</span></span><br><span class="line">    context = &#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">1000</span>,<span class="string">&#x27;data&#x27;</span>:ser.data&#125;</span><br><span class="line">    <span class="keyword">return</span> Response(context)</span><br></pre></td></tr></table></figure>
+
+<p>源码中的配置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PageNumberPagination</span>(<span class="title class_ inherited__">BasePagination</span>):</span><br><span class="line">    <span class="comment"># 配置默认分页大小</span></span><br><span class="line">    page_size = api_settings.PAGE_SIZE</span><br><span class="line"></span><br><span class="line">    django_paginator_class = DjangoPaginator</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 配置url中页码参数名称</span></span><br><span class="line">    page_query_param = <span class="string">&#x27;page&#x27;</span></span><br><span class="line">    page_query_description = _(<span class="string">&#x27;A page number within the paginated result set.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 配置url上分页大小的名称</span></span><br><span class="line">    page_size_query_param = <span class="literal">None</span></span><br><span class="line">    page_size_query_description = _(<span class="string">&#x27;Number of results to return per page.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 开启动态分页，设置最大每页传输多少数据，限制动态分页大小</span></span><br><span class="line">    max_page_size = <span class="literal">None</span>   <span class="comment"># 默认不开启</span></span><br><span class="line"></span><br><span class="line">    last_page_strings = (<span class="string">&#x27;last&#x27;</span>,)</span><br><span class="line"></span><br><span class="line">    template = <span class="string">&#x27;rest_framework/pagination/numbers.html&#x27;</span></span><br><span class="line"></span><br><span class="line">    invalid_page_message = _(<span class="string">&#x27;Invalid page.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>自定义：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BlogPaginator</span>(<span class="title class_ inherited__">PageNumberPagination</span>):</span><br><span class="line">    page_size_query_param = <span class="string">&#x27;page_size&#x27;</span></span><br><span class="line">    max_page_size = <span class="number">10</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>想要返回分页其他信息:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用这个方法，data传入已序列化数据</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">PageNumberPagination</span>(<span class="title class_ inherited__">BasePagination</span>):</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_paginated_response</span>(<span class="params">self, data</span>):</span><br><span class="line">        <span class="keyword">return</span> Response(&#123;</span><br><span class="line">            <span class="string">&#x27;count&#x27;</span>: <span class="variable language_">self</span>.page.paginator.count,  <span class="comment">#总条数</span></span><br><span class="line">            <span class="string">&#x27;next&#x27;</span>: <span class="variable language_">self</span>.get_next_link(),　　　　 <span class="comment"># 上一页</span></span><br><span class="line">            <span class="string">&#x27;previous&#x27;</span>: <span class="variable language_">self</span>.get_previous_link(),  <span class="comment"># 下一页</span></span><br><span class="line">            <span class="string">&#x27;results&#x27;</span>: data,                    <span class="comment"># 数据</span></span><br><span class="line">        &#125;)</span><br><span class="line"><span class="comment">#我们也可以自定义这个方法</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request,version</span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取数据</span></span><br><span class="line">    queryset=models.Blog.objects.<span class="built_in">all</span>().order_by(<span class="string">&#x27;-id&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 分页</span></span><br><span class="line">    page= BlogPaginator()</span><br><span class="line">    result = page.paginate_queryset(queryset,request,<span class="variable language_">self</span>)</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 序列化</span></span><br><span class="line">    ser = BlogSerializer(instance = result ,many=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取序列化结果 or 分页返回处理 </span></span><br><span class="line">    res = page.get_paginated_response(ser.data)   </span><br><span class="line">	<span class="keyword">return</span> res</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-LimitOffsetPagination"><a href="#2-LimitOffsetPagination" class="headerlink" title="2.LimitOffsetPagination"></a>2.LimitOffsetPagination</h3><p>使用：与PageNumberPagination相同，使用同样的方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">对象 = PageNumberPagination()</span><br><span class="line">result = 对象方法(data,request,<span class="variable language_">self</span>)   <span class="comment"># 返回一个列表，是分页结果</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request,version</span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取数据</span></span><br><span class="line">    queryset=models.Blog.objects.<span class="built_in">all</span>().order_by(<span class="string">&#x27;-id&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 分页</span></span><br><span class="line">    page= LimitOffsetPagination()</span><br><span class="line">    result = page.paginate_queryset(queryset,request,<span class="variable language_">self</span>)</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 序列化</span></span><br><span class="line">    ser = BlogSerializer(instance = result ,many=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取序列化结果 or 分页返回处理</span></span><br><span class="line">    res = page.get_paginated_response(ser.data)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>源码配置：url参数不同，基本类似</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LimitOffsetPagination</span>(<span class="title class_ inherited__">BasePagination</span>):</span><br><span class="line">	<span class="comment"># 分页大小</span></span><br><span class="line">    default_limit = api_settings.PAGE_SIZE</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 参数名称</span></span><br><span class="line">    limit_query_param = <span class="string">&#x27;limit&#x27;</span></span><br><span class="line">    limit_query_description = _(<span class="string">&#x27;Number of results to return per page.&#x27;</span>)</span><br><span class="line">    offset_query_param = <span class="string">&#x27;offset&#x27;</span></span><br><span class="line">    offset_query_description = _(<span class="string">&#x27;The initial index from which to return the results.&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 动态开启与限制大小</span></span><br><span class="line">    max_limit = <span class="literal">None</span></span><br><span class="line">    template = <span class="string">&#x27;rest_framework/pagination/numbers.html&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>bug：</p>
+<p>offset是根据数据最新的位置排序的，在倒序时，可能会在插入新数据，导致位置名次发生改变，从而获取到重复数据</p>
+<p>扩展：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request,version</span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取数据</span></span><br><span class="line">    queryset=models.Blog.objects.<span class="built_in">all</span>().order_by(<span class="string">&#x27;-id&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 扩展：?max_id</span></span><br><span class="line">    max_id = request.query_params.get(<span class="string">&#x27;max_id&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> max_id <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        queryset = queryset.<span class="built_in">filter</span>(id__lt = max_id)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 分页</span></span><br><span class="line">    page= LimitOffsetPagination()</span><br><span class="line">    result = page.paginate_queryset(queryset,request,<span class="variable language_">self</span>)</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 序列化</span></span><br><span class="line">    ser = BlogSerializer(instance = result ,many=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取序列化结果 or 分页返回处理</span></span><br><span class="line">    res = page.get_paginated_response(ser.data)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>翻页：让offset固定为0，缺点无法获取新数据，要提醒用户</p>
+<pre><code>/accounts/?lastid=10&amp;offset=0&amp;limit=10
+/accounts/?lastid=20&amp;offset=0&amp;limit=10
+</code></pre>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p><code>APIView</code>是drf中 “顶层” 的视图类，在他的内部主要实现drf基础的组件的使用，例如：版本、认证、权限、限流等。</p>
+<h3 id="1-GenericAPIView"><a href="#1-GenericAPIView" class="headerlink" title="1.GenericAPIView"></a>1.GenericAPIView</h3><p><code>GenericAPIView</code> 继承APIView，在APIView的基础上又增加了一些功能。例如：<code>get_queryset</code>、<code>get_object</code>等。</p>
+<p>实际在开发中一般不会直接继承它，他更多的是担任 <code>中间人</code>的角色，为子类提供公共功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 源码-提供的功能</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GenericAPIView</span>(views.APIView):</span><br><span class="line">	<span class="comment"># 配置</span></span><br><span class="line">    queryset = <span class="literal">None</span></span><br><span class="line">    serializer_class = <span class="literal">None</span></span><br><span class="line">    lookup_field = <span class="string">&#x27;pk&#x27;</span></span><br><span class="line">    lookup_url_kwarg = <span class="literal">None</span></span><br><span class="line">    filter_backends = api_settings.DEFAULT_FILTER_BACKENDS</span><br><span class="line">    pagination_class = api_settings.DEFAULT_PAGINATION_CLASS</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__class_getitem__</span>(<span class="params">cls, *args, **kwargs</span>):</span><br><span class="line">        <span class="keyword">return</span> cls</span><br><span class="line">	<span class="comment"># 获取数据库数据（列表）</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_queryset</span>(<span class="params">self</span>):	</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_object</span>(<span class="params">self</span>):   <span class="comment"># 获取单条数据</span></span><br><span class="line">       </span><br><span class="line">	<span class="comment"># 序列化　　</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_serializer</span>(<span class="params">self, *args, **kwargs</span>):　　<span class="comment"># 实现序列化</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_serializer_class</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_serializer_context</span>(<span class="params">self</span>):</span><br><span class="line">        </span><br><span class="line">	<span class="comment"># 数据库动态筛选</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">filter_queryset</span>(<span class="params">self, queryset</span>):  <span class="comment"># 在取单条数据时自动筛选</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 分页</span></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">paginator</span>(<span class="params">self</span>):    <span class="comment">#获取分页类</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">paginate_queryset</span>(<span class="params">self, queryset</span>):   <span class="comment"># 实现分页</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_paginated_response</span>(<span class="params">self, data</span>):  <span class="comment"># 分页详细数据</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DemoView</span>(<span class="title class_ inherited__">GenericAPIView</span>):</span><br><span class="line">    <span class="comment"># 配置</span></span><br><span class="line">    queryset = models.UserInfo.objects.<span class="built_in">all</span>()   <span class="comment"># 数据</span></span><br><span class="line">    serializer_class = DemoSerializers         <span class="comment"># 序列化</span></span><br><span class="line">    pagination_class = PageNumberPagination    <span class="comment"># 分页</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 1.获取数据</span></span><br><span class="line">        queryset = <span class="variable language_">self</span>.get_queryset()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 2.分页</span></span><br><span class="line">        <span class="keyword">from</span> rest_framework.pagination <span class="keyword">import</span> PageNumberPagination</span><br><span class="line">        result=page.paginate_queryset(queryset,request,<span class="variable language_">self</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 3.序列化</span></span><br><span class="line">        ser =<span class="variable language_">self</span>.get_serializer(result,many=<span class="literal">True</span>)</span><br><span class="line">        <span class="built_in">print</span>(ser.data)</span><br><span class="line"></span><br><span class="line">        response=page.get_paginated_response(ser.data)</span><br><span class="line">        <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure>
+
+<p>获取单条数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DemoDetailView</span>(<span class="title class_ inherited__">GenericAPIView</span>):</span><br><span class="line">    queryset = models.UserInfo.objects.<span class="built_in">all</span>()</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request, pk</span>):</span><br><span class="line">        <span class="built_in">print</span>(pk)  <span class="comment"># pk=主键</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 获取单条数据的两种形式</span></span><br><span class="line">        <span class="comment">#obj = models.UserInfo.objects.get(pk=pk)    # id=10必须找到 &amp; 仅有一条，不然就报错</span></span><br><span class="line">        <span class="comment">#obj = models.UserInfo.objects.filter(pk=pk).first()   #　找不到返回none</span></span><br><span class="line">        <span class="comment"># 单条数据,默认使用pk</span></span><br><span class="line">        obj = <span class="variable language_">self</span>.get_object()   <span class="comment"># 取数据 + 权限校验 has_object_permission 不仅控制数据列表的权限，连数据详细也要限制，更加深入</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#　序列化</span></span><br><span class="line">        ser = <span class="variable language_">self</span>.get_serializer(obj)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Response(ser.data)</span><br></pre></td></tr></table></figure>
+
+<p>筛选：在取单条数据时自动筛选</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定义好筛选方法</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.filters <span class="keyword">import</span> BaseFilterBackend</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyFilterBackend</span>(<span class="title class_ inherited__">BaseFilterBackend</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">filter_queryset</span>(<span class="params">self, request, queryset, view</span>):</span><br><span class="line">        xx = request.query_params.get(<span class="string">&#x27;xx&#x27;</span>)</span><br><span class="line">        res = queryset.<span class="built_in">filter</span>(xx=xx)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DemoDetailView</span>(<span class="title class_ inherited__">GenericAPIView</span>):</span><br><span class="line">    queryset = models.UserInfo.objects.<span class="built_in">all</span>()</span><br><span class="line">    filter_backends = [MyFilterBackend]   <span class="comment"># 配置</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request, pk</span>):</span><br><span class="line">        <span class="built_in">print</span>(pk)  <span class="comment"># pk=主键</span></span><br><span class="line">        <span class="comment"># 单条数据,默认使用pk筛选</span></span><br><span class="line">        obj = <span class="variable language_">self</span>.get_object()   <span class="comment"># 取数据 + 权限校验 has_object_permission 不仅控制数据列表的权限，连数据详细也要限制，更加深入</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#　序列化</span></span><br><span class="line">        ser = <span class="variable language_">self</span>.get_serializer(obj)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Response(ser.data)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="2-GenericViewSet"><a href="#2-GenericViewSet" class="headerlink" title="2.GenericViewSet"></a>2.GenericViewSet</h3><p><code>GenericViewSet</code>类中没有定义任何代码，他就是继承 <code>ViewSetMixin</code> 和 <code>GenericAPIView</code>，也就说他的功能就是将继承的两个类的功能继承到一起。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yibin11/blog-image@main/img/image-20210824092131703.png" alt="image-20210824092131703"></p>
+<ul>
+<li><code>ViewSetMixin</code>，将 get&#x2F;post&#x2F;put&#x2F;delete 等方法映射到 list、create、retrieve、update、partial_update、destroy方法中，让视图不再需要两个类。</li>
+<li><code>GenericAPIView</code>，将数据库查询、序列化类的定义提取到类变量中，便于后期处理。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">DRF 的API设计思路：</span><br><span class="line">	api/demo/        GET          数据列表 </span><br><span class="line">	api/demo/        POST         新建数据</span><br><span class="line">	api/demo/<span class="number">10</span>/     GET          获取指定一条数据详细</span><br><span class="line">	api/demo/<span class="number">10</span>/     PUT          修改数据</span><br><span class="line">	api/demo/<span class="number">10</span>/     DELETE       删除数据</span><br><span class="line">	</span><br><span class="line">采用--ViewSetMixin</span><br><span class="line"></span><br><span class="line">路由: 在同一个类中调用不同方法</span><br><span class="line">path(<span class="string">&#x27;api/demo/&#x27;</span>, demo.GvsView.as_view(&#123;<span class="string">&quot;get&quot;</span>:<span class="string">&quot;list&quot;</span>,<span class="string">&quot;post&quot;</span>:<span class="string">&quot;create&quot;</span>&#125;)),</span><br><span class="line">path(<span class="string">&#x27;api/demo/&lt;int:pk&gt;/&#x27;</span>,demo.GvsView.as_view(&#123;<span class="string">&quot;get&quot;</span>:<span class="string">&quot;retrive&quot;</span>,<span class="string">&quot;delete&quot;</span>:<span class="string">&quot;destroy&quot;</span>,<span class="string">&quot;put&quot;</span>:<span class="string">&quot;update&quot;</span>&#125;)),</span><br><span class="line"></span><br><span class="line">视图：通过重命名的方法进行区分</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">GvsView</span>(<span class="title class_ inherited__">ViewSetMixin</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">list</span>(<span class="params">self,request</span>):</span><br><span class="line">            <span class="keyword">pass</span> <span class="comment"># 获取数据列表</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">create</span>(<span class="params">self,request</span>):</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">retrive</span>(<span class="params">self,request,pk</span>):</span><br><span class="line">            <span class="keyword">pass</span> <span class="comment"># 获取数据详细</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">destroy</span>(<span class="params">self,request,pk</span>):</span><br><span class="line">            <span class="keyword">pass</span> <span class="comment"># 删除</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self,request,pk</span>):</span><br><span class="line">            <span class="keyword">pass</span> <span class="comment"># 修改</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：开发中一般也很少直接去继承他，因为他也属于是 <code>中间人</code>类，在原来 <code>GenericAPIView</code> 基础上又增加了一个映射而已。</p>
+<h3 id="3-五大类"><a href="#3-五大类" class="headerlink" title="3.五大类"></a>3.五大类</h3><p>在drf的为我们提供好了5个用于做 增、删、改（含局部修改）、查列表、查单个数据的5个类（需结合 <code>GenericViewSet</code> 使用）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 写好url</span></span><br><span class="line">path(<span class="string">&#x27;api/demo/&#x27;</span>, demo.GvsView.as_view(&#123;<span class="string">&quot;get&quot;</span>:<span class="string">&quot;list&quot;</span>,<span class="string">&quot;post&quot;</span>:<span class="string">&quot;create&quot;</span>&#125;)),</span><br><span class="line">path(<span class="string">&#x27;api/demo/&lt;int:pk&gt;/&#x27;</span>,demo.GvsView.as_view(&#123;<span class="string">&quot;get&quot;</span>:<span class="string">&quot;retrieve&quot;</span>,<span class="string">&quot;delete&quot;</span>:<span class="string">&quot;destroy&quot;</span>,<span class="string">&quot;put&quot;</span>:<span class="string">&quot;update&quot;</span>&#125;)),</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> rest_framework.mixins <span class="keyword">import</span> ListModelMixin</span><br><span class="line"><span class="comment"># 我们只需要这样配置好</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GvsSerializers</span>(<span class="title class_ inherited__">ModelSerializer</span>):</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model=models.UserInfo</span><br><span class="line">        fields=<span class="string">&quot;__all__&quot;</span></span><br><span class="line"><span class="comment"># 继承ListModelMixin</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GvsViewSet</span>(ListModelMixin, GenericViewSet):  </span><br><span class="line">    pagination_class = PageNumberPagination</span><br><span class="line">    serializer_class = GvsSerializers</span><br><span class="line">    queryset = models.UserInfo.objects</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<p>在<code>ListModelMixin</code>已经写好了<code>list</code>方法帮我们继续数据获取，分页，序列化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ListModelMixin</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    List a queryset.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">list</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">        queryset = <span class="variable language_">self</span>.filter_queryset(<span class="variable language_">self</span>.get_queryset())</span><br><span class="line"></span><br><span class="line">        page = <span class="variable language_">self</span>.paginate_queryset(queryset)</span><br><span class="line">        <span class="keyword">if</span> page <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            serializer = <span class="variable language_">self</span>.get_serializer(page, many=<span class="literal">True</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>.get_paginated_response(serializer.data)</span><br><span class="line"></span><br><span class="line">        serializer = <span class="variable language_">self</span>.get_serializer(queryset, many=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">return</span> Response(serializer.data)</span><br></pre></td></tr></table></figure>
+
+<p>其他五大类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UserView</span>(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.CreateModelMixin, GenericViewSet):</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-对于List与Retrieve-Get"><a href="#1-对于List与Retrieve-Get" class="headerlink" title="1.对于List与Retrieve(Get)"></a>1.对于List与Retrieve(Get)</h4><p>需求：不同的请求使用不同的序列化类</p>
+<p>如：请求1条数据\多条数据    ———&gt;   使用不同的类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GvsViews</span>(ListModelMixin,RetrieveModelMixin, GenericViewSet):</span><br><span class="line">    pagination_class = PageNumberPagination</span><br><span class="line">    serializer_class = GvsSerializers</span><br><span class="line">    queryset = models.UserInfo.objects.<span class="built_in">all</span>()</span><br><span class="line">	</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 自定义</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_serializer_class</span>(<span class="params">self</span>)</span><br><span class="line">    	<span class="comment">#　两个请求有什么不同</span></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.kwargs.get(<span class="string">&#x27;pk&#x27;</span>):   <span class="comment"># 如果url存在动态参数，使用其他序列化类</span></span><br><span class="line">            <span class="keyword">return</span> Gvs2Serializers</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.serializer_class</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-create-Post"><a href="#2-create-Post" class="headerlink" title="2.create(Post)"></a>2.create(Post)</h4><p>帮我们进行校验与保存</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GvsViews</span>(ListModelMixin,RetrieveModelMixin, CreateModelMixin,GenericViewSet):</span><br><span class="line">    pagination_class = PageNumberPagination</span><br><span class="line">    serializer_class = GvsSerializers</span><br><span class="line">    queryset = models.UserInfo.objects.<span class="built_in">all</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 我们只需定义好保存数据就行</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">perform_create</span>(<span class="params">self, serializer</span>):</span><br><span class="line">        serializer.save()</span><br><span class="line">        <span class="comment"># serializer.save(user=&quot;xxx&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-update-Put-Patch"><a href="#3-update-Put-Patch" class="headerlink" title="3.update(Put&#x2F;Patch)"></a>3.update(Put&#x2F;Patch)</h4><p>区分新增与更新</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增</span></span><br><span class="line">serializer = <span class="variable language_">self</span>.get_serializer(data=request.data)</span><br><span class="line"><span class="keyword">if</span> serializer.is_valid():</span><br><span class="line">    serializer.save()     <span class="comment"># ----新增</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新</span></span><br><span class="line"><span class="comment"># - 全部更新</span></span><br><span class="line">instance = <span class="variable language_">self</span>.get_object()     <span class="comment"># 要更新的数据对象</span></span><br><span class="line">serializer = <span class="variable language_">self</span>.get_serializer(instance, data=request.data)</span><br><span class="line"><span class="keyword">if</span> serializer.is_valid():</span><br><span class="line">    serializer.save()      <span class="comment"># -----&gt;全部更新</span></span><br><span class="line"><span class="comment"># - 局部更新</span></span><br><span class="line">partial = <span class="literal">True</span>     <span class="comment"># True</span></span><br><span class="line">instance = <span class="variable language_">self</span>.get_object()</span><br><span class="line">serializer = <span class="variable language_">self</span>.get_serializer(instance, data=request.data, partial=partial)</span><br><span class="line"><span class="keyword">if</span> serializer.is_valid():</span><br><span class="line">    serializer.save()      <span class="comment"># -------&gt;partial=True ,局部更新</span></span><br></pre></td></tr></table></figure>
+
+<p>更新:  <code> put</code>全局  ,<code>patch</code>局部</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path(<span class="string">&#x27;api/gvs/&lt;int:pk&gt;/&#x27;</span>, gvs.GvsViews.as_view(&#123;<span class="string">&quot;put&quot;</span>:<span class="string">&quot;update&quot;</span>,<span class="string">&quot;patch&quot;</span>:<span class="string">&quot;partial_update&quot;</span>&#125;), ),</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.mixins <span class="keyword">import</span> UpdateModelMixin,</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GvsViews</span>(UpdateModelMixin,GenericViewSet):</span><br><span class="line">    pagination_class = PageNumberPagination</span><br><span class="line">    serializer_class = GvsSerializers</span><br><span class="line">    queryset = models.UserInfo.objects.<span class="built_in">all</span>()</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># ...自定制</span></span><br></pre></td></tr></table></figure>
+
+<p>需求:根据不同的请求方式使用不同序列化器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_serializer_class</span>(<span class="params">self</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="variable language_">self</span>.request.method == <span class="string">&quot;GET&quot;</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;区别请求&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.kwargs.get(<span class="string">&quot;pk&quot;</span>):</span><br><span class="line">            <span class="string">&quot;&quot;&quot;区别参数&quot;&quot;&quot;</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> Gvs2Serializers</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> GvsSerializers</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-destroy-delete"><a href="#4-destroy-delete" class="headerlink" title="4.destroy(delete)"></a>4.destroy(delete)</h4><p>默认物理删除</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DestroyModelMixin</span>:</span><br><span class="line">	<span class="string">&quot;&quot;&quot;源码&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">destroy</span>(<span class="params">self, request, *args, **kwargs</span>):</span><br><span class="line">        instance = <span class="variable language_">self</span>.get_object()</span><br><span class="line">        <span class="variable language_">self</span>.perform_destroy(instance)</span><br><span class="line">        <span class="keyword">return</span> Response(status=status.HTTP_204_NO_CONTENT)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">perform_destroy</span>(<span class="params">self, instance</span>):</span><br><span class="line">        instance.delete()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GvsViews</span>(DestroyModelMixin,GenericViewSet):</span><br><span class="line">    pagination_class = PageNumberPagination</span><br><span class="line">    serializer_class = GvsSerializers</span><br><span class="line">    queryset = models.UserInfo.objects.<span class="built_in">all</span>()</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 自定义逻辑删除</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">perform_destroy</span>(<span class="params">self, instance</span>):</span><br><span class="line">        instance.status = <span class="number">1</span></span><br><span class="line">        instance.save()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-总和与选择"><a href="#4-总和与选择" class="headerlink" title="4.总和与选择"></a>4.总和与选择</h3><p>继承太麻烦,drf帮我们写好了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ModelViewSet</span>(mixins.CreateModelMixin,</span><br><span class="line">                   mixins.RetrieveModelMixin,</span><br><span class="line">                   mixins.UpdateModelMixin,</span><br><span class="line">                   mixins.DestroyModelMixin,</span><br><span class="line">                   mixins.ListModelMixin,</span><br><span class="line">                   GenericViewSet):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> rest_framework.viewsets <span class="keyword">import</span> ModelViewSet</span><br><span class="line"><span class="comment">#　直接继承</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GvsViews</span>(<span class="title class_ inherited__">ModelViewSet</span>):</span><br><span class="line">    pagination_class = PageNumberPagination</span><br><span class="line">    serializer_class = GvsSerializers</span><br><span class="line">    queryset = models.UserInfo.objects.<span class="built_in">all</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">perform_create</span>(<span class="params">self, serializer</span>):</span><br><span class="line">        serializer.save()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>视图类的选择: (1,2常用)</p>
+<ol>
+<li><p>继承 APIView, 核心功能 + 自己实现业务  -&gt; 自定义操作(读取redis,文件)</p>
+</li>
+<li><p>ModelViewSe   ,  五大类  —-&gt; 数据库操作</p>
+<p>​    路由的as_view需要参数   get -&gt;List</p>
+</li>
+<li><p>GenericViewSet + 五大类</p>
+<p>​    路由的as_view不需要参数   get&#x2F;post</p>
+</li>
+</ol>
+<p>我们也可以去修改自定义我们的五大类</p>
+<h3 id="补充：权限"><a href="#补充：权限" class="headerlink" title="补充：权限"></a>补充：权限</h3><p>在之前定义权限类时，类中可以定义两个方法：<code>has_permission</code> 和 <code>has_object_permission</code> </p>
+<ul>
+<li><code>has_permission</code> ，在请求进入视图之前就会执行。</li>
+<li><code>has_object_permission</code>，当视图中调用 <code>self.get_object</code>时就会被调用（删除、更新、查看某个对象时都会调用），一般用于检查对某个对象是否具有权限进行操作。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PermissionA</span>(<span class="title class_ inherited__">BasePermission</span>):</span><br><span class="line">    message = &#123;<span class="string">&quot;code&quot;</span>: <span class="number">1003</span>, <span class="string">&#x27;data&#x27;</span>: <span class="string">&quot;无权访问&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">has_permission</span>(<span class="params">self, request, view</span>):</span><br><span class="line">        exists = request.user.roles.<span class="built_in">filter</span>(title=<span class="string">&quot;员工&quot;</span>).exists()</span><br><span class="line">        <span class="keyword">if</span> exists:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">has_object_permission</span>(<span class="params">self, request, view, obj</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>drf提供了方便上面视图的写法,自动帮我们生成url</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> routers</span><br><span class="line"><span class="keyword">from</span> app01 <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">router = routers.SimpleRouter()</span><br><span class="line">router.register(<span class="string">r&#x27;api/users&#x27;</span>, views.UserView)</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># 其他URL</span></span><br><span class="line">    <span class="comment"># path(&#x27;xxxx/&#x27;, xxxx.as_view()),</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">urlpatterns += router.urls</span><br></pre></td></tr></table></figure>
+
+<p>路由分发:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> routers</span><br><span class="line"><span class="keyword">from</span> app01 <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">router = routers.SimpleRouter()</span><br><span class="line">router.register(<span class="string">r&#x27;users&#x27;</span>, views.UserView)</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;api/&#x27;</span>, include((router.urls, <span class="string">&#x27;app_name&#x27;</span>), namespace=<span class="string">&#x27;instance_name&#x27;</span>)),</span><br><span class="line">    <span class="comment"># 其他URL</span></span><br><span class="line">    <span class="comment"># path(&#x27;forgot-password/&#x27;, ForgotPasswordFormView.as_view()),</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="额外的URL"><a href="#额外的URL" class="headerlink" title="额外的URL"></a>额外的URL</h3><p>想要在原有url上增加其他功能 , 给 DRF 的 ViewSet 自定义一个额外接口（非标准 CRUD 路由）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.viewsets <span class="keyword">import</span> ModelViewSet</span><br><span class="line"><span class="keyword">from</span> rest_framework.decorators <span class="keyword">import</span> action</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">XXXModelSerializer</span>(serializers.ModelSerializer):</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.UserInfo</span><br><span class="line">        fields = <span class="string">&quot;__all__&quot;</span></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">XXXView</span>(<span class="title class_ inherited__">ModelViewSet</span>):</span><br><span class="line">    queryset = models.UserInfo.objects.<span class="built_in">all</span>()</span><br><span class="line">    serializer_class = XXXModelSerializer</span><br><span class="line"></span><br><span class="line"><span class="meta">    @action(<span class="params">detail=<span class="literal">False</span>, methods=[<span class="string">&#x27;get&#x27;</span>], url_path=<span class="string">&quot;yyy/(?P&lt;xx&gt;\d+)/xxx&quot;</span></span>)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_password</span>(<span class="params">self, request, xx, pk=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="built_in">print</span>(xx)</span><br><span class="line">        <span class="keyword">return</span> Response(<span class="string">&quot;...&quot;</span>)</span><br><span class="line">	</span><br><span class="line"><span class="meta">    @action(<span class="params">detail=<span class="literal">True</span>, methods=[<span class="string">&#x27;get&#x27;</span>], url_path=<span class="string">&quot;yyy/(?P&lt;xx&gt;\d+)/xxx&quot;</span></span>)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">set_password</span>(<span class="params">self, request, xx, pk=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="built_in">print</span>(xx)</span><br><span class="line">        <span class="keyword">return</span> Response(<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># methods代表这个接口的调用方法</span></span><br><span class="line"><span class="comment"># detail 这表示原url是否要加上pk  /user/&#123;pk&#125;/yyy/(?P&lt;xx&gt;\d+)/xxx</span></span><br><span class="line"><span class="comment"># url_path 表示你要拼接上去的url</span></span><br></pre></td></tr></table></figure>
+
+<p>原理图:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">                ViewSet (比如 UserViewSet)</span><br><span class="line">                         │</span><br><span class="line">        ┌────────────────┼────────────────┐</span><br><span class="line">        │                │                │</span><br><span class="line">     list             retrieve         自定义 action</span><br><span class="line">(detail=False)     (detail=True)     (@action)</span><br><span class="line">        │                │                │</span><br><span class="line">        ▼                ▼                ▼</span><br><span class="line"></span><br><span class="line">GET /user/        GET /user/&#123;pk&#125;/     👇两种情况👇</span><br><span class="line">                                     ┌──────────────────────┐</span><br><span class="line">                                     │ detail=False         │</span><br><span class="line">                                     │ 集合级接口           │</span><br><span class="line">                                     │                      │</span><br><span class="line">                                     │ /user/xxx/           │</span><br><span class="line">                                     │ /user/yyy/&#123;xx&#125;/xxx/  │</span><br><span class="line">                                     └──────────────────────┘</span><br><span class="line"></span><br><span class="line">                                     ┌──────────────────────┐</span><br><span class="line">                                     │ detail=True          │</span><br><span class="line">                                     │ 单对象接口           │</span><br><span class="line">                                     │                      │</span><br><span class="line">                                     │ /user/&#123;pk&#125;/xxx/      │</span><br><span class="line">                                     │ /user/&#123;pk&#125;/reset/    │</span><br><span class="line">                                     └──────────────────────┘</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="筛选器"><a href="#筛选器" class="headerlink" title="筛选器"></a>筛选器</h2><h3 id="自定义Filter-新手使用"><a href="#自定义Filter-新手使用" class="headerlink" title="自定义Filter(新手使用)"></a>自定义Filter(新手使用)</h3><p>如果某个API需要传递一些条件进行搜索，其实就在是URL后面通过GET传参即可，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/api/users?age=19&amp;category=12</span><br></pre></td></tr></table></figure>
+
+<p>配置筛选类:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.filters <span class="keyword">import</span> BaseFilterBackend</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Filter1</span>(<span class="title class_ inherited__">BaseFilterBackend</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">filter_queryset</span>(<span class="params">self, request, queryset, view</span>):</span><br><span class="line">        age = request.query_params.get(<span class="string">&#x27;age&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> age:</span><br><span class="line">            <span class="keyword">return</span> queryset</span><br><span class="line">        <span class="keyword">return</span> queryset.<span class="built_in">filter</span>(age=age)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Filter2</span>(<span class="title class_ inherited__">BaseFilterBackend</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">filter_queryset</span>(<span class="params">self, request, queryset, view</span>):</span><br><span class="line">        user_id = request.query_params.get(<span class="string">&#x27;id&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> user_id:</span><br><span class="line">            <span class="keyword">return</span> queryset</span><br><span class="line">        <span class="keyword">return</span> queryset.<span class="built_in">filter</span>(id__gt=user_id)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserView</span>(<span class="title class_ inherited__">ModelViewSet</span>):</span><br><span class="line">    filter_backends = [Filter1, Filter2]    <span class="comment"># 筛选</span></span><br><span class="line"></span><br><span class="line">    queryset = models.UserInfo.objects.<span class="built_in">all</span>()</span><br><span class="line">    serializer_class = UserModelSerializer</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">perform_create</span>(<span class="params">self, serializer</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot; 序列化：对请求的数据校验成功后，执行保存。&quot;&quot;&quot;</span></span><br><span class="line">        serializer.save(depart_id=<span class="number">1</span>, password=<span class="string">&quot;123&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+	
+    <div class="copyright-box">
+		<div class="license-box">
+			<div class="license-header">
+				
+				<div class="license-title">
+					drf-page,view,router,filter
+				</div>
+				<div class="license-subTitle">http://example.com/2026/04/06/drf/11.drf-page-view-router-filter/index.html</div>
+			</div>
+			<div class="license-meta">
+				
+					<div class="license-meta-item">
+						<div>作者</div>
+						<div>
+							<a href="">
+								yibinL
+							</a>
+						</div>
+					</div>
+				
+				
+					<div class="license-meta-item license-meta-date">
+					<div>发布于</div>
+					<div>2026年4月6日</div>
+					</div>
+				
+				
+				
+				
+					<div class="license-meta-item">
+					<div>许可协议</div>
+					<div>
+						
+						
+						
+							<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+								<span class="hint--top hint--rounded" aria-label="BY - 署名">
+									BY - 署名
+								</span>
+							</a>
+						
+						
+					</div>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+    
+
+    
+
+    
+        
+        <script async reload>
+            fetch("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/tokyo-night-dark.css")
+                .then((response) => response.text())
+                .then((cssContent) => {
+                    const style = document.createElement("style");
+                    
+                        cssContent = cssContent
+                            .replace(".hljs-code,", "")
+                            .replaceAll("_", " ")
+                            .replaceAll("hljs-", "hljs .")
+                            .replaceAll(".hljs", " .highlight")
+                            .replaceAll(".built in", ".built_in")
+                            .replaceAll("title.", "");
+                        const figures = document.querySelectorAll("figure.highlight td.gutter");
+                        figures.forEach(figure=>{
+                            figure.classList.add("highlight");
+                        })
+                    
+                    style.innerHTML = cssContent;
+                    document.head.appendChild(style);
+                })
+                .catch((error) => {
+                    console.error("Error loading CSS:", error);
+                });
+        </script>
+    
+
+
+
+
+
+    <script reload>
+        var targets = document.querySelectorAll("figure.highlight, #article-content > pre:not(.highlight,.hljs)");
+        targets.forEach((block) => {
+            const copyBtn = document.createElement("button");
+            copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+            copyBtn.className = "code-copy";
+
+            
+                copyBtn.style.color = "#fff";
+            
+
+            copyBtn.addEventListener("click", () => {
+                const text = block.querySelector("td.code")?.textContent || block.querySelector("code")?.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    copyBtn.innerHTML = "Copied!";
+                    setTimeout(() => {
+                        copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+                    }, 2000);
+                });
+            });
+            block.appendChild(copyBtn);
+        });
+    </script>
+
+
+
+
+<div class="post-guide">
+	<div class="item left">
+	
+		<a href="/2026/04/02/drf/%E6%A1%88%E4%BE%8B/">
+			<i class="fa fa-angle-left" aria-hidden="true"></i>
+			案例-博客
+		</a>
+	
+	</div>
+	<div class="item right">
+		
+	</div>
+</div>
+
+
+
+
+	</div>
+
+	<div id="footer">
+	<div>
+		
+			
+				©2024<span>-</span><span>2026
+			
+			
+			</span>
+			<a href="">
+				yibinL
+			</a>
+		
+		
+			<span id="busuanzi_container_site_pv">
+				总访问量
+				<span id="vercount_value_page_pv"></span>
+			</span>
+			<span id="busuanzi_container_site_uv">
+				总访客数
+				<span id="vercount_value_site_pv"></span>
+			</span>
+		
+	</div>
+	 <div> Theme <a href="https://github.com/Exisi/hexo-theme-node-tree"	target="_blank">Node-Tree</a> Powered by <a href="https://hexo.io" target="_blank">Hexo</a> </div> 
+</div>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+
+<script async>
+    const topTopBtn = document.querySelector("#totop-toggle");
+	topTopBtn.addEventListener("click", () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	});
+</script>
+</body>
+</html>

@@ -257,9 +257,9 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2026/03/30/drf/7.def-%E7%89%88%E6%9C%AC/" title="/2026/03/30/drf/7.def-版本">
+									<a href="/2026/03/30/drf/7.drf-%E7%89%88%E6%9C%AC/" title="/2026/03/30/drf/7.drf-版本">
 									
-										7.def-版本
+										7.drf-版本
 									
 									</a>
 								</li>
@@ -288,6 +288,39 @@
 								<div class="article-toc" style="display: none;"></div>
 							</ul>
 			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/01/drf/10.%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" title="/2026/04/01/drf/10.数据校验">
+									
+										10.数据校验
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/02/drf/%E6%A1%88%E4%BE%8B/" title="/2026/04/02/drf/案例">
+									
+										案例
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/06/drf/11.drf-page-view-router-filter/" title="/2026/04/06/drf/11.drf-page-view-router-filter">
+									
+										11.drf-page-view-router-filter
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
 								</li>
 							</ul>
 			
@@ -297,6 +330,104 @@
 
 	<div id="content">
 		<div id="index">
+	
+	<div class="index-li">
+		<a href="/2026/03/29/drf/3.drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/">
+			<h2 class="index-title">
+				drf-认证组件
+			</h2>
+			<div class="index-brief">
+				1.用户授权100个API，1个无需登录就能访问；99需要登录才能访问。
+编写类作为认证组件
+from rest_framework.authentication import BaseAuthenticationfrom rest_framework.exceptions import AuthenticationFailedclass MyAuthentication(BaseAuthenti ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/29/drf/2.drf-request/">
+			<h2 class="index-title">
+				drf-request
+			</h2>
+			<div class="index-brief">
+				1.request封装在URL中调用的view方法最后是调用了self.dispatch
+在源码的dispatch方法中
+def dispatch(self, request, *args, **kwargs):    &quot;&quot;&quot;    `.dispatch()` is pretty much the same as Django&#x27;s regular dispa ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/29/drf/drf%E7%BA%AF%E5%87%80%E7%89%88/">
+			<h2 class="index-title">
+				drf纯净版
+			</h2>
+			<div class="index-brief">
+				1.匿名用户默认情况下：drf页面访问需要用户信息
+class UserView(APIView):    def get(self,request,*args,**kwargs):        print(request.user)   # 当前登录的用户 - 此时没用户 -&gt; 匿名用户        return Response(&#123;&#x27;status&#x27;: & ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
 	
 	<div class="index-li">
 		<a href="/2026/03/27/drf/1.drf-%E8%A7%86%E5%9B%BE/">

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<!-- title -->
+	
+<title>
+    
+        案例-博客&nbsp;&nbsp;✦&nbsp;
+    
+    It&#39;s my blogs
+</title>
+
+	<!-- keywords,description -->
+	
+
+<meta name="author" content="yibinL" />
+
+<meta name="keywords" content="drf" />
+
+<meta name="description" content="注意事项1.post要注意认证，权限，数据校验，数据存不存在,序列化返回如果url上有参数代表数据，就要校验一下是否存在
+
+2.get认证，权限，数据获取，序列化返回
+
+3.不同方法认证在同一个类中get可以不通过认证，post要认证让认证不抛异常，在post中判断
+
+
+
+功能
+博客列表
+路由 + 视图（时间倒序排序） + 序列化
+
+输出所有博客文章（除了博文）
+class BlogSeriali" />
+
+	<!-- favicon -->
+	
+		<link rel="shortcut icon" href="/favicon.ico">
+	
+
+	<!-- css, script -->
+	
+<link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	<!-- custom css and js -->
+	
+
+
+
+
+
+	<!-- search -->
+	<script async>
+	window.searchEngine = "https://www.google.com/search?q=" ?? "https://www.google.com/search?q=";
+	window.homeHost = "http://example.com" ?? window.location.host;
+</script>
+
+	<!-- statistics -->
+	
+	<script async reload src="https://cn.vercount.one/js"></script>
+
+
+	<!-- analysis -->
+	
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+	<header id="header">
+	<a id="title" href="/" class="logo">
+		<img id="logo" src="/favicon-white.ico" alt="logo"/>
+		It's my blogs
+	</a>
+
+	<ul id="menu">
+		
+			<li class="menu-item">
+				<a href="/about" class="menu-item-link">关于</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="/tags" class="menu-item-link">标签</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="/categories" class="menu-item-link">分类</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="" class="menu-item-link item-icon" target="_blank">
+					<i class="fa fa-github fa-2x"></i>
+				</a>
+			</li>
+		
+		
+			<li class="menu-item dark-mode">
+				<a href="#" class="menu-item-link item-icon">
+					<i class="fa fa-moon-o fa-2x"></i>
+				</a>
+			</li>
+
+			<script async>
+				const localModel = localStorage.getItem("darkModel");
+				const darkModel = !localModel ? 0 : localModel;
+
+				const darkModeIcon = document.querySelector("#menu .dark-mode i");
+
+				if (darkModel == 1) {
+					darkModeIcon.classList.replace("fa-moon-o", "fa-sun-o");
+					DarkReader.enable({
+						brightness: 100,
+						contrast: 90,
+						sepia: 10,
+					});
+				}
+
+				darkModeIcon.addEventListener("click", () => {
+					const isMoon = darkModeIcon.classList.contains("fa-moon-o");
+					darkModeIcon.classList.toggle("fa-moon-o", !isMoon);
+					darkModeIcon.classList.toggle("fa-sun-o", isMoon);
+					localStorage.setItem("darkModel", isMoon ? 1 : 0);
+					isMoon ? DarkReader.enable({ brightness: 100, contrast: 90, sepia: 10 }) : DarkReader.disable();
+				});
+			</script>
+		
+	</ul>
+</header>
+
+<script async>
+	let startHeight = 0;
+	window.addEventListener("scroll", () => {
+		const { scrollY: endHeight } = window;
+		const distance = endHeight - startHeight;
+		startHeight = endHeight;
+		document.querySelector("#header").style.display = distance > 0 && endHeight > 50 ? "none" : "";
+	});
+</script>
+	<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="按回车全站搜索">
+		<div id="tree">
+			
+			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/03/29/other/other/" title="/2026/03/29/other/other">
+											<i class="fa fa-plus-square-o"></i>
+											other
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/other/hello-world/" title="/2026/03/27/other/hello-world">
+									
+										hello-world
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/other/my-blog/" title="/2026/03/27/other/my-blog">
+									
+										my-blog
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/03/29/drf/drf/" title="/2026/03/29/drf/drf">
+											<i class="fa fa-plus-square-o"></i>
+											drf
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/drf/1.drf-%E8%A7%86%E5%9B%BE/" title="/2026/03/27/drf/1.drf-视图">
+									
+										1.drf-视图
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf%E7%BA%AF%E5%87%80%E7%89%88/" title="/2026/03/29/drf/drf纯净版">
+									
+										drf纯净版
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/2.drf-request/" title="/2026/03/29/drf/2.drf-request">
+									
+										2.drf-request
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/3.drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/" title="/2026/03/29/drf/3.drf-认证组件">
+									
+										3.drf-认证组件
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/4.drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/" title="/2026/03/29/drf/4.drf-权限组件">
+									
+										4.drf-权限组件
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/6.drf-%E9%99%90%E6%B5%81/" title="/2026/03/29/drf/6.drf-限流">
+									
+										6.drf-限流
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/30/drf/7.drf-%E7%89%88%E6%9C%AC/" title="/2026/03/30/drf/7.drf-版本">
+									
+										7.drf-版本
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/31/drf/8.%E8%A7%A3%E6%9E%90%E5%99%A8/" title="/2026/03/31/drf/8.解析器">
+									
+										8.解析器
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/31/drf/9.%E5%BA%8F%E5%88%97%E5%8C%96/" title="/2026/03/31/drf/9.序列化">
+									
+										9.序列化
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/01/drf/10.%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" title="/2026/04/01/drf/10.数据校验">
+									
+										10.数据校验
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2026/04/02/drf/%E6%A1%88%E4%BE%8B/" title="/2026/04/02/drf/案例">
+									
+										案例
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/06/drf/11.drf-page-view-router-filter/" title="/2026/04/06/drf/11.drf-page-view-router-filter">
+									
+										11.drf-page-view-router-filter
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<div id="content">
+		<h1 id="article-title">
+	案例-博客
+</h1>
+
+<div class="article-meta">
+	<span> yibinL </span>
+	<span> 2026-04-02 15:21:48 </span>
+	<div id="article-categories">
+		
+			<span>Categories：</span>
+			
+				
+				<span>
+					<i class="fa fa-folder" aria-hidden="true">
+						<a href="/categories/drf/">
+							drf
+						</a>
+					</i>
+				
+				</span>
+				
+			
+		
+		
+			<span>Tags：</span>
+			
+				
+					<span>
+						<i class="fa fa-tag" aria-hidden="true">
+							<a href="/tags/drf/">
+								drf
+							</a>
+						</i>
+					</span>
+				
+			
+		
+	</div>
+</div>
+
+<div id="article-content">
+	<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><h4 id="1-post"><a href="#1-post" class="headerlink" title="1.post"></a>1.post</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">要注意认证，权限，数据校验，数据存不存在,序列化返回</span><br><span class="line">如果url上有参数代表数据，就要校验一下是否存在</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-get"><a href="#2-get" class="headerlink" title="2.get"></a>2.get</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">认证，权限，数据获取，序列化返回</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-不同方法认证"><a href="#3-不同方法认证" class="headerlink" title="3.不同方法认证"></a>3.不同方法认证</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在同一个类中</span><br><span class="line">get可以不通过认证，post要认证</span><br><span class="line">让认证不抛异常，在post中判断</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ul>
+<li><p>博客列表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">路由 + 视图（时间倒序排序） + 序列化</span><br></pre></td></tr></table></figure>
+
+<p>输出所有博客文章（除了博文）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BlogSerializer</span>(serializers.ModelSerializer):</span><br><span class="line">    category = serializers.CharField(source=<span class="string">&#x27;get_category_display&#x27;</span>)</span><br><span class="line">    creator = CreatorSerializer()</span><br><span class="line">    ctime = serializers.DateTimeField(<span class="built_in">format</span>=<span class="string">&#x27;%Y-%m-%d&#x27;</span>)</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.Blog</span><br><span class="line">        fields = [<span class="string">&#x27;category&#x27;</span>,<span class="string">&#x27;image&#x27;</span>,<span class="string">&quot;title&quot;</span>,<span class="string">&#x27;summary&#x27;</span>,<span class="string">&#x27;ctime&#x27;</span>,<span class="string">&#x27;comment_count&#x27;</span>,<span class="string">&#x27;favor_count&#x27;</span>,<span class="string">&#x27;creator&#x27;</span>]</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BlogViews</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;获取博客列表&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request,version</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 读取数据</span></span><br><span class="line">        queryset=models.Blog.objects.<span class="built_in">all</span>()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 序列化</span></span><br><span class="line">        ser = BlogSerializer(instance = queryset ,many=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># 返回</span></span><br><span class="line">        context = &#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">1000</span>,<span class="string">&#x27;data&#x27;</span>:ser.data&#125;</span><br><span class="line">        <span class="keyword">return</span> Response(context)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>博客详细</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">路由（PK） + 新视图或原视图 + 序列化</span><br></pre></td></tr></table></figure>
+
+<p>输出博文与博客信息，评论不太可以放在这里，不方便进行分页，仅查看评论等操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BlogTextSerializer</span>(serializers.ModelSerializer):</span><br><span class="line">    category = serializers.CharField(source=<span class="string">&#x27;get_category_display&#x27;</span>)</span><br><span class="line">    creator = CreatorSerializer()</span><br><span class="line">    ctime = serializers.DateTimeField(<span class="built_in">format</span>=<span class="string">&#x27;%Y-%m-%d&#x27;</span>)</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.Blog</span><br><span class="line">        fields = <span class="string">&quot;__all__&quot;</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BlogTextViews</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;获取博客文章&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request,version,pk</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 读取数据</span></span><br><span class="line">        queryset=models.Blog.objects.<span class="built_in">filter</span>(<span class="built_in">id</span>=pk).first()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 序列化</span></span><br><span class="line">        ser = BlogTextSerializer(instance = queryset)</span><br><span class="line">        <span class="comment"># 返回</span></span><br><span class="line">        context = &#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">1000</span>,<span class="string">&#x27;data&#x27;</span>:ser.data&#125;</span><br><span class="line">        <span class="keyword">return</span> Response(context)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>评论列表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在URL上通过GET方式传入博客ID，根据博客ID获取相关评论。</span><br><span class="line"></span><br><span class="line">提示：请求可以单独，也可以在博客详细的请求中返回。</span><br></pre></td></tr></table></figure>
+
+<p>博文下方的评论</p>
+<p>方便校验</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CommentNameSerializer</span>(serializers.IntegerField):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, method_name=<span class="literal">None</span>, **kwargs</span>):</span><br><span class="line">        <span class="variable language_">self</span>.method_name = method_name</span><br><span class="line">        kwargs[<span class="string">&#x27;read_only&#x27;</span>] = <span class="literal">False</span></span><br><span class="line">        <span class="built_in">super</span>().__init__(**kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">bind</span>(<span class="params">self, field_name, parent</span>):</span><br><span class="line">        <span class="comment"># The method name defaults to `get_&#123;field_name&#125;`.</span></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.method_name <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="variable language_">self</span>.method_name = <span class="string">f&#x27;get_<span class="subst">&#123;field_name&#125;</span>&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">super</span>().bind(field_name, parent)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_attribute</span>(<span class="params">self, instance</span>):</span><br><span class="line">        method = <span class="built_in">getattr</span>(<span class="variable language_">self</span>.parent, <span class="variable language_">self</span>.method_name)</span><br><span class="line">        <span class="keyword">return</span> method(instance)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">to_representation</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>(value)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CommentSerializers</span>(serializers.ModelSerializer):</span><br><span class="line">    user = CommentNameSerializer()</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.Comment</span><br><span class="line">        fields = [<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;content&#x27;</span>,<span class="string">&#x27;user&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_user</span>(<span class="params">self,obj</span>):</span><br><span class="line">        <span class="keyword">return</span> obj.user.username</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注册</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入用户信息+重复密码进行注册</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RegisterSerializer</span>(serializers.ModelSerializer):</span><br><span class="line"></span><br><span class="line">    confirm_password= serializers.CharField(required=<span class="literal">True</span>,write_only=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.UserInfo</span><br><span class="line">        fields = [<span class="string">&#x27;username&#x27;</span>,<span class="string">&#x27;password&#x27;</span>,<span class="string">&#x27;confirm_password&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">validata_confirm_password</span>(<span class="params">self,confirm_password</span>):</span><br><span class="line">        <span class="built_in">print</span>(confirm_password)</span><br><span class="line">        <span class="built_in">print</span>(<span class="variable language_">self</span>.initial_data[<span class="string">&#x27;password&#x27;</span>])    <span class="comment"># 看源码可以知道，实例化时把request.data传给了它</span></span><br><span class="line">        <span class="keyword">if</span> confirm_password != <span class="variable language_">self</span>.initial_data.get(<span class="string">&#x27;password&#x27;</span>):</span><br><span class="line">            <span class="keyword">raise</span> exceptions.ValidationError(<span class="string">&#x27;密码不一致&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> confirm_password</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RegisterViews</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;注册&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">post</span>(<span class="params">self, request, version</span>):</span><br><span class="line">        <span class="comment"># 拿到数据</span></span><br><span class="line">        <span class="comment"># request.data</span></span><br><span class="line">        ser = RegisterSerializer(data=request.data)</span><br><span class="line">        <span class="keyword">if</span> ser.is_valid():</span><br><span class="line">            ser.validated_data.pop(<span class="string">&#x27;confirm_password&#x27;</span>)</span><br><span class="line">            ser.save()</span><br><span class="line">            <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">4000</span>,<span class="string">&#x27;data&#x27;</span>:ser.data&#125;)</span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">4000</span>,<span class="string">&#x27;msg&#x27;</span>:ser.errors&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>登录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">登录成功，生成TOKEN+失效日期，返回。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LoginSerializer</span>(serializers.ModelSerializer):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.UserInfo</span><br><span class="line">        fields = [<span class="string">&#x27;username&#x27;</span>,<span class="string">&#x27;password&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LoginViews</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">post</span>(<span class="params">self,request,version</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 校验输入字段</span></span><br><span class="line">        ser= LoginSerializer(data= request.data)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> ser.is_valid():</span><br><span class="line">            <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">404</span>,<span class="string">&#x27;msg&#x27;</span>:ser.errors&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 判断是否存在</span></span><br><span class="line">        <span class="built_in">print</span>(ser.validated_data)</span><br><span class="line">        exist = models.UserInfo.objects.<span class="built_in">filter</span>(**ser.validated_data).first()</span><br><span class="line">        <span class="keyword">if</span> exist <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">404</span>,<span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;用户不存在&#x27;</span>&#125;)</span><br><span class="line">        exist.token = <span class="built_in">str</span>(uuid.uuid4())</span><br><span class="line">        exist.save()</span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">200</span>,<span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;登录成功&#x27;</span>,<span class="string">&#x27;token&#x27;</span>:exist.token&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>创建评论（需登录）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在URL上通过GET方式传入博客ID + 请求体中评论信息 发送到后端API</span><br><span class="line">- 认证组件，request.user</span><br><span class="line">- 构造参数保存</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CommentSerializers</span>(HookSerializer,serializers.ModelSerializer):</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.Comment</span><br><span class="line">        fields = [<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;content&#x27;</span>,<span class="string">&#x27;user&#x27;</span>]</span><br><span class="line">        extra_kwargs = &#123;</span><br><span class="line">            <span class="string">&#x27;user&#x27;</span>: &#123;<span class="string">&#x27;read_only&#x27;</span>: <span class="literal">True</span>&#125;,</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span>: &#123;<span class="string">&#x27;read_only&#x27;</span>: <span class="literal">True</span>&#125;,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_user</span>(<span class="params">self,obj</span>):</span><br><span class="line">        <span class="keyword">return</span> obj.user.username</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CommentViews</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;评论列表&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    authentication_classes = [BlogAuthentication]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">post</span>(<span class="params">self,request,version,blog_id</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;发布评论&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 判断是否登录</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> request.user <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">401</span>,<span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;用户未登录&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 判断博客存不存在</span></span><br><span class="line">        blog = models.Blog.objects.<span class="built_in">filter</span>(<span class="built_in">id</span>=request.data.get(<span class="string">&#x27;blog&#x27;</span>)).first()</span><br><span class="line">        <span class="keyword">if</span> blog <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">401</span>,<span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;博客不存在&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#　校验数据格式</span></span><br><span class="line">        ser = CommentSerializers(data = request.data)</span><br><span class="line">        <span class="keyword">if</span> ser.is_valid():</span><br><span class="line">            ser.save(blog=blog,user=request.user)</span><br><span class="line">            <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">200</span>,<span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;发表成功&#x27;</span>,<span class="string">&#x27;data&#x27;</span>:ser.data&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">400</span>,<span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;格式错误，发布失败&#x27;</span>,<span class="string">&#x27;errors&#x27;</span>:ser.errors&#125;)</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>点赞（需登录）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 赞过不能再赞</span><br><span class="line">- 结合事务实现添加赞 + 赞数量更新。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FavoriteSerializer</span>(serializers.ModelSerializer):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line"></span><br><span class="line">        model = models.Favor</span><br><span class="line">        fields = [<span class="string">&#x27;blog&#x27;</span>,<span class="string">&#x27;user&#x27;</span>,<span class="string">&#x27;id&#x27;</span>]</span><br><span class="line">        extra_kwargs = &#123;</span><br><span class="line">            <span class="string">&#x27;user&#x27;</span>: &#123;<span class="string">&#x27;read_only&#x27;</span>: <span class="literal">True</span>&#125;,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_user</span>(<span class="params">self,obj</span>):</span><br><span class="line">        <span class="keyword">return</span> obj.user.username</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FavorViews</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;点赞&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    authentication_classes = [BlogAuthentication,NoAuthentication]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">post</span>(<span class="params">self,request,version</span>):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 数据校验</span></span><br><span class="line">        ser = FavoriteSerializer(data=request.data)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> ser.is_valid():</span><br><span class="line">            <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>: <span class="number">404</span>, <span class="string">&quot;msg&quot;</span>: <span class="string">&quot;格式错误&quot;</span>, <span class="string">&quot;errors&quot;</span>: ser.errors&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 没点赞过才能赞</span></span><br><span class="line">        exist = models.Favor.objects.<span class="built_in">filter</span>(user=request.user,**ser.validated_data).exists()</span><br><span class="line">        <span class="keyword">if</span> exist:</span><br><span class="line">			models.Blog.objects.<span class="built_in">filter</span>(<span class="built_in">id</span>=blog_id).update(favor_count=F(<span class="string">&#x27;favor_count&#x27;</span>) - <span class="number">1</span>)</span><br><span class="line">            models.Favor.objects.<span class="built_in">filter</span>(user=request.user,**ser.validated_data).delete()</span><br><span class="line">            <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">10000</span>,<span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;取消点赞&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 保存</span></span><br><span class="line"></span><br><span class="line">        ser.save(user=request.user)</span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">200</span>,<span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;点赞成功&#x27;</span>,<span class="string">&#x27;data&#x27;</span>:ser.data&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>新建博文（需登录）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BlogSerializer</span>(HookSerializer,serializers.ModelSerializer):</span><br><span class="line">    creator = CreatorSerializer(read_only=<span class="literal">True</span>)</span><br><span class="line">    ctime = serializers.DateTimeField(<span class="built_in">format</span>=<span class="string">&#x27;%Y-%m-%d&#x27;</span>,read_only=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.Blog</span><br><span class="line">        fields = [<span class="string">&#x27;category&#x27;</span>,<span class="string">&#x27;image&#x27;</span>,<span class="string">&quot;title&quot;</span>,<span class="string">&#x27;summary&#x27;</span>,<span class="string">&#x27;ctime&#x27;</span>,<span class="string">&#x27;comment_count&#x27;</span>,<span class="string">&#x27;favor_count&#x27;</span>,<span class="string">&#x27;creator&#x27;</span>,<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">        extra_kwargs =&#123;</span><br><span class="line">            <span class="string">&#x27;text&#x27;</span>:&#123;<span class="string">&#x27;write_only&#x27;</span>:<span class="literal">True</span>&#125;,</span><br><span class="line">            <span class="string">&#x27;favor_count&#x27;</span>:&#123;<span class="string">&#x27;read_only&#x27;</span>:<span class="literal">True</span>&#125;,</span><br><span class="line">            <span class="string">&#x27;comment_count&#x27;</span>:&#123;<span class="string">&#x27;read_only&#x27;</span>:<span class="literal">True</span>&#125;,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_category_display</span>(<span class="params">self,obj</span>):</span><br><span class="line">        <span class="keyword">return</span> obj.get_category_display()</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BlogViews</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;获取博客列表&quot;&quot;&quot;</span></span><br><span class="line">    authentication_classes = [BlogAuthentication]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">post</span>(<span class="params">self,request,version</span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> request.user:</span><br><span class="line">            <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>: <span class="number">404</span>, <span class="string">&quot;msg&quot;</span>: <span class="string">&quot;未登录&quot;</span>, <span class="string">&quot;errors&quot;</span>: <span class="number">0</span>&#125;)</span><br><span class="line"></span><br><span class="line">        ser = BlogSerializer(data =request.data)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> ser.is_valid():</span><br><span class="line">            <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>: <span class="number">404</span>, <span class="string">&quot;msg&quot;</span>: <span class="string">&quot;格式错误&quot;</span>, <span class="string">&quot;errors&quot;</span>: ser.errors&#125;)</span><br><span class="line"></span><br><span class="line">        ser.save(creator=request.user,)</span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">200</span>,<span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;发送成功&#x27;</span>,<span class="string">&#x27;data&#x27;</span>:ser.data&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+	
+    <div class="copyright-box">
+		<div class="license-box">
+			<div class="license-header">
+				
+				<div class="license-title">
+					案例-博客
+				</div>
+				<div class="license-subTitle">http://example.com/2026/04/02/drf/案例/index.html</div>
+			</div>
+			<div class="license-meta">
+				
+					<div class="license-meta-item">
+						<div>作者</div>
+						<div>
+							<a href="">
+								yibinL
+							</a>
+						</div>
+					</div>
+				
+				
+					<div class="license-meta-item license-meta-date">
+					<div>发布于</div>
+					<div>2026年4月2日</div>
+					</div>
+				
+				
+				
+				
+					<div class="license-meta-item">
+					<div>许可协议</div>
+					<div>
+						
+						
+						
+							<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+								<span class="hint--top hint--rounded" aria-label="BY - 署名">
+									BY - 署名
+								</span>
+							</a>
+						
+						
+					</div>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+    
+
+    
+
+    
+        
+        <script async reload>
+            fetch("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/tokyo-night-dark.css")
+                .then((response) => response.text())
+                .then((cssContent) => {
+                    const style = document.createElement("style");
+                    
+                        cssContent = cssContent
+                            .replace(".hljs-code,", "")
+                            .replaceAll("_", " ")
+                            .replaceAll("hljs-", "hljs .")
+                            .replaceAll(".hljs", " .highlight")
+                            .replaceAll(".built in", ".built_in")
+                            .replaceAll("title.", "");
+                        const figures = document.querySelectorAll("figure.highlight td.gutter");
+                        figures.forEach(figure=>{
+                            figure.classList.add("highlight");
+                        })
+                    
+                    style.innerHTML = cssContent;
+                    document.head.appendChild(style);
+                })
+                .catch((error) => {
+                    console.error("Error loading CSS:", error);
+                });
+        </script>
+    
+
+
+
+
+
+    <script reload>
+        var targets = document.querySelectorAll("figure.highlight, #article-content > pre:not(.highlight,.hljs)");
+        targets.forEach((block) => {
+            const copyBtn = document.createElement("button");
+            copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+            copyBtn.className = "code-copy";
+
+            
+                copyBtn.style.color = "#fff";
+            
+
+            copyBtn.addEventListener("click", () => {
+                const text = block.querySelector("td.code")?.textContent || block.querySelector("code")?.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    copyBtn.innerHTML = "Copied!";
+                    setTimeout(() => {
+                        copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+                    }, 2000);
+                });
+            });
+            block.appendChild(copyBtn);
+        });
+    </script>
+
+
+
+
+<div class="post-guide">
+	<div class="item left">
+	
+		<a href="/2026/04/01/drf/10.%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/">
+			<i class="fa fa-angle-left" aria-hidden="true"></i>
+			10.数据校验
+		</a>
+	
+	</div>
+	<div class="item right">
+		
+		<a href="/2026/04/06/drf/11.drf-page-view-router-filter/">
+			11.drf-page-view-router-filter
+			<i class="fa fa-angle-right" aria-hidden="true"></i>
+		</a>
+		
+	</div>
+</div>
+
+
+
+
+	</div>
+
+	<div id="footer">
+	<div>
+		
+			
+				©2024<span>-</span><span>2026
+			
+			
+			</span>
+			<a href="">
+				yibinL
+			</a>
+		
+		
+			<span id="busuanzi_container_site_pv">
+				总访问量
+				<span id="vercount_value_page_pv"></span>
+			</span>
+			<span id="busuanzi_container_site_uv">
+				总访客数
+				<span id="vercount_value_site_pv"></span>
+			</span>
+		
+	</div>
+	 <div> Theme <a href="https://github.com/Exisi/hexo-theme-node-tree"	target="_blank">Node-Tree</a> Powered by <a href="https://hexo.io" target="_blank">Hexo</a> </div> 
+</div>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+
+<script async>
+    const topTopBtn = document.querySelector("#totop-toggle");
+	topTopBtn.addEventListener("click", () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<!-- title -->
+	
+<title>
+    
+        10.数据校验&nbsp;&nbsp;✦&nbsp;
+    
+    It&#39;s my blogs
+</title>
+
+	<!-- keywords,description -->
+	
+
+<meta name="author" content="yibinL" />
+
+<meta name="keywords" content="drf,源码流程" />
+
+<meta name="description" content="1.序列化器
+序列化
+序列化器的类
+路由 -&amp;gt; 视图  -&amp;gt; 去数据库获取对象或QuerySet  -&amp;gt; 序列化器的类转换成列表、字典、有序字典  -&amp;gt; JSON处理
+
+
+数据校验
+序列化器的类
+路由 -&amp;gt; 视图  -&amp;gt; 解析后 -&amp;gt; request.data  -&amp;gt; 校验（序列化器的类） -&amp;gt; 操作（db，序列化器的类）
+
+2.数据校验校验方" />
+
+	<!-- favicon -->
+	
+		<link rel="shortcut icon" href="/favicon.ico">
+	
+
+	<!-- css, script -->
+	
+<link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	<!-- custom css and js -->
+	
+
+
+
+
+
+	<!-- search -->
+	<script async>
+	window.searchEngine = "https://www.google.com/search?q=" ?? "https://www.google.com/search?q=";
+	window.homeHost = "http://example.com" ?? window.location.host;
+</script>
+
+	<!-- statistics -->
+	
+	<script async reload src="https://cn.vercount.one/js"></script>
+
+
+	<!-- analysis -->
+	
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+	<header id="header">
+	<a id="title" href="/" class="logo">
+		<img id="logo" src="/favicon-white.ico" alt="logo"/>
+		It's my blogs
+	</a>
+
+	<ul id="menu">
+		
+			<li class="menu-item">
+				<a href="/about" class="menu-item-link">关于</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="/tags" class="menu-item-link">标签</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="/categories" class="menu-item-link">分类</a>
+			</li>
+		
+		
+			<li class="menu-item">
+				<a href="" class="menu-item-link item-icon" target="_blank">
+					<i class="fa fa-github fa-2x"></i>
+				</a>
+			</li>
+		
+		
+			<li class="menu-item dark-mode">
+				<a href="#" class="menu-item-link item-icon">
+					<i class="fa fa-moon-o fa-2x"></i>
+				</a>
+			</li>
+
+			<script async>
+				const localModel = localStorage.getItem("darkModel");
+				const darkModel = !localModel ? 0 : localModel;
+
+				const darkModeIcon = document.querySelector("#menu .dark-mode i");
+
+				if (darkModel == 1) {
+					darkModeIcon.classList.replace("fa-moon-o", "fa-sun-o");
+					DarkReader.enable({
+						brightness: 100,
+						contrast: 90,
+						sepia: 10,
+					});
+				}
+
+				darkModeIcon.addEventListener("click", () => {
+					const isMoon = darkModeIcon.classList.contains("fa-moon-o");
+					darkModeIcon.classList.toggle("fa-moon-o", !isMoon);
+					darkModeIcon.classList.toggle("fa-sun-o", isMoon);
+					localStorage.setItem("darkModel", isMoon ? 1 : 0);
+					isMoon ? DarkReader.enable({ brightness: 100, contrast: 90, sepia: 10 }) : DarkReader.disable();
+				});
+			</script>
+		
+	</ul>
+</header>
+
+<script async>
+	let startHeight = 0;
+	window.addEventListener("scroll", () => {
+		const { scrollY: endHeight } = window;
+		const distance = endHeight - startHeight;
+		startHeight = endHeight;
+		document.querySelector("#header").style.display = distance > 0 && endHeight > 50 ? "none" : "";
+	});
+</script>
+	<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="按回车全站搜索">
+		<div id="tree">
+			
+			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/03/29/other/other/" title="/2026/03/29/other/other">
+											<i class="fa fa-plus-square-o"></i>
+											other
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/other/hello-world/" title="/2026/03/27/other/hello-world">
+									
+										hello-world
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/other/my-blog/" title="/2026/03/27/other/my-blog">
+									
+										my-blog
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/03/29/drf/drf/" title="/2026/03/29/drf/drf">
+											<i class="fa fa-plus-square-o"></i>
+											drf
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/03/27/drf/1.drf-%E8%A7%86%E5%9B%BE/" title="/2026/03/27/drf/1.drf-视图">
+									
+										1.drf-视图
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/drf%E7%BA%AF%E5%87%80%E7%89%88/" title="/2026/03/29/drf/drf纯净版">
+									
+										drf纯净版
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/2.drf-request/" title="/2026/03/29/drf/2.drf-request">
+									
+										2.drf-request
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/3.drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/" title="/2026/03/29/drf/3.drf-认证组件">
+									
+										3.drf-认证组件
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/4.drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/" title="/2026/03/29/drf/4.drf-权限组件">
+									
+										4.drf-权限组件
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/29/drf/6.drf-%E9%99%90%E6%B5%81/" title="/2026/03/29/drf/6.drf-限流">
+									
+										6.drf-限流
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/30/drf/7.drf-%E7%89%88%E6%9C%AC/" title="/2026/03/30/drf/7.drf-版本">
+									
+										7.drf-版本
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/31/drf/8.%E8%A7%A3%E6%9E%90%E5%99%A8/" title="/2026/03/31/drf/8.解析器">
+									
+										8.解析器
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/03/31/drf/9.%E5%BA%8F%E5%88%97%E5%8C%96/" title="/2026/03/31/drf/9.序列化">
+									
+										9.序列化
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2026/04/01/drf/10.%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" title="/2026/04/01/drf/10.数据校验">
+									
+										10.数据校验
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/02/drf/%E6%A1%88%E4%BE%8B/" title="/2026/04/02/drf/案例">
+									
+										案例
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/06/drf/11.drf-page-view-router-filter/" title="/2026/04/06/drf/11.drf-page-view-router-filter">
+									
+										11.drf-page-view-router-filter
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<div id="content">
+		<h1 id="article-title">
+	10.数据校验
+</h1>
+
+<div class="article-meta">
+	<span> yibinL </span>
+	<span> 2026-04-01 10:30:11 </span>
+	<div id="article-categories">
+		
+			<span>Categories：</span>
+			
+				
+				<span>
+					<i class="fa fa-folder" aria-hidden="true">
+						<a href="/categories/drf/">
+							drf
+						</a>
+					</i>
+				 > 
+				</span>
+				
+			
+				
+				<span>
+					<i class="fa fa-folder" aria-hidden="true">
+						<a href="/categories/drf/源码流程/">
+							源码流程
+						</a>
+					</i>
+				
+				</span>
+				
+			
+		
+		
+			<span>Tags：</span>
+			
+				
+					<span>
+						<i class="fa fa-tag" aria-hidden="true">
+							<a href="/tags/drf/">
+								drf
+							</a>
+						</i>
+					</span>
+				
+			
+		
+	</div>
+</div>
+
+<div id="article-content">
+	<h2 id="1-序列化器"><a href="#1-序列化器" class="headerlink" title="1.序列化器"></a>1.序列化器</h2><ul>
+<li>序列化<ul>
+<li>序列化器的类</li>
+<li>路由 -&gt; 视图  -&gt; 去数据库获取对象或QuerySet  -&gt; 序列化器的类转换成列表、字典、有序字典  -&gt; JSON处理</li>
+</ul>
+</li>
+<li>数据校验</li>
+<li>序列化器的类</li>
+<li>路由 -&gt; 视图  -&gt; 解析后 -&gt; request.data  -&gt; 校验（序列化器的类） -&gt; 操作（db，序列化器的类）</li>
+</ul>
+<h2 id="2-数据校验"><a href="#2-数据校验" class="headerlink" title="2.数据校验"></a>2.数据校验</h2><h3 id="校验方法"><a href="#校验方法" class="headerlink" title="校验方法:"></a>校验方法:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DepartSerializers</span>(serializers.Serializer):</span><br><span class="line">    <span class="comment"># 内置校验</span></span><br><span class="line">    username = serializers.CharField(required=<span class="literal">True</span>,max_length=<span class="number">32</span>,min_length=<span class="number">3</span>)     <span class="comment"># 不能为空,字符串长度</span></span><br><span class="line">    order = serializers.IntegerField(required=<span class="literal">False</span>, max_value=<span class="number">100</span>, min_value=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    level = serializers.ChoiceField(choices=[(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;高级&quot;</span>), (<span class="number">2</span>, <span class="string">&quot;中级&quot;</span>)])   </span><br><span class="line">    <span class="comment"># 数字写整型或字符串都可以，都会转换为字符串比较</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 正则校验：多种类型</span></span><br><span class="line">    <span class="keyword">from</span> django.core.validators <span class="keyword">import</span> EmailValidator,RegexValidator</span><br><span class="line">    <span class="comment"># email = serializers.EmailField()   </span></span><br><span class="line">    <span class="comment">#email = serializers.CharField(validators=[EmailValidator(message=&quot;邮箱格式错误&quot;)])</span></span><br><span class="line">    email = serializers.CharField(validators=[RegexValidator(<span class="string">r&quot;\d+&quot;</span>,message=<span class="string">&quot;邮箱格式错误&quot;</span>)])     <span class="comment">#可以使用多个正则</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 钩子校验</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">validate_email</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="built_in">print</span>(value)        <span class="comment"># 这里的value是将校验值拿了进来</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(value) &gt; <span class="number">6</span>:</span><br><span class="line">            <span class="keyword">raise</span> exceptions.ValidationError(<span class="string">&quot;字段钩子校验失败&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> value        <span class="comment"># 必须将值返回，否则validated_data得不到数据</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">validate</span>(<span class="params">self, attrs</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;validate=&quot;</span>, attrs)    <span class="comment"># 是将所有校验值拿了</span></span><br><span class="line">        <span class="comment"># api_settings.NON_FIELD_ERRORS_KEY      #  进行除了字段以外单独的校验</span></span><br><span class="line">        <span class="comment"># raise exceptions.ValidationError(&quot;全局钩子校验失败&quot;)    # 默认：non_field_errors</span></span><br><span class="line">        <span class="keyword">return</span> attrs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DepartSerializers1</span>(serializers.ModelSerializer):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model=models.Depart</span><br><span class="line">        fields = [<span class="string">&#x27;title&#x27;</span>,<span class="string">&#x27;count&#x27;</span>,<span class="string">&#x27;order&#x27;</span>]</span><br><span class="line">        extra_kwargs = &#123;</span><br><span class="line">            <span class="string">&#x27;title&#x27;</span>: &#123;<span class="string">&#x27;required&#x27;</span>: <span class="literal">False</span>,<span class="string">&#x27;min_length&#x27;</span>:<span class="number">3</span>,<span class="string">&#x27;max_length&#x27;</span>:<span class="number">32</span>&#125;,</span><br><span class="line">            <span class="string">&#x27;count&#x27;</span>: &#123;<span class="string">&#x27;validators&#x27;</span>:[RegexValidator(<span class="string">r&#x27;\d+&#x27;</span>,message=<span class="string">&#x27;邮箱格式错误&#x27;</span>)]&#125;,</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 钩子与上面一致</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="校验外键与MTM类型"><a href="#校验外键与MTM类型" class="headerlink" title="校验外键与MTM类型"></a>校验外键与MTM类型</h3><p>会自动帮我们获取对象（内部机制）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UsSerializer</span>(serializers.ModelSerializer):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model=models.UserInfo</span><br><span class="line">        fields = [<span class="string">&#x27;username&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;depart&#x27;</span>,<span class="string">&#x27;tags&#x27;</span>]    </span><br><span class="line">        <span class="comment"># 默认仅会校验model里面的规则</span></span><br><span class="line">        <span class="comment"># depart 作为外键默认校验id     tags 是MTM 校验一个包含id的列表</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 处理外键</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">validate_depart</span>(<span class="params">self,value</span>):</span><br><span class="line">        <span class="built_in">print</span>(value)                 <span class="comment"># 这里value是得到传入id对应的depart对象</span></span><br><span class="line">        <span class="keyword">if</span> value.<span class="built_in">id</span>&gt;<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> value</span><br><span class="line">        <span class="keyword">raise</span> serializers.ValidationError(<span class="string">&#x27;部门错误&#x27;</span>)</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># 处理MTM</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">validate_tags</span>(<span class="params">self,value</span>):</span><br><span class="line">        <span class="built_in">print</span>(value)    <span class="comment"># 是一个包含多个对象的列表</span></span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yibin11/blog-image@main/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-04-01%20152716.png" alt="屏幕截图 2026-04-01 152716"></p>
+<p>但是数据库中外键以<code>depart_id</code>存储，所以我们也可以直接传进它</p>
+<p>数据库有对应列，就可以传入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UsSerializer</span>(serializers.ModelSerializer):</span><br><span class="line">	depart_id = serializers.IntegerField()   <span class="comment"># 自定义一个</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model=models.UserInfo</span><br><span class="line">        fields = [<span class="string">&#x27;username&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;depart_id&#x27;</span>,<span class="string">&#x27;tags&#x27;</span>]    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>对于MTM,我们也可以自行处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UsSerializer</span>(serializers.ModelSerializer):</span><br><span class="line"></span><br><span class="line">    tags=serializers.ListField()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model=models.UserInfo</span><br><span class="line">        fields = [<span class="string">&#x27;username&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;depart&#x27;</span>,<span class="string">&#x27;tags&#x27;</span>]    <span class="comment"># 默认仅会校验model里面的规则</span></span><br><span class="line">        <span class="comment"># depart 作为外键默认校验id     tags 是MTM 校验一个包含id的列表</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 处理外键</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">validate_depart</span>(<span class="params">self,value</span>):</span><br><span class="line">        <span class="built_in">print</span>(value)                 <span class="comment"># 这里value是得到传入id对应的depart对象</span></span><br><span class="line">        <span class="keyword">if</span> value.<span class="built_in">id</span> &gt; <span class="number">0</span> <span class="keyword">and</span> value.<span class="built_in">id</span> &lt; <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> value</span><br><span class="line">        <span class="keyword">raise</span> serializers.ValidationError(<span class="string">&#x27;部门错误&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">validate_tags</span>(<span class="params">self,value</span>):</span><br><span class="line">        <span class="built_in">print</span>(value)    <span class="comment"># 是一个包含多个对象的列表</span></span><br><span class="line">        queryset = models.Tag.objects.<span class="built_in">filter</span>(id__in= value)</span><br><span class="line">        <span class="keyword">return</span> queryset</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="提交到数据库"><a href="#提交到数据库" class="headerlink" title="提交到数据库"></a>提交到数据库</h3><p>校验完成后提交到数据库</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对于ModelSerializer</span></span><br><span class="line"><span class="comment"># 1.字段不多也不少</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">post</span>(<span class="params">self,request,*args,**kwargs</span>):</span><br><span class="line">    <span class="comment"># 1.获取原始数据</span></span><br><span class="line">    queryset = models.Depart.objects.<span class="built_in">all</span>().first()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 2.校验</span></span><br><span class="line">    ser = DepartSerializers1(data=request.data)      <span class="comment"># 传入data参数</span></span><br><span class="line">    <span class="keyword">if</span> ser.is_valid():</span><br><span class="line">        ser.validated_data   <span class="comment"># 校验成功的所有数据</span></span><br><span class="line">        <span class="comment"># 添加到数据库</span></span><br><span class="line">        ser.save()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(ser.errors)</span><br><span class="line"><span class="comment"># 2.当校验的字段不足存入数据库</span></span><br><span class="line">	<span class="keyword">if</span> ser.is_valid():</span><br><span class="line">        <span class="comment"># 添加到数据库</span></span><br><span class="line">        ser.save(user = <span class="string">&#x27;xxxx&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(ser.errors)</span><br><span class="line"><span class="comment"># 3.当校验的字段不用存入数据库</span></span><br><span class="line">	<span class="keyword">if</span> ser.is_valid():</span><br><span class="line">        <span class="comment"># 剔除不需要的字段</span></span><br><span class="line">        ser.validated_data.pop(<span class="string">&quot;more&quot;</span>)</span><br><span class="line">        ser.save()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(ser.errors)</span><br></pre></td></tr></table></figure>
+
+<p><code>save</code>的返回值与序列化返回（这里使用不同的序列化器）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DpView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">post</span>(<span class="params">self,request,**kwargs</span>):</span><br><span class="line"></span><br><span class="line">        ser = DpSerializer(data = request.data)</span><br><span class="line">        <span class="keyword">if</span> ser.is_valid():</span><br><span class="line">            <span class="built_in">print</span>(ser.validated_data)</span><br><span class="line">            instance = ser.save()      <span class="comment"># instance 获取到数据库数据对象</span></span><br><span class="line">            res = DepartSerializers1(instance = instance)</span><br><span class="line">            <span class="keyword">return</span> Response(res.data)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> Response(ser.errors, status=status.HTTP_400_BAD_REQUEST)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="校验并序列化"><a href="#校验并序列化" class="headerlink" title="校验并序列化"></a>校验并序列化</h3><p>使用同一个序列化器进行校验与序列化</p>
+<p><code>read_only=True</code>, 只有在序列化的使用，<code>write_only=True</code> , 只有在校验的使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DpSerializer</span>(serializers.ModelSerializer):</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model= models.Depart</span><br><span class="line">        fields = [<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;title&#x27;</span>,<span class="string">&#x27;count&#x27;</span>,<span class="string">&#x27;order&#x27;</span>]</span><br><span class="line">        extra_kwargs = &#123;</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span>:&#123;<span class="string">&#x27;read_only&#x27;</span>:<span class="literal">True</span>&#125;,</span><br><span class="line">            <span class="string">&#x27;count&#x27;</span>:&#123;<span class="string">&#x27;write_only&#x27;</span>:<span class="literal">True</span>&#125;,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DpView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">post</span>(<span class="params">self,request,**kwargs</span>):</span><br><span class="line"></span><br><span class="line">        ser = DpSerializer(data = request.data)</span><br><span class="line">        <span class="keyword">if</span> ser.is_valid():</span><br><span class="line">            ser.save()</span><br><span class="line">            <span class="keyword">return</span> Response(ser.data)   <span class="comment">#　直接使用ser.data即可</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> Response(ser.errors, status=status.HTTP_400_BAD_REQUEST)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yibin11/blog-image@main/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-04-01%20165427.png" alt="屏幕截图 2026-04-01 165427"></p>
+<p>关于特殊值：<code>choice</code>,<code>外键</code>,<code>MTM</code> 如何处理序列化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># choice 有两种方式</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UssSerializer</span>(serializers.ModelSerializer):</span><br><span class="line">    <span class="comment"># 方式一</span></span><br><span class="line">    gender_info = serializers.CharField(source=<span class="string">&#x27;get_gender_display&#x27;</span>,read_only=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># 方式二</span></span><br><span class="line">    gender_text = serializers.SerializerMethodField(read_only=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.UserInfo</span><br><span class="line">        fields = [<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;username&#x27;</span>,<span class="string">&#x27;age&#x27;</span>,<span class="string">&#x27;gender&#x27;</span>,<span class="string">&#x27;gender_info&#x27;</span>,<span class="string">&#x27;gender_text&#x27;</span>,<span class="string">&#x27;depart&#x27;</span>,]</span><br><span class="line">        extra_kwargs = &#123;</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span>:&#123;<span class="string">&#x27;read_only&#x27;</span>:<span class="literal">True</span>&#125;,</span><br><span class="line">            <span class="string">&#x27;gender&#x27;</span>:&#123;<span class="string">&#x27;write_only&#x27;</span>:<span class="literal">True</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_gender_text</span>(<span class="params">self,obj</span>):</span><br><span class="line">        text = obj.get_gender_display()</span><br><span class="line">        <span class="keyword">return</span> text</span><br><span class="line"></span><br><span class="line"><span class="comment"># 外键 两种方式</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">U</span>(serializers.ModelSerializer):</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.Depart</span><br><span class="line">        fields = <span class="string">&#x27;__all__&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UssSerializer</span>(serializers.ModelSerializer):</span><br><span class="line">	<span class="comment"># 方法一</span></span><br><span class="line">    depart_info = serializers.CharField(source=<span class="string">&#x27;depart.title&#x27;</span>,read_only=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># 方法二 嵌套:要加source</span></span><br><span class="line">    depart_text =U(read_only=<span class="literal">True</span>,source=<span class="string">&#x27;depart&#x27;</span>)</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.UserInfo</span><br><span class="line">        fields = [<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;username&#x27;</span>,<span class="string">&#x27;age&#x27;</span>,<span class="string">&#x27;gender&#x27;</span>,<span class="string">&#x27;depart&#x27;</span>,<span class="string">&#x27;depart_info&#x27;</span>,<span class="string">&#x27;depart_text&#x27;</span>]</span><br><span class="line">        extra_kwargs = &#123;</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span>:&#123;<span class="string">&#x27;read_only&#x27;</span>:<span class="literal">True</span>&#125;,</span><br><span class="line">            <span class="string">&#x27;gender&#x27;</span>:&#123;<span class="string">&#x27;write_only&#x27;</span>:<span class="literal">True</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="错误信息："><a href="#错误信息：" class="headerlink" title="错误信息："></a>错误信息：</h3><p>是存储在一个<code>error</code>字典中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#x27;字段1&#x27;：&#x27;错误信息&#x27;,&#x27;字段2&#x27;：&#x27;错误信息&#x27;,&#x27;字段3&#x27;：&#x27;错误信息&#x27;,&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;&#x27;username&#x27;: [ErrorDetail(string=&#x27;请确保这个字段至少包含 3 个字符。&#x27;, code=&#x27;min_length&#x27;)], &#x27;level&#x27;: [ErrorDetail(string=&#x27;“3” 不是合法选项。&#x27;, code=&#x27;invalid_choice&#x27;)],</span><br><span class="line">&#x27;email&#x27;: [ErrorDetail(string=&#x27;邮箱格式错误&#x27;, code=&#x27;invalid&#x27;)]&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="3-自定义钩子hook-源码"><a href="#3-自定义钩子hook-源码" class="headerlink" title="3.自定义钩子hook(源码)"></a>3.自定义钩子hook(源码)</h2><p>序列化的底层源码实现有别于上述其他的组件，序列化器相关类的定义和执行都是在视图中被调用的，所以源码的分析过程可以分为：定义类、序列化、数据校验。</p>
+<p>实例化了 —-&gt; 什么时候调用 </p>
+<p>我们要了解钩子函数与它的类的联系</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UuSerializer</span>(serializers.ModelSerializer):</span><br><span class="line">    </span><br><span class="line">    gender = serializers.SerializerMethodField()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_gender</span>(<span class="params">self,obj</span>):</span><br><span class="line">       </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><p>在加载序列化类时,实例化<code>SerializerMethodField</code></p>
+<p>一共做了三件事:</p>
+<p>让source&#x3D; * 	,   </p>
+<p>让这个字段变为仅用于序列化	,	</p>
+<p>让<code>self.method_name = get_field_name</code>,得到钩子函数的名称</p>
+<p>注意:bind 在 Serializer 实例化时执行。   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SerializerMethodField</span>(<span class="title class_ inherited__">Field</span>):</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, method_name=<span class="literal">None</span>, **kwargs</span>):</span><br><span class="line">        <span class="variable language_">self</span>.method_name = method_name</span><br><span class="line">        kwargs[<span class="string">&#x27;source&#x27;</span>] = <span class="string">&#x27;*&#x27;</span>　　　<span class="comment"># 让source= *,后面用到 </span></span><br><span class="line">        kwargs[<span class="string">&#x27;read_only&#x27;</span>] = <span class="literal">True</span>  <span class="comment"># 让这个字段变为仅用于序列化</span></span><br><span class="line">        <span class="built_in">super</span>().__init__(**kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">bind</span>(<span class="params">self, field_name, parent</span>):</span><br><span class="line">        <span class="comment"># The method name defaults to `get_&#123;field_name&#125;`.</span></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.method_name <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="variable language_">self</span>.method_name = <span class="string">f&#x27;get_<span class="subst">&#123;field_name&#125;</span>&#x27;</span>   <span class="comment">#　field_name通过底层获得这个对象的变量名</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">super</span>().bind(field_name, parent)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">to_representation</span>(<span class="params">self, value</span>):</span><br><span class="line">        method = <span class="built_in">getattr</span>(<span class="variable language_">self</span>.parent, <span class="variable language_">self</span>.method_name)</span><br><span class="line">        <span class="keyword">return</span> method(value)</span><br></pre></td></tr></table></figure>
+
+<p>了解bind函数:</p>
+<p>在代码里写下<code>tags = SerializerMethodField()</code>时，这只是在类的层面上实例化了一个字段对象。<br>在 Python 语法中，等号右边的对象在创建时，是绝对不知道等号左边的变量名叫什么的。此时它不知道自己叫 “tags”，也不知道自己属于哪个序列化器。</p>
+<p>DRF 采用这种设计，是为了实现<strong>解耦</strong>。它让 <code>SerializerMethodField </code>这个纯粹的工具类，在真正“投入战斗”的那一瞬间（序列化器实例化时），通过底层的<code>BindingDict</code>被动态告知：“你的名字是 tags，你的宿主是 <code>UsSerializer</code>，现在去生成你该调用的函数名（get_tags）吧！”</p>
+<h3 id="触发"><a href="#触发" class="headerlink" title="触发"></a>触发</h3><p>执行<code>self.to_representation</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BaseSerializer</span>(<span class="title class_ inherited__">Field</span>):</span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">data</span>(<span class="params">self</span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;_data&#x27;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.instance <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> <span class="keyword">not</span> <span class="built_in">getattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;_errors&#x27;</span>, <span class="literal">None</span>):</span><br><span class="line">                <span class="comment"># 进行序列化功能*</span></span><br><span class="line">                <span class="variable language_">self</span>._data = <span class="variable language_">self</span>.to_representation(<span class="variable language_">self</span>.instance)</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">elif</span> <span class="built_in">hasattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;_validated_data&#x27;</span>) <span class="keyword">and</span> <span class="keyword">not</span> <span class="built_in">getattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;_errors&#x27;</span>, <span class="literal">None</span>):</span><br><span class="line">                <span class="variable language_">self</span>._data = <span class="variable language_">self</span>.to_representation(<span class="variable language_">self</span>.validated_data)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="variable language_">self</span>._data = <span class="variable language_">self</span>.get_initial()</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>._data</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Serializer</span>(BaseSerializer, metaclass=SerializerMetaclass):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">to_representation</span>(<span class="params">self, instance</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Object instance -&gt; Dict of primitive datatypes.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        ret = &#123;&#125;</span><br><span class="line">        <span class="comment"># 1.获取所有字段:  类变量字段 + (主要) meta-&gt;fields中的字段 &#123;&quot;id&quot;:字段对象,....&#125;</span></span><br><span class="line">        fields = <span class="variable language_">self</span>._readable_fields</span><br><span class="line">        <span class="comment"># 循环所有的字段对象字典</span></span><br><span class="line">        <span class="keyword">for</span> field <span class="keyword">in</span> fields:</span><br><span class="line">            <span class="comment"># 2.获取数据库原始值</span></span><br><span class="line">            attribute = field.get_attribute(instance) </span><br><span class="line">            <span class="comment"># 3.类型转换,如时间类型转为字符串</span></span><br><span class="line">            ret[field.field_name] = field.to_representation(attribute)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure>
+
+<p>关于 _readable_fields 去看序列化器的源码,只要知道它返回了所有字段对象</p>
+<p>2.这里我们看 get_attribute </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_attribute</span>(<span class="params">self, instance</span>):</span><br><span class="line">		<span class="comment">#　这里的self.source_attrs为［］</span></span><br><span class="line">        <span class="comment">#　我们知道在前面加载source就被定义成 *，drf特殊处理self.source_attrs=[]</span></span><br><span class="line">       <span class="keyword">return</span> get_attribute(instance, <span class="variable language_">self</span>.source_attrs)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">bind</span>(<span class="params">self, field_name, parent</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.source <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        	<span class="variable language_">self</span>.source = field_name</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.source == <span class="string">&#x27;*&#x27;</span>:    <span class="comment">#### 这里</span></span><br><span class="line">            <span class="variable language_">self</span>.source_attrs = []</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="variable language_">self</span>.source_attrs = <span class="variable language_">self</span>.source.split(<span class="string">&#x27;.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_attribute</span>(<span class="params">instance, attrs</span>):</span><br><span class="line">	<span class="comment">#　循环执行不了</span></span><br><span class="line">    <span class="keyword">for</span> attr <span class="keyword">in</span> attrs:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">isinstance</span>(instance, Mapping):</span><br><span class="line">                instance = instance[attr]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                instance = <span class="built_in">getattr</span>(instance, attr)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> is_simple_callable(instance):</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                instance = instance()</span><br><span class="line">    <span class="comment"># 直接返回</span></span><br><span class="line">    <span class="keyword">return</span> instance</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>而<code>instance</code> 是数据对象,没有被处理获取原始数据</p>
+<p>3.然后执行hook钩子这个类的<code>to_representation</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">to_representation</span>(<span class="params">self, value</span>):</span><br><span class="line">    method = <span class="built_in">getattr</span>(<span class="variable language_">self</span>.parent, <span class="variable language_">self</span>.method_name)</span><br><span class="line">    <span class="keyword">return</span> method(value)</span><br></pre></td></tr></table></figure>
+
+<p>会发现<code>self.method_name</code>就是钩子函数,<code>value</code>就是没有处理的数据对象</p>
+<p>这样就会执行钩子函数.</p>
+<h3 id="自定义（1）"><a href="#自定义（1）" class="headerlink" title="自定义（1）"></a>自定义（1）</h3><p>了解钩子类与钩子函数的原理后,我们可以借用它来自定义我们的钩子绑定字段来返回特定的值</p>
+<p>自定义钩子类，修改里面序列化的逻辑</p>
+<p>由于原来的<code>get_attribute</code>是没有实际作用的,可以使用它</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MySerializerMethodField</span>(serializers.IntegerField):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, method_name=<span class="literal">None</span>, **kwargs</span>):</span><br><span class="line">        <span class="variable language_">self</span>.method_name = method_name</span><br><span class="line">        kwargs[<span class="string">&#x27;read_only&#x27;</span>] = <span class="literal">False</span></span><br><span class="line">        <span class="built_in">super</span>().__init__(**kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">bind</span>(<span class="params">self, field_name, parent</span>):</span><br><span class="line">        <span class="comment"># The method name defaults to `get_&#123;field_name&#125;`.</span></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.method_name <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="variable language_">self</span>.method_name = <span class="string">f&#x27;get_<span class="subst">&#123;field_name&#125;</span>&#x27;</span>   <span class="comment">#　field_name通过底层获得这个对象的变量名</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">super</span>().bind(field_name, parent)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_attribute</span>(<span class="params">self,instance</span>):</span><br><span class="line">        method = <span class="built_in">getattr</span>(<span class="variable language_">self</span>.parent, <span class="variable language_">self</span>.method_name)</span><br><span class="line">        <span class="keyword">return</span> method(instance)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">to_representation</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>(value)</span><br></pre></td></tr></table></figure>
+
+<p>改变它序列化的三步:<code>_readable_fields</code>,<code>get_attribute</code>,<code>to_representation</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Serializer</span>(BaseSerializer, metaclass=SerializerMetaclass):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">to_representation</span>(<span class="params">self, instance</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Object instance -&gt; Dict of primitive datatypes.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        ret = &#123;&#125;</span><br><span class="line">        <span class="comment"># 1.获取所有字段:  类变量字段 + (主要) meta-&gt;fields中的字段 &#123;&quot;id&quot;:字段对象,....&#125;</span></span><br><span class="line">        fields = <span class="variable language_">self</span>._readable_fields</span><br><span class="line">        <span class="comment"># 循环所有的字段对象字典</span></span><br><span class="line">        <span class="keyword">for</span> field <span class="keyword">in</span> fields:</span><br><span class="line">            <span class="comment"># 2.获取数据库原始值</span></span><br><span class="line">            attribute = field.get_attribute(instance) </span><br><span class="line">            <span class="comment"># 3.类型转换,如时间类型转为字符串</span></span><br><span class="line">            ret[field.field_name] = field.to_representation(attribute)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="自定义（2）"><a href="#自定义（2）" class="headerlink" title="自定义（2）"></a>自定义（2）</h3><p>自定义序列化类的<code>to_representation</code>，不走原来的序列化三步</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.fields <span class="keyword">import</span> (  <span class="comment"># NOQA # isort:skip</span></span><br><span class="line">    CreateOnlyDefault, CurrentUserDefault, SkipField, empty)</span><br><span class="line"><span class="keyword">from</span> rest_framework.relations <span class="keyword">import</span> PKOnlyObject</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">HookSerializer</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">to_representation</span>(<span class="params">self, instance</span>):</span><br><span class="line">        ret = &#123;&#125;</span><br><span class="line">        fields = <span class="variable language_">self</span>._readable_fields</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> field <span class="keyword">in</span> fields:</span><br><span class="line">            <span class="comment"># 判断有无钩子，有就执行</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">hasattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;get_%s&#x27;</span> % field.field_name):</span><br><span class="line">                value = <span class="built_in">getattr</span>(<span class="variable language_">self</span>, <span class="string">&#x27;get_%s&#x27;</span> % field.field_name)(instance)</span><br><span class="line">                ret[field.field_name] = <span class="built_in">str</span>(value)</span><br><span class="line">            <span class="comment"># 没有钩子才去执行原来的序列化</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    attribute = field.get_attribute(instance)</span><br><span class="line">                <span class="keyword">except</span> SkipField:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                check_for_none = attribute.pk <span class="keyword">if</span> <span class="built_in">isinstance</span>(attribute, PKOnlyObject) <span class="keyword">else</span> attribute</span><br><span class="line">                <span class="keyword">if</span> check_for_none <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                    ret[field.field_name] = <span class="literal">None</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    ret[field.field_name] = field.to_representation(attribute)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure>
+
+<p>让序列化类去继承它</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UuSerializer</span>(HookSerializer,serializers.ModelSerializer):</span><br><span class="line"></span><br><span class="line">    gender = MySerializerMethodField()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.UsInfo</span><br><span class="line">        fields = [<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;age&#x27;</span>,<span class="string">&#x27;gender&#x27;</span>,]</span><br><span class="line">        extra_kwargs = &#123;</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span>:&#123;<span class="string">&#x27;read_only&#x27;</span>:<span class="literal">True</span>&#125;,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_gender</span>(<span class="params">self,obj</span>):</span><br><span class="line">        <span class="keyword">return</span> obj.get_gender_display()</span><br></pre></td></tr></table></figure>
+
+
+	
+    <div class="copyright-box">
+		<div class="license-box">
+			<div class="license-header">
+				
+				<div class="license-title">
+					10.数据校验
+				</div>
+				<div class="license-subTitle">http://example.com/2026/04/01/drf/10.数据校验/index.html</div>
+			</div>
+			<div class="license-meta">
+				
+					<div class="license-meta-item">
+						<div>作者</div>
+						<div>
+							<a href="">
+								yibinL
+							</a>
+						</div>
+					</div>
+				
+				
+					<div class="license-meta-item license-meta-date">
+					<div>发布于</div>
+					<div>2026年4月1日</div>
+					</div>
+				
+				
+				
+				
+					<div class="license-meta-item">
+					<div>许可协议</div>
+					<div>
+						
+						
+						
+							<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+								<span class="hint--top hint--rounded" aria-label="BY - 署名">
+									BY - 署名
+								</span>
+							</a>
+						
+						
+					</div>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+    
+
+    
+
+    
+        
+        <script async reload>
+            fetch("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/tokyo-night-dark.css")
+                .then((response) => response.text())
+                .then((cssContent) => {
+                    const style = document.createElement("style");
+                    
+                        cssContent = cssContent
+                            .replace(".hljs-code,", "")
+                            .replaceAll("_", " ")
+                            .replaceAll("hljs-", "hljs .")
+                            .replaceAll(".hljs", " .highlight")
+                            .replaceAll(".built in", ".built_in")
+                            .replaceAll("title.", "");
+                        const figures = document.querySelectorAll("figure.highlight td.gutter");
+                        figures.forEach(figure=>{
+                            figure.classList.add("highlight");
+                        })
+                    
+                    style.innerHTML = cssContent;
+                    document.head.appendChild(style);
+                })
+                .catch((error) => {
+                    console.error("Error loading CSS:", error);
+                });
+        </script>
+    
+
+
+
+
+
+    <script reload>
+        var targets = document.querySelectorAll("figure.highlight, #article-content > pre:not(.highlight,.hljs)");
+        targets.forEach((block) => {
+            const copyBtn = document.createElement("button");
+            copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+            copyBtn.className = "code-copy";
+
+            
+                copyBtn.style.color = "#fff";
+            
+
+            copyBtn.addEventListener("click", () => {
+                const text = block.querySelector("td.code")?.textContent || block.querySelector("code")?.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    copyBtn.innerHTML = "Copied!";
+                    setTimeout(() => {
+                        copyBtn.innerHTML = `<i class="fa fa-clone" aria-hidden="true"></i>`;
+                    }, 2000);
+                });
+            });
+            block.appendChild(copyBtn);
+        });
+    </script>
+
+
+
+
+<div class="post-guide">
+	<div class="item left">
+	
+		<a href="/2026/03/31/drf/9.%E5%BA%8F%E5%88%97%E5%8C%96/">
+			<i class="fa fa-angle-left" aria-hidden="true"></i>
+			9.序列化
+		</a>
+	
+	</div>
+	<div class="item right">
+		
+		<a href="/2026/04/02/drf/%E6%A1%88%E4%BE%8B/">
+			案例
+			<i class="fa fa-angle-right" aria-hidden="true"></i>
+		</a>
+		
+	</div>
+</div>
+
+
+
+
+	</div>
+
+	<div id="footer">
+	<div>
+		
+			
+				©2024<span>-</span><span>2026
+			
+			
+			</span>
+			<a href="">
+				yibinL
+			</a>
+		
+		
+			<span id="busuanzi_container_site_pv">
+				总访问量
+				<span id="vercount_value_page_pv"></span>
+			</span>
+			<span id="busuanzi_container_site_uv">
+				总访客数
+				<span id="vercount_value_site_pv"></span>
+			</span>
+		
+	</div>
+	 <div> Theme <a href="https://github.com/Exisi/hexo-theme-node-tree"	target="_blank">Node-Tree</a> Powered by <a href="https://hexo.io" target="_blank">Hexo</a> </div> 
+</div>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+
+<script async>
+    const topTopBtn = document.querySelector("#totop-toggle");
+	topTopBtn.addEventListener("click", () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	});
+</script>
+</body>
+</html>

@@ -332,26 +332,18 @@
 		<div id="index">
 	
 	<div class="index-li">
-		<a href="/2026/03/27/drf/1.drf-%E8%A7%86%E5%9B%BE/">
+		<a href="/2026/04/06/drf/11.drf-page-view-router-filter/">
 			<h2 class="index-title">
-				drf-CBV
+				drf-page,view,router,filter
 			</h2>
 			<div class="index-brief">
-				django的FBV和CBV
-FBV，函数
-CBV，类+反射 &#x3D;&gt; 请求方法不同执行类中的不同方法。
-
-drf-&gt;CBVView	- 10APIView(View)	- 20class UserInfo(APIView):	-&gt; 调用30个功能
-
-
-
-1.视图源码（django）
-url中
-urlpatterns = [    # path(&#x27;admin/&# ...
+				分页后端：返回数据与总数据条数，每页显示多少条
+前端：生成页码
+PageNumberPagination,适用于显示页面、上一下、下一页	/accounts/?page=7&amp;page_size=2   #页码与动态分页大小LimitOffsetPagination，滚动翻页,获取当前数据后几条数据	/accounts/?offset=2&amp;limit=10    # 从第几条数据(o ...
 			</div>
 		</a>
 		<div class="article-meta">
-			<span>2026-03-27</span>
+			<span>2026-04-06</span>
 			  
 			<span>
 				<i class="fa fa-folder" aria-hidden="true"></i>
@@ -363,8 +355,8 @@ urlpatterns = [    # path(&#x27;admin/&# ...
 			  
 			<span>
 				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/drf/cbv/"
-					>cbv</a
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
 				>
 				
 			</span>
@@ -373,34 +365,75 @@ urlpatterns = [    # path(&#x27;admin/&# ...
 	</div>
 	
 	<div class="index-li">
-		<a href="/2026/03/27/other/my-blog/">
+		<a href="/2026/04/02/drf/%E6%A1%88%E4%BE%8B/">
 			<h2 class="index-title">
-				my-blog
+				案例-博客
 			</h2>
 			<div class="index-brief">
-				一.GitHub Pages + Hexo这种方案的本质是：你在自己电脑上写文章（Markdown格式），用 Hexo 把文章转成漂亮的网页，最后推送到 GitHub 上托管。全程免费，不需要买服务器，不需要买域名（除非你想自定义）。
-以下是手把手教学：
+				注意事项1.post要注意认证，权限，数据校验，数据存不存在,序列化返回如果url上有参数代表数据，就要校验一下是否存在
 
-第一步：安装必备工具在开始之前，你的电脑需要安装两个基础环境：
+2.get认证，权限，数据获取，序列化返回
 
-Node.js: 运行 Hexo 的引擎。 官网下载 (选 LTS 版本)。 ...
+3.不同方法认证在同一个类中get可以不通过认证，post要认证让认证不抛异常，在post中判断
+
+
+
+功能
+博客列表
+路由 + 视图（时间倒序排序） + 序列化
+
+输出所有博客文章（除了博文）
+class BlogSeriali ...
 			</div>
 		</a>
 		<div class="article-meta">
-			<span>2026-03-27</span>
+			<span>2026-04-02</span>
 			  
 			<span>
 				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/网站/"
-					>网站</a
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/04/01/drf/10.%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/">
+			<h2 class="index-title">
+				10.数据校验
+			</h2>
+			<div class="index-brief">
+				1.序列化器
+序列化
+序列化器的类
+路由 -&gt; 视图  -&gt; 去数据库获取对象或QuerySet  -&gt; 序列化器的类转换成列表、字典、有序字典  -&gt; JSON处理
+
+
+数据校验
+序列化器的类
+路由 -&gt; 视图  -&gt; 解析后 -&gt; request.data  -&gt; 校验（序列化器的类） -&gt; 操作（db，序列化器的类）
+
+2.数据校验校验方 ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-04-01</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
 				>
 				 > 
 			</span>
 			  
 			<span>
 				<i class="fa fa-folder" aria-hidden="true"></i>
-				<a href="/categories/网站/blog/"
-					>blog</a
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
 				>
 				
 			</span>
@@ -408,25 +441,9 @@ Node.js: 运行 Hexo 的引擎。 官网下载 (选 LTS 版本)。 ...
 		</div>
 	</div>
 	
-	<div class="index-li">
-		<a href="/2026/03/27/other/hello-world/">
-			<h2 class="index-title">
-				Hello World
-			</h2>
-			<div class="index-brief">
-				Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick ...
-			</div>
-		</a>
-		<div class="article-meta">
-			<span>2026-03-27</span>
-			  
-		</div>
-	</div>
-	
 
 	<div id="index-paginator">
-		 <a class="extend prev" rel="prev" href="/archives/2026/03/">&lt;</a><a class="page-number" href="/archives/2026/03/">1</a><span class="page-number current">2</span> 
+		
 	</div>
 </div>
 
