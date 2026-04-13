@@ -324,12 +324,199 @@
 								</li>
 							</ul>
 			
+							<ul>
+								<li class="directory">
+			
+										<a class="directory " href="/2026/04/13/vue/vue/" title="/2026/04/13/vue/vue">
+											<i class="fa fa-plus-square-o"></i>
+											vue
+										</a>
+										<div class="article-toc" style="display: none;"></div>
+			
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/04/13/vue/1-%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/" title="/2026/04/13/vue/1-入门基础">
+									
+										1-入门基础
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/13/vue/2-%E8%BF%9B%E9%98%B6/" title="/2026/04/13/vue/2-进阶">
+									
+										2-进阶
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/13/vue/3-%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA/" title="/2026/04/13/vue/3-项目创建">
+									
+										3-项目创建
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/04/13/vue/4-%E6%B7%B1%E5%85%A5%E6%8B%93%E5%B1%95/" title="/2026/04/13/vue/4-深入拓展">
+									
+										4-深入拓展
+									
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+							</ul>
+			
 		</div>
 	</div>
 </div>
 
 	<div id="content">
 		<div id="index">
+	
+	<div class="index-li">
+		<a href="/2026/03/30/drf/7.drf-%E7%89%88%E6%9C%AC/">
+			<h2 class="index-title">
+				drf-版本
+			</h2>
+			<div class="index-brief">
+				1.GET参数传递1.使用在restful规范中要去，后端的API中需要体现版本
+class HomeView(APIView):    # 版本    # 配置文件 VERSION_PARAM 定义版本称呼(version)    # http://127.0.0.1:8000/home/?xxx=123&amp;version=v1      -&gt;   request.version   ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-30</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/29/other/other/">
+			<h2 class="index-title">
+				other
+			</h2>
+			<div class="index-brief">
+				 ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/29/drf/drf/">
+			<h2 class="index-title">
+				drf
+			</h2>
+			<div class="index-brief">
+				 ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/29/drf/6.drf-%E9%99%90%E6%B5%81/">
+			<h2 class="index-title">
+				drf-限流
+			</h2>
+			<div class="index-brief">
+				原理用于限制访问频率
+获取访问者的ip或账户作为标识，记录下访问记录在redis中
+    标识                           访问记录（redis）
+ &quot;9123123&quot;                   [16：45, 16:43, 16:42, ]
+
+throttle_XXX_11.11.11.11     [16：45, 16:43, 16:42 ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
+	
+	<div class="index-li">
+		<a href="/2026/03/29/drf/4.drf-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6/">
+			<h2 class="index-title">
+				drf-权限组件
+			</h2>
+			<div class="index-brief">
+				1.应用我们可以编辑权限校验的逻辑和返回错误信息
+from rest_framework.permissions import BasePermissionfrom ext.code import *class UserPermission(BasePermission):    # 自定义错误返回信息    message = &#123;&#x27;code&#x27;:PERMISSION_ ...
+			</div>
+		</a>
+		<div class="article-meta">
+			<span>2026-03-29</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/"
+					>drf</a
+				>
+				 > 
+			</span>
+			  
+			<span>
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<a href="/categories/drf/源码流程/"
+					>源码流程</a
+				>
+				
+			</span>
+			  
+		</div>
+	</div>
 	
 	<div class="index-li">
 		<a href="/2026/03/29/drf/3.drf-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6/">
@@ -506,25 +693,9 @@ Node.js: 运行 Hexo 的引擎。 官网下载 (选 LTS 版本)。 ...
 		</div>
 	</div>
 	
-	<div class="index-li">
-		<a href="/2026/03/27/other/hello-world/">
-			<h2 class="index-title">
-				Hello World
-			</h2>
-			<div class="index-brief">
-				Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick ...
-			</div>
-		</a>
-		<div class="article-meta">
-			<span>2026-03-27</span>
-			  
-		</div>
-	</div>
-	
 
 	<div id="index-paginator">
-		 <a class="extend prev" rel="prev" href="/">&lt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span> 
+		 <a class="extend prev" rel="prev" href="/">&lt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">&gt;</a> 
 	</div>
 </div>
 
